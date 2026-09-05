@@ -1,2 +1,19 @@
-# InternetBloxGlobal-
-🌐 InternetBlox Global é uma plataforma de mensagens online criada com HTML, CSS, JavaScript e Supabase. Publique mensagens, escolha seu usuário e compartilhe ideias com outras pessoas pela internet. O feed é atualizado automaticamente e o projeto continua em desenvolvimento! 🚧💬
+# 🌐 InternetBlox Global
+
+Uma plataforma de mensagens online onde pessoas podem publicar mensagens e conversar pela internet!
+
+## 🚀 Tecnologias
+
+- HTML
+- CSS
+- JavaScript
+- Supabase
+
+## 💬 Recursos
+
+- 👤 Escolha seu nome de usuário
+- 🌎 Publique mensagens globalmente
+- ☁️ Mensagens salvas na nuvem
+- 🔄 Feed atualizado automaticamente
+
+🚧 Projeto em desenvolvimento!
