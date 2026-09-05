@@ -2,681 +2,3250 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>InternetBlox Global 🌐</title>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>InternetBlox Global 🌐</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+body{
+background:#0f172a;
+color:#f8fafc;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+padding:20px;
+}
+
+.app{
+width:100%;
+max-width:550px;
+background:#1e293b;
+border:1px solid #334155;
+border-radius:16px;
+padding:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+h1{
+text-align:center;
+color:#38bdf8;
+font-size:1.8rem;
+margin-bottom:8px;
+}
+
+h2{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+h3{
+color:#f8fafc;
+margin-bottom:6px;
+}
+
+.subtitulo{
+text-align:center;
+color:#94a3b8;
+font-size:.9rem;
+margin-bottom:20px;
+}
+
+input,
+textarea,
+select{
+width:100%;
+background:#0f172a;
+color:white;
+border:1px solid #334155;
+border-radius:8px;
+padding:12px;
+margin-bottom:12px;
+font-size:1rem;
+outline:none;
+resize:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#38bdf8;
+box-shadow:0 0 0 2px rgba(56,189,248,.1);
+}
+
+textarea{
+min-height:90px;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#38bdf8;
+color:#0f172a;
+font-size:1rem;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+margin-bottom:10px;
+}
+
+button:hover{
+background:#0ea5e9;
+transform:translateY(-1px);
+}
+
+button:disabled{
+opacity:.6;
+cursor:not-allowed;
+transform:none;
+}
+
+.secondary-btn{
+background:#334155;
+color:#f8fafc;
+}
+
+.secondary-btn:hover{
+background:#475569;
+}
+
+.danger-btn{
+background:#7f1d1d;
+color:white;
+}
+
+.danger-btn:hover{
+background:#991b1b;
+}
+
+.status{
+text-align:center;
+margin-top:12px;
+font-size:.85rem;
+color:#64748b;
+}
+
+.feed{
+margin-top:25px;
+max-height:500px;
+overflow-y:auto;
+padding-right:5px;
+}
+
+.post{
+background:#334155;
+border-left:4px solid #38bdf8;
+border-radius:10px;
+padding:15px;
+margin-bottom:12px;
+}
+
+.post-usuario{
+color:#38bdf8;
+font-weight:bold;
+margin-bottom:7px;
+word-break:break-word;
+}
+
+.post-mensagem{
+color:#e2e8f0;
+line-height:1.5;
+white-space:pre-wrap;
+word-break:break-word;
+}
+
+.post-imagem{
+display:block;
+width:100%;
+max-height:450px;
+object-fit:contain;
+border-radius:10px;
+margin-top:10px;
+background:#0f172a;
+}
+
+.info{
+text-align:center;
+color:#64748b;
+padding:15px;
+}
+
+.erro{
+text-align:center;
+color:#f87171;
+padding:15px;
+}
+
+.auth-screen{
+position:fixed;
+inset:0;
+background:#0f172a;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:9999;
+}
+
+.auth-box{
+width:100%;
+max-width:400px;
+background:#1e293b;
+border:1px solid #334155;
+border-radius:16px;
+padding:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+text-align:center;
+}
+
+.auth-box h1{
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.auth-box p{
+color:#94a3b8;
+margin-bottom:15px;
+}
+
+.auth-switch{
+font-size:.9rem;
+margin-top:5px;
+}
+
+.auth-switch button{
+background:none;
+color:#38bdf8;
+padding:0;
+width:auto;
+margin:0;
+font-size:.9rem;
+}
+
+.auth-switch button:hover{
+background:none;
+transform:none;
+text-decoration:underline;
+}
+
+.screen{
+width:100%;
+}
+
+.community-card{
+background:#334155;
+border-radius:10px;
+padding:15px;
+margin-bottom:12px;
+border-left:4px solid #38bdf8;
+}
+
+.community-description{
+color:#cbd5e1;
+margin-bottom:12px;
+line-height:1.4;
+word-break:break-word;
+}
+
+.community-owner{
+color:#94a3b8;
+font-size:.85rem;
+margin-bottom:12px;
+}
+
+.community-actions{
+display:flex;
+gap:8px;
+}
+
+.community-actions button{
+margin-bottom:0;
+}
+
+.community-header{
+margin-bottom:20px;
+}
+
+.back-btn{
+background:#334155;
+color:white;
+}
+
+.community-post-box{
+margin-bottom:20px;
+}
+
+.member-count{
+color:#94a3b8;
+font-size:.9rem;
+margin-bottom:15px;
+}
+
+.composer-box{
+background:#0f172a;
+border:1px solid #334155;
+border-radius:12px;
+padding:15px;
+margin-bottom:20px;
+}
+
+.composer-title{
+color:#38bdf8;
+font-weight:bold;
+font-size:1.05rem;
+margin-bottom:12px;
+}
+
+.composer-help{
+color:#94a3b8;
+font-size:.8rem;
+margin-bottom:10px;
+line-height:1.4;
+}
+
+.section-title{
+color:#38bdf8;
+font-size:1.2rem;
+margin:20px 0 12px 0;
+}
+
+.message{
+background:#263449;
+border-radius:10px;
+padding:12px;
+margin-bottom:10px;
+border-left:3px solid #64748b;
+}
+
+.message-usuario{
+color:#cbd5e1;
+font-weight:bold;
+font-size:.9rem;
+margin-bottom:5px;
+}
+
+.message-conteudo{
+color:#e2e8f0;
+white-space:pre-wrap;
+word-break:break-word;
+line-height:1.5;
+}
+
+.message-apagar{
+width:auto;
+padding:7px 10px;
+font-size:.8rem;
+margin-top:8px;
+margin-bottom:0;
+}
+
+.image-preview{
+display:none;
+width:100%;
+max-height:250px;
+object-fit:contain;
+border-radius:10px;
+margin-bottom:12px;
+background:#0f172a;
+}
+
+.file-info{
+color:#94a3b8;
+font-size:.8rem;
+margin-top:-5px;
+margin-bottom:10px;
+}
+
+</style>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
-        }
-
-        body {
-            background: #0f172a;
-            color: #f8fafc;
-
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-
-            padding: 20px;
-        }
-
-        .app {
-            width: 100%;
-            max-width: 550px;
-
-            background: #1e293b;
-
-            border: 1px solid #334155;
-
-            border-radius: 16px;
-
-            padding: 25px;
-
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-        }
-
-        h1 {
-            text-align: center;
-
-            color: #38bdf8;
-
-            font-size: 1.8rem;
-
-            margin-bottom: 8px;
-        }
-
-        .subtitulo {
-            text-align: center;
-
-            color: #94a3b8;
-
-            font-size: 0.9rem;
-
-            margin-bottom: 20px;
-        }
-
-        input,
-        textarea {
-
-            width: 100%;
-
-            background: #0f172a;
-
-            color: white;
-
-            border: 1px solid #334155;
-
-            border-radius: 8px;
-
-            padding: 12px;
-
-            margin-bottom: 12px;
-
-            font-size: 1rem;
-
-            outline: none;
-
-            resize: none;
-        }
-
-        input:focus,
-        textarea:focus {
-
-            border-color: #38bdf8;
-
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
-        }
-
-        textarea {
-            min-height: 90px;
-        }
-
-        button {
-
-            width: 100%;
-
-            padding: 12px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #38bdf8;
-
-            color: #0f172a;
-
-            font-size: 1rem;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: #0ea5e9;
-            transform: translateY(-1px);
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .status {
-
-            text-align: center;
-
-            margin-top: 12px;
-
-            font-size: 0.85rem;
-
-            color: #64748b;
-        }
-
-        .feed {
-
-            margin-top: 25px;
-
-            max-height: 500px;
-
-            overflow-y: auto;
-
-            padding-right: 5px;
-        }
-
-        .post {
-
-            background: #334155;
-
-            border-left: 4px solid #38bdf8;
-
-            border-radius: 10px;
-
-            padding: 15px;
-
-            margin-bottom: 12px;
-        }
-
-        .post-usuario {
-
-            color: #38bdf8;
-
-            font-weight: bold;
-
-            margin-bottom: 7px;
-
-            word-break: break-word;
-        }
-
-        .post-mensagem {
-
-            color: #e2e8f0;
-
-            line-height: 1.5;
-
-            white-space: pre-wrap;
-
-            word-break: break-word;
-        }
-
-        .info {
-
-            text-align: center;
-
-            color: #64748b;
-
-            padding: 15px;
-        }
-
-        .erro {
-
-            text-align: center;
-
-            color: #f87171;
-
-            padding: 15px;
-        }
-
-    </style>
 </head>
 
-<body>
+<body><!-- ==========================================
+     TELA DE AUTENTICAÇÃO
+     ========================================== -->
 
-    <div class="app">
+<div id="authScreen" class="auth-screen">
 
-        <h1>InternetBlox Global 🌐</h1>
+<div class="auth-box">
 
-        <div class="subtitulo">
-            Converse com o mundo!
-        </div>
+<h1>🌐 InternetBlox Global</h1>
 
-        <input
-            type="text"
-            id="username"
-            maxlength="30"
-            placeholder="Seu usuário (ex: @Player1)"
-        >
+<p id="authSubtitle">
+Crie sua conta para entrar.
+</p>
 
-        <textarea
-            id="message"
-            maxlength="500"
-            placeholder="Escreva uma mensagem..."
-        ></textarea>
+<div id="cadastroArea">
 
-        <button id="sendBtn">
-            Publicar Globalmente
-        </button>
+<input
+type="text"
+id="cadastroUsername"
+maxlength="30"
+placeholder="@SeuUsuario"
+>
 
-        <div class="status" id="status">
-            🔄 Conectando...
-        </div>
+<input
+type="email"
+id="cadastroEmail"
+placeholder="Seu e-mail"
+>
 
-        <div class="feed" id="feed">
+<input
+type="password"
+id="cadastroSenha"
+minlength="6"
+placeholder="Senha"
+>
 
-            <p class="info">
-                Carregando mensagens globais...
-            </p>
+<select id="cadastroAvatar">
 
-        </div>
+<option value="avatar1">
+😀 Avatar 1
+</option>
 
-    </div><script>
+<option value="avatar2">
+😎 Avatar 2
+</option>
 
-    // ============================================
-    // CONFIGURAÇÃO DO SUPABASE
-    // ============================================
+<option value="avatar3">
+😈 Avatar 3
+</option>
 
-    const SUPABASE_URL =
-        "https://hjjnxdkvdourignxxtwl.supabase.co";
+<option value="avatar4">
+🤖 Avatar 4
+</option>
 
-    const SUPABASE_KEY =
-        "sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
+<option value="avatar5">
+👽 Avatar 5
+</option>
 
-    // Cria a conexão
-    const supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+</select>
 
+<button id="criarContaBtn">
+Criar conta
+</button>
 
-    // ============================================
-    // ELEMENTOS DA PÁGINA
-    // ============================================
+<p class="auth-switch">
+Já possui uma conta?
+<button id="mostrarLoginBtn">
+Entrar
+</button>
+</p>
 
-    const usernameInput =
-        document.getElementById("username");
+</div>
 
-    const messageInput =
-        document.getElementById("message");
+<div id="loginArea" style="display:none;">
 
-    const sendBtn =
-        document.getElementById("sendBtn");
+<input
+type="email"
+id="loginEmail"
+placeholder="Seu e-mail"
+>
 
-    const feed =
-        document.getElementById("feed");
+<input
+type="password"
+id="loginSenha"
+placeholder="Sua senha"
+>
 
-    const status =
-        document.getElementById("status");
+<button id="entrarBtn">
+Entrar
+</button>
 
+<p class="auth-switch">
+Ainda não possui uma conta?
+<button id="mostrarCadastroBtn">
+Criar conta
+</button>
+</p>
 
-    // ============================================
-    // CARREGAR MENSAGENS
-    // ============================================
+</div>
 
-    async function carregarMensagens() {
+<p id="authStatus"></p>
 
-        try {
+</div>
 
-            const resultado =
-                await supabaseClient
-                    .from("mensagens")
-                    .select("usuario, conteudo");
+</div>
 
 
-            if (resultado.error) {
+<!-- ==========================================
+     APLICAÇÃO
+     ========================================== -->
 
-                console.error(
-                    "Erro do Supabase:",
-                    resultado.error
-                );
+<div class="app">
 
-                status.textContent =
-                    "🔴 Erro ao conectar com o banco";
 
-                feed.innerHTML = "";
+<!-- ======================================
+     TELA DE COMUNIDADES
+     ====================================== -->
 
-                const erro =
-                    document.createElement("p");
+<div
+id="communitiesScreen"
+class="screen"
+style="display:none;"
+>
 
-                erro.className = "erro";
+<h1>
+🌐 InternetBlox Global
+</h1>
 
-                erro.textContent =
-                    "❌ Não foi possível carregar as mensagens.";
+<div class="subtitulo">
+Suas comunidades
+</div>
 
-                feed.appendChild(erro);
+<button id="novaComunidadeBtn">
+➕ Criar comunidade
+</button>
+
+<button
+id="logoutBtn"
+class="secondary-btn"
+>
+🚪 Sair da conta
+</button>
+
+<div id="communitiesList">
+
+<p class="info">
+Carregando comunidades...
+</p>
 
-                return;
-            }
+</div>
+
+<p
+id="communityStatus"
+class="status"
+></p>
 
+</div>
 
-            const mensagens =
-                resultado.data || [];
 
+<!-- ======================================
+     TELA DE CRIAR COMUNIDADE
+     ====================================== -->
 
-            status.textContent =
-                "🟢 InternetBlox conectado";
+<div
+id="createCommunityScreen"
+class="screen"
+style="display:none;"
+>
 
+<h2>
+➕ Criar comunidade
+</h2>
 
-            // Nenhuma mensagem
-            if (mensagens.length === 0) {
+<input
+type="text"
+id="communityName"
+maxlength="60"
+placeholder="Nome da comunidade"
+>
 
-                feed.innerHTML = "";
+<textarea
+id="communityDescription"
+maxlength="300"
+placeholder="Descrição da comunidade"
+></textarea>
 
-                const vazio =
-                    document.createElement("p");
+<button id="createCommunityBtn">
+Criar comunidade
+</button>
 
-                vazio.className = "info";
+<button
+id="cancelCommunityBtn"
+class="secondary-btn"
+>
+Cancelar
+</button>
 
-                vazio.textContent =
-                    "🌎 Nenhuma mensagem publicada ainda.";
+<p
+id="createCommunityStatus"
+class="status"
+></p>
 
-                feed.appendChild(vazio);
+</div><!-- ==========================================
+     TELA DA COMUNIDADE
+     ========================================== -->
 
-                return;
-            }
+<div
+id="communityPageScreen"
+class="screen"
+style="display:none;"
+>
+
+<div class="community-header">
+
+<button
+id="backToCommunitiesBtn"
+class="back-btn"
+>
+← Voltar para comunidades
+</button>
+
+<h2 id="openedCommunityName">
+Comunidade
+</h2>
+
+<p
+id="openedCommunityDescription"
+class="community-description"
+></p>
+
+<p
+id="openedCommunityMembers"
+class="member-count"
+>
+👥 0 membros
+</p>
 
+<button
+id="leaveCommunityBtn"
+class="danger-btn"
+>
+🚪 Sair da comunidade
+</button>
 
-            // Limpa o feed
-            feed.innerHTML = "";
+</div>
 
 
-            // Mostra as mensagens mais recentes primeiro
-            mensagens.reverse();
+<!-- ======================================
+     💬 NOVA MENSAGEM
+     ====================================== -->
 
+<div class="composer-box">
 
-            mensagens.forEach(function(post) {
+<div class="composer-title">
+💬 Enviar mensagem
+</div>
 
-                const div =
-                    document.createElement("div");
+<div class="composer-help">
+Mensagens são conversas normais. Elas não aparecem como posts.
+</div>
 
-                div.className = "post";
+<textarea
+id="communityMessageContent"
+maxlength="500"
+placeholder="Escreva uma mensagem..."
+></textarea>
 
+<button id="sendCommunityMessageBtn">
+💬 Enviar mensagem
+</button>
 
-                const usuario =
-                    document.createElement("div");
+<p
+id="messageStatus"
+class="status"
+></p>
 
-                usuario.className =
-                    "post-usuario";
+</div>
 
-                usuario.textContent =
-                    post.usuario || "@usuário";
 
+<!-- ======================================
+     📝 NOVO POST
+     ====================================== -->
 
-                const mensagem =
-                    document.createElement("div");
+<div class="composer-box">
 
-                mensagem.className =
-                    "post-mensagem";
+<div class="composer-title">
+📝 Criar post
+</div>
 
-                mensagem.textContent =
-                    post.conteudo || "";
+<div class="composer-help">
+Posts precisam ter uma imagem. Você pode adicionar uma legenda opcional.
+</div>
 
+<textarea
+id="communityPostContent"
+maxlength="1000"
+placeholder="Legenda do post (opcional)..."
+></textarea>
 
-                div.appendChild(usuario);
+<input
+type="file"
+id="communityPostImage"
+accept="image/*"
+>
 
-                div.appendChild(mensagem);
+<p
+id="imageFileInfo"
+class="file-info"
+>
+Nenhuma imagem selecionada.
+</p>
 
-                feed.appendChild(div);
+<img
+id="imagePreview"
+class="image-preview"
+alt="Pré-visualização da imagem"
+>
+
+<button id="publishCommunityPostBtn">
+📝 Publicar post
+</button>
+
+<p
+id="postStatus"
+class="status"
+></p>
+
+</div>
+
+
+<!-- ======================================
+     POSTS
+     ====================================== -->
+
+<h3 class="section-title">
+📝 Posts
+</h3>
+
+<div id="communityPostsList">
+
+<p class="info">
+Carregando posts...
+</p>
+
+</div>
+
+
+<!-- ======================================
+     CONVERSAS
+     ====================================== -->
+
+<h3 class="section-title">
+💬 Conversas
+</h3>
+
+<div id="communityMessagesList">
+
+<p class="info">
+Carregando conversas...
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ==========================================
+     SISTEMA ANTIGO
+     ========================================== -->
+
+<div
+id="oldSystemScreen"
+class="screen"
+style="display:none;"
+>
+
+<h1>
+InternetBlox Global 🌐
+</h1>
+
+<div class="subtitulo">
+Converse com o mundo!
+</div>
+
+<input
+type="text"
+id="username"
+maxlength="30"
+placeholder="Seu usuário"
+>
+
+<textarea
+id="message"
+maxlength="500"
+placeholder="Escreva uma mensagem..."
+></textarea>
+
+<button id="sendBtn">
+Publicar Globalmente
+</button>
+
+<div
+class="status"
+id="status"
+>
+🔄 Conectando...
+</div>
+
+<div
+class="feed"
+id="feed"
+>
+
+<p class="info">
+Carregando mensagens globais...
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+// ============================================
+// CONFIGURAÇÃO DO SUPABASE
+// ============================================
+
+const SUPABASE_URL =
+"https://hjjnxdkvdourignxxtwl.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
+
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+// ============================================
+// AUTENTICAÇÃO
+// ============================================
+
+const authScreen =
+document.getElementById("authScreen");
+
+const cadastroArea =
+document.getElementById("cadastroArea");
+
+const loginArea =
+document.getElementById("loginArea");
+
+const authSubtitle =
+document.getElementById("authSubtitle");
+
+const cadastroUsername =
+document.getElementById("cadastroUsername");
+
+const cadastroEmail =
+document.getElementById("cadastroEmail");
+
+const cadastroSenha =
+document.getElementById("cadastroSenha");
+
+const cadastroAvatar =
+document.getElementById("cadastroAvatar");
+
+const criarContaBtn =
+document.getElementById("criarContaBtn");
+
+const entrarBtn =
+document.getElementById("entrarBtn");
+
+const loginEmail =
+document.getElementById("loginEmail");
+
+const loginSenha =
+document.getElementById("loginSenha");
+
+const mostrarLoginBtn =
+document.getElementById("mostrarLoginBtn");
+
+const mostrarCadastroBtn =
+document.getElementById("mostrarCadastroBtn");
+
+const authStatus =
+document.getElementById("authStatus");
+
+
+// ============================================
+// TELAS
+// ============================================
+
+const communitiesScreen =
+document.getElementById(
+"communitiesScreen"
+);
+
+const createCommunityScreen =
+document.getElementById(
+"createCommunityScreen"
+);
+
+const communityPageScreen =
+document.getElementById(
+"communityPageScreen"
+);
+
+
+// ============================================
+// COMUNIDADES
+// ============================================
+
+const novaComunidadeBtn =
+document.getElementById(
+"novaComunidadeBtn"
+);
+
+const createCommunityBtn =
+document.getElementById(
+"createCommunityBtn"
+);
+
+const cancelCommunityBtn =
+document.getElementById(
+"cancelCommunityBtn"
+);
+
+const communityName =
+document.getElementById(
+"communityName"
+);
+
+const communityDescription =
+document.getElementById(
+"communityDescription"
+);
+
+const communitiesList =
+document.getElementById(
+"communitiesList"
+);
+
+const communityStatus =
+document.getElementById(
+"communityStatus"
+);
+
+const createCommunityStatus =
+document.getElementById(
+"createCommunityStatus"
+);
+
+const logoutBtn =
+document.getElementById(
+"logoutBtn"
+);// ============================================
+// PÁGINA DA COMUNIDADE
+// ============================================
+
+const backToCommunitiesBtn =
+document.getElementById(
+"backToCommunitiesBtn"
+);
+
+const openedCommunityName =
+document.getElementById(
+"openedCommunityName"
+);
+
+const openedCommunityDescription =
+document.getElementById(
+"openedCommunityDescription"
+);
+
+const openedCommunityMembers =
+document.getElementById(
+"openedCommunityMembers"
+);
+
+const leaveCommunityBtn =
+document.getElementById(
+"leaveCommunityBtn"
+);
+
+
+// ============================================
+// MENSAGENS
+// ============================================
+
+const communityMessageContent =
+document.getElementById(
+"communityMessageContent"
+);
+
+const sendCommunityMessageBtn =
+document.getElementById(
+"sendCommunityMessageBtn"
+);
+
+const communityMessagesList =
+document.getElementById(
+"communityMessagesList"
+);
+
+const messageStatus =
+document.getElementById(
+"messageStatus"
+);
+
+
+// ============================================
+// POSTS
+// ============================================
+
+const communityPostContent =
+document.getElementById(
+"communityPostContent"
+);
+
+const communityPostImage =
+document.getElementById(
+"communityPostImage"
+);
+
+const imagePreview =
+document.getElementById(
+"imagePreview"
+);
+
+const imageFileInfo =
+document.getElementById(
+"imageFileInfo"
+);
+
+const publishCommunityPostBtn =
+document.getElementById(
+"publishCommunityPostBtn"
+);
+
+const communityPostsList =
+document.getElementById(
+"communityPostsList"
+);
+
+const postStatus =
+document.getElementById(
+"postStatus"
+);
+
+
+// ============================================
+// VARIÁVEIS
+// ============================================
+
+let comunidadeAtual = null;
+
+let intervaloAtualizacao = null;
+
+
+// ============================================
+// MOSTRAR LOGIN
+// ============================================
+
+mostrarLoginBtn.addEventListener(
+"click",
+function(){
+
+cadastroArea.style.display =
+"none";
+
+loginArea.style.display =
+"block";
+
+authSubtitle.textContent =
+"Entre na sua conta.";
+
+authStatus.textContent =
+"";
+
+}
+);
+
+
+// ============================================
+// MOSTRAR CADASTRO
+// ============================================
+
+mostrarCadastroBtn.addEventListener(
+"click",
+function(){
+
+loginArea.style.display =
+"none";
+
+cadastroArea.style.display =
+"block";
+
+authSubtitle.textContent =
+"Crie sua conta para entrar.";
+
+authStatus.textContent =
+"";
+
+}
+);
+
+
+// ============================================
+// CRIAR CONTA
+// ============================================
+
+criarContaBtn.addEventListener(
+"click",
+async function(){
+
+let username =
+cadastroUsername.value.trim();
+
+const email =
+cadastroEmail.value.trim();
+
+const senha =
+cadastroSenha.value;
+
+const avatar =
+cadastroAvatar.value;
+
+
+if(!username){
+
+authStatus.textContent =
+"⚠️ Digite um nome de usuário.";
+
+return;
+
+}
+
+
+if(username.startsWith("@")){
+
+username =
+username.substring(1);
+
+}
+
+
+if(!email){
+
+authStatus.textContent =
+"⚠️ Digite seu e-mail.";
+
+return;
+
+}
+
+
+if(senha.length < 6){
+
+authStatus.textContent =
+"⚠️ A senha precisa ter pelo menos 6 caracteres.";
+
+return;
+
+}
+
+
+criarContaBtn.disabled =
+true;
+
+criarContaBtn.textContent =
+"Criando conta...";
+
+authStatus.textContent =
+"⏳ Criando sua conta...";
+
+
+try{
+
+const resultado =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:senha,
+
+options:{
+data:{
+username:username,
+avatar:avatar
+}
+}
+
+});
+
+
+if(resultado.error){
+
+console.error(
+resultado.error
+);
+
+authStatus.textContent =
+"❌ " +
+resultado.error.message;
+
+return;
+
+}
+
+
+console.log(
+"Conta criada:",
+resultado.data.user
+);
+
+
+if(resultado.data.session){
+
+authStatus.textContent =
+"✅ Conta criada! Entrando...";
+
+await entrarNoInternetBlox();
+
+}
+
+else{
+
+authStatus.textContent =
+"📧 Conta criada!";
+
+}
+
+}
+
+catch(erro){
+
+console.error(erro);
+
+authStatus.textContent =
+"❌ Ocorreu um erro inesperado.";
+
+}
+
+finally{
+
+criarContaBtn.disabled =
+false;
+
+criarContaBtn.textContent =
+"Criar conta";
+
+}
+
+}
+);
+
+
+// ============================================
+// LOGIN
+// ============================================
+
+entrarBtn.addEventListener(
+"click",
+async function(){
+
+const email =
+loginEmail.value.trim();
+
+const senha =
+loginSenha.value;
+
+
+if(!email){
+
+authStatus.textContent =
+"⚠️ Digite seu e-mail.";
+
+return;
+
+}
+
+
+if(!senha){
+
+authStatus.textContent =
+"⚠️ Digite sua senha.";
+
+return;
+
+}
+
+
+entrarBtn.disabled =
+true;
+
+entrarBtn.textContent =
+"Entrando...";
+
+authStatus.textContent =
+"⏳ Entrando na sua conta...";
+
+
+try{
+
+const resultado =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:senha
+
+});
+
+
+if(resultado.error){
+
+console.error(
+resultado.error
+);
+
+authStatus.textContent =
+"❌ " +
+resultado.error.message;
+
+return;
+
+}
+
+
+authStatus.textContent =
+"✅ Login realizado!";
+
+await entrarNoInternetBlox();
+
+}
+
+catch(erro){
+
+console.error(erro);
+
+authStatus.textContent =
+"❌ Ocorreu um erro inesperado.";
+
+}
+
+finally{
+
+entrarBtn.disabled =
+false;
+
+entrarBtn.textContent =
+"Entrar";
+
+}
+
+}
+);// ============================================
+// ENTRAR NO INTERNETBLOX
+// ============================================
+
+async function entrarNoInternetBlox(){
+
+authScreen.style.display =
+"none";
+
+communitiesScreen.style.display =
+"block";
+
+createCommunityScreen.style.display =
+"none";
+
+communityPageScreen.style.display =
+"none";
+
+await carregarComunidades();
+
+}
+
+
+// ============================================
+// VERIFICAR LOGIN
+// ============================================
+
+async function verificarSessao(){
+
+const {
+data,
+error
+} =
+await supabaseClient.auth.getSession();
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+if(data.session){
+
+await entrarNoInternetBlox();
+
+}
+
+else{
+
+authScreen.style.display =
+"flex";
+
+communitiesScreen.style.display =
+"none";
+
+}
+
+}
+
+verificarSessao();
+
+
+// ============================================
+// NOVA COMUNIDADE
+// ============================================
+
+novaComunidadeBtn.addEventListener(
+"click",
+function(){
+
+communitiesScreen.style.display =
+"none";
+
+createCommunityScreen.style.display =
+"block";
+
+communityName.value =
+"";
+
+communityDescription.value =
+"";
+
+createCommunityStatus.textContent =
+"";
+
+}
+);
+
+
+// ============================================
+// CANCELAR
+// ============================================
+
+cancelCommunityBtn.addEventListener(
+"click",
+function(){
+
+createCommunityScreen.style.display =
+"none";
+
+communitiesScreen.style.display =
+"block";
+
+createCommunityStatus.textContent =
+"";
+
+}
+);
+
+
+// ============================================
+// CRIAR COMUNIDADE
+// ============================================
+
+createCommunityBtn.addEventListener(
+"click",
+async function(){
+
+const nome =
+communityName.value.trim();
+
+const descricao =
+communityDescription.value.trim();
+
+
+if(!nome){
+
+createCommunityStatus.textContent =
+"⚠️ Digite um nome.";
+
+return;
+
+}
+
+
+createCommunityBtn.disabled =
+true;
+
+createCommunityStatus.textContent =
+"⏳ Criando comunidade...";
+
+
+try{
+
+const {
+data:sessionData,
+error:sessionError
+} =
+await supabaseClient.auth.getSession();
+
+
+if(sessionError){
+
+throw sessionError;
+
+}
+
+
+const usuario =
+sessionData.session?.user;
+
+
+if(!usuario){
+
+createCommunityStatus.textContent =
+"❌ Você precisa estar logado.";
+
+return;
+
+}
+
+
+const {
+data:comunidade,
+error
+} =
+await supabaseClient
+.from("communities")
+.insert({
+
+name:nome,
+
+description:descricao,
+
+owner_id:usuario.id
+
+})
+.select()
+.single();
+
+
+if(error){
+
+throw error;
+
+}
+
+
+const {
+error:membroError
+} =
+await supabaseClient
+.from("community_members")
+.insert({
+
+community_id:
+comunidade.id,
+
+user_id:
+usuario.id
+
+});
+
+
+if(membroError){
+
+console.error(
+membroError
+);
+
+createCommunityStatus.textContent =
+"⚠️ Comunidade criada, mas houve erro ao entrar nela.";
+
+return;
+
+}
+
+
+createCommunityStatus.textContent =
+"✅ Comunidade criada!";
+
+communityName.value =
+"";
+
+communityDescription.value =
+"";
+
+await carregarComunidades();
+
+
+setTimeout(
+function(){
+
+createCommunityScreen.style.display =
+"none";
+
+communitiesScreen.style.display =
+"block";
+
+},
+700
+);
+
+}
+
+catch(erro){
+
+console.error(
+"Erro ao criar comunidade:",
+erro
+);
+
+createCommunityStatus.textContent =
+"❌ " +
+erro.message;
+
+}
+
+finally{
+
+createCommunityBtn.disabled =
+false;
+
+}
+
+}
+);
+
+
+// ============================================
+// CARREGAR COMUNIDADES
+// ============================================
+
+async function carregarComunidades(){
+
+communitiesList.innerHTML =
+'<p class="info">⏳ Carregando comunidades...</p>';
+
+
+const {
+data,
+error
+} =
+await supabaseClient
+.from("communities")
+.select("*")
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(error);
+
+communitiesList.innerHTML =
+'<p class="erro">❌ Erro ao carregar comunidades.</p>';
+
+return;
+
+}
+
+
+if(!data || data.length === 0){
+
+communitiesList.innerHTML =
+'<p class="info">🌎 Nenhuma comunidade criada ainda.</p>';
+
+return;
+
+}
+
+
+communitiesList.innerHTML =
+"";
+
+
+for(const comunidade of data){
+
+const card =
+document.createElement("div");
+
+card.className =
+"community-card";
+
+
+const titulo =
+document.createElement("h3");
+
+titulo.textContent =
+"🌐 " +
+comunidade.name;
+
+
+const descricao =
+document.createElement("p");
+
+descricao.className =
+"community-description";
+
+descricao.textContent =
+comunidade.description ||
+"Sem descrição.";
+
+
+const owner =
+document.createElement("p");
+
+owner.className =
+"community-owner";
+
+owner.textContent =
+"👑 Comunidade criada por um usuário";
+
+
+const actions =
+document.createElement("div");
+
+actions.className =
+"community-actions";
+
+
+const abrirBtn =
+document.createElement("button");
+
+abrirBtn.textContent =
+"👀 Abrir";
+
+
+abrirBtn.addEventListener(
+"click",
+function(){
+
+abrirComunidade(
+comunidade
+);
+
+}
+);
+
+
+const entrarBtnComunidade =
+document.createElement("button");
+
+entrarBtnComunidade.className =
+"secondary-btn";
+
+entrarBtnComunidade.textContent =
+"➕ Entrar";
+
+
+entrarBtnComunidade.addEventListener(
+"click",
+function(){
+
+entrarNaComunidade(
+comunidade.id
+);
+
+}
+);
+
+
+actions.appendChild(
+abrirBtn
+);
+
+actions.appendChild(
+entrarBtnComunidade
+);
+
+card.appendChild(
+titulo
+);
+
+card.appendChild(
+descricao
+);
+
+card.appendChild(
+owner
+);
+
+card.appendChild(
+actions
+);
+
+communitiesList.appendChild(
+card
+);
+
+}
+
+}// ============================================
+// ENTRAR NA COMUNIDADE
+// ============================================
+
+async function entrarNaComunidade(
+communityId
+){
+
+const {
+data:sessionData
+} =
+await supabaseClient.auth.getSession();
+
+
+const usuario =
+sessionData.session?.user;
+
+
+if(!usuario){
+
+alert(
+"❌ Você precisa estar logado."
+);
+
+return;
+
+}
+
+
+const {
+error
+} =
+await supabaseClient
+.from("community_members")
+.insert({
+
+community_id:
+communityId,
+
+user_id:
+usuario.id
+
+});
+
+
+if(error){
+
+if(error.code === "23505"){
+
+alert(
+"ℹ️ Você já está nessa comunidade!"
+);
+
+}
+
+else{
+
+console.error(error);
+
+alert(
+"❌ Não foi possível entrar.\n\n" +
+error.message
+);
+
+}
+
+return;
+
+}
+
+
+alert(
+"✅ Você entrou na comunidade!"
+);
+
+await carregarComunidades();
+
+}
+
+
+// ============================================
+// ABRIR COMUNIDADE
+// ============================================
+
+async function abrirComunidade(
+comunidade
+){
+
+comunidadeAtual =
+comunidade;
+
+communitiesScreen.style.display =
+"none";
+
+createCommunityScreen.style.display =
+"none";
+
+communityPageScreen.style.display =
+"block";
+
+openedCommunityName.textContent =
+"🌐 " +
+comunidade.name;
+
+openedCommunityDescription.textContent =
+comunidade.description ||
+"Sem descrição.";
+
+communityPostContent.value =
+"";
+
+communityPostImage.value =
+"";
+
+communityMessageContent.value =
+"";
+
+imagePreview.style.display =
+"none";
+
+imageFileInfo.textContent =
+"Nenhuma imagem selecionada.";
+
+postStatus.textContent =
+"";
+
+messageStatus.textContent =
+"";
+
+
+await atualizarQuantidadeMembros(
+comunidade.id
+);
+
+await carregarPosts(
+comunidade.id
+);
+
+await carregarMensagens(
+comunidade.id
+);
+
+
+// ========================================
+// ATUALIZAÇÃO AUTOMÁTICA
+// ========================================
+
+if(intervaloAtualizacao){
+
+clearInterval(
+intervaloAtualizacao
+);
+
+}
+
+intervaloAtualizacao =
+setInterval(
+async function(){
+
+if(!comunidadeAtual){
+
+return;
+
+}
+
+await carregarPosts(
+comunidadeAtual.id
+);
+
+await carregarMensagens(
+comunidadeAtual.id
+);
+
+},
+5000
+);
+
+}
+
+
+// ============================================
+// QUANTIDADE DE MEMBROS
+// ============================================
+
+async function atualizarQuantidadeMembros(
+communityId
+){
+
+const {
+count,
+error
+} =
+await supabaseClient
+.from("community_members")
+.select(
+"*",
+{
+count:"exact",
+head:true
+}
+)
+.eq(
+"community_id",
+communityId
+);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+openedCommunityMembers.textContent =
+"👥 " +
+(count || 0) +
+" membros";
+
+}
+
+
+// ============================================
+// VOLTAR
+// ============================================
+
+backToCommunitiesBtn.addEventListener(
+"click",
+async function(){
+
+if(intervaloAtualizacao){
+
+clearInterval(
+intervaloAtualizacao
+);
+
+intervaloAtualizacao =
+null;
+
+}
+
+communityPageScreen.style.display =
+"none";
+
+communitiesScreen.style.display =
+"block";
+
+comunidadeAtual =
+null;
+
+await carregarComunidades();
+
+});
+
+
+// ============================================
+// SAIR
+// ============================================
+
+leaveCommunityBtn.addEventListener(
+"click",
+async function(){
+
+if(!comunidadeAtual){
+
+return;
+
+}
+
+
+const confirmar =
+confirm(
+"Tem certeza que deseja sair desta comunidade?"
+);
+
+
+if(!confirmar){
+
+return;
+
+}
+
+
+const {
+data:sessionData
+} =
+await supabaseClient.auth.getSession();
+
+
+const usuario =
+sessionData.session?.user;
+
+
+if(!usuario){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await supabaseClient
+.from("community_members")
+.delete()
+.eq(
+"community_id",
+comunidadeAtual.id
+)
+.eq(
+"user_id",
+usuario.id
+);
+
+
+if(error){
+
+console.error(error);
+
+alert(
+"❌ Não foi possível sair.\n\n" +
+error.message
+);
+
+return;
+
+}
+
+
+if(intervaloAtualizacao){
+
+clearInterval(
+intervaloAtualizacao
+);
+
+intervaloAtualizacao =
+null;
+
+}
+
+
+alert(
+"🚪 Você saiu da comunidade."
+);
+
+communityPageScreen.style.display =
+"none";
+
+communitiesScreen.style.display =
+"block";
+
+comunidadeAtual =
+null;
+
+await carregarComunidades();
+
+}
+);// ============================================
+// COMPRESSÃO DA IMAGEM
+// ============================================
+
+async function comprimirImagem(
+arquivo
+){
+
+const imagem =
+await createImageBitmap(
+arquivo
+);
+
+
+const tamanhoMaximo =
+1280;
+
+const escala =
+Math.min(
+1,
+tamanhoMaximo /
+imagem.width
+);
+
+
+const canvas =
+document.createElement(
+"canvas"
+);
+
+canvas.width =
+Math.round(
+imagem.width *
+escala
+);
+
+canvas.height =
+Math.round(
+imagem.height *
+escala
+);
+
+
+const contexto =
+canvas.getContext(
+"2d"
+);
+
+
+contexto.drawImage(
+imagem,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+const blob =
+await new Promise(
+function(resolve){
+
+canvas.toBlob(
+function(resultado){
+
+resolve(
+resultado
+);
+
+},
+"image/jpeg",
+0.80
+);
+
+}
+);
+
+
+imagem.close();
+
+return blob;
+
+}
+
+
+// ============================================
+// ESCOLHER IMAGEM
+// ============================================
+
+communityPostImage.addEventListener(
+"change",
+function(){
+
+const arquivo =
+communityPostImage.files[0];
+
+
+if(!arquivo){
+
+imagePreview.style.display =
+"none";
+
+imageFileInfo.textContent =
+"Nenhuma imagem selecionada.";
+
+return;
+
+}
+
+
+// ========================================
+// LIMITE DE 5 MB
+// ========================================
+
+const cincoMB =
+5 *
+1024 *
+1024;
+
+
+if(arquivo.size > cincoMB){
+
+communityPostImage.value =
+"";
+
+imagePreview.style.display =
+"none";
+
+imageFileInfo.textContent =
+"❌ A imagem ultrapassa o limite de 5 MB.";
+
+postStatus.textContent =
+"⚠️ Escolha uma imagem de até 5 MB.";
+
+return;
+
+}
+
+
+const tamanhoMB =
+(
+arquivo.size /
+1024 /
+1024
+).toFixed(2);
+
+
+imageFileInfo.textContent =
+"🖼️ " +
+arquivo.name +
+" • " +
+tamanhoMB +
+" MB";
+
+
+const url =
+URL.createObjectURL(
+arquivo
+);
+
+
+imagePreview.src =
+url;
+
+imagePreview.style.display =
+"block";
+
+
+imagePreview.onload =
+function(){
+
+URL.revokeObjectURL(
+url
+);
+
+};
+
+}
+);
+
+
+// ============================================
+// CARREGAR POSTS
+// ============================================
+
+async function carregarPosts(communityId, mostrarCarregando = false){
+
+    if(mostrarCarregando){
+        communityPostsList.innerHTML =
+            '<p class="info">⏳ Carregando posts...</p>';
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("*")
+        .eq("community_id", communityId)
+        .order("created_at", {ascending:false});
+
+    if(error){
+        console.error("Erro ao carregar posts:", error);
+
+        if(mostrarCarregando){
+            communityPostsList.innerHTML =
+                '<p class="erro">❌ Erro ao carregar posts.</p>';
+        }
+
+        return;
+    }
+
+    /*
+     * Só mexemos na tela depois que
+     * o Supabase terminou de responder.
+     */
+
+    if(!data || data.length === 0){
+
+        communityPostsList.innerHTML =
+            '<p class="info">📝 Nenhum post nesta comunidade ainda.</p>';
+
+        return;
+    }
+
+    communityPostsList.innerHTML = "";
+
+    const {
+        data: sessionData
+    } = await supabaseClient.auth.getSession();
+
+    const usuario = sessionData.session?.user;
+
+    data.forEach(function(post){
+
+        const div = document.createElement("div");
+        div.className = "post";
+
+        /*
+         * IMAGEM
+         */
+        if(post.image_url){
+
+            const imagem = document.createElement("img");
+
+            imagem.className = "post-imagem";
+            imagem.src = post.image_url;
+            imagem.alt = "Imagem do post";
+            imagem.loading = "lazy";
+
+            div.appendChild(imagem);
+        }
+
+        /*
+         * LEGENDA
+         */
+        if(post.content && post.content.trim() !== ""){
+
+            const mensagem = document.createElement("div");
+
+            mensagem.className = "post-mensagem";
+            mensagem.textContent = post.content;
+
+            div.appendChild(mensagem);
+        }
+
+        /*
+         * AUTOR
+         */
+        const autor = document.createElement("div");
+
+        autor.className = "post-autor";
+
+        autor.textContent =
+            post.author_id === usuario?.id
+            ? "👤 Você"
+            : "👤 Usuário";
+
+        div.appendChild(autor);
+
+        /*
+         * BOTÃO DE APAGAR
+         */
+        if(usuario && post.author_id === usuario.id){
+
+            const apagarBtn = document.createElement("button");
+
+            apagarBtn.textContent = "🗑️ Apagar";
+            apagarBtn.className = "danger-btn";
+
+            apagarBtn.addEventListener("click", function(){
+
+                apagarPost(post.id);
 
             });
 
+            div.appendChild(apagarBtn);
         }
 
-        catch (erro) {
+        communityPostsList.appendChild(div);
 
-            console.error(
-                "Erro inesperado:",
-                erro
-            );
+    });
 
-            status.textContent =
-                "🔴 Erro inesperado";
+}// ============================================
+// PUBLICAR POST
+// ============================================
 
-        }
+publishCommunityPostBtn.addEventListener(
+"click",
+async function(){
 
-    }
+if(!comunidadeAtual){
 
-</script><script>
+return;
 
-    // ============================================
-    // PUBLICAR MENSAGEM
-    // ============================================
+}
 
-    sendBtn.addEventListener(
-        "click",
-        async function() {
 
-            const usuario =
-                usernameInput.value.trim();
+const conteudo =
+communityPostContent.value.trim();
 
-            const conteudo =
-                messageInput.value.trim();
+const arquivo =
+communityPostImage.files[0];
 
 
-            // Verificação
-            if (!usuario) {
+// ========================================
+// POST PRECISA TER IMAGEM
+// ========================================
 
-                alert(
-                    "⚠️ Digite seu usuário!"
-                );
+if(!arquivo){
 
-                usernameInput.focus();
+postStatus.textContent =
+"⚠️ Um post precisa ter uma imagem.";
 
-                return;
-            }
+return;
 
+}
 
-            if (!conteudo) {
 
-                alert(
-                    "⚠️ Digite uma mensagem!"
-                );
+const cincoMB =
+5 *
+1024 *
+1024;
 
-                messageInput.focus();
 
-                return;
-            }
+if(arquivo.size > cincoMB){
 
+postStatus.textContent =
+"⚠️ A imagem precisa ter no máximo 5 MB.";
 
-            // Desativa botão enquanto envia
-            sendBtn.disabled = true;
+return;
 
-            sendBtn.textContent =
-                "Enviando...";
+}
 
 
-            try {
+const {
+data:sessionData
+} =
+await supabaseClient.auth.getSession();
 
-                // Salva IMEDIATAMENTE no Supabase
-                const resultado =
-                    await supabaseClient
-                        .from("mensagens")
-                        .insert([
-                            {
-                                usuario: usuario,
-                                conteudo: conteudo
-                            }
-                        ]);
 
+const usuario =
+sessionData.session?.user;
 
-                // Verifica erro
-                if (resultado.error) {
 
-                    console.error(
-                        "Erro ao publicar:",
-                        resultado.error
-                    );
+if(!usuario){
 
-                    alert(
-                        "❌ Não foi possível publicar.\n\n" +
-                        resultado.error.message
-                    );
+postStatus.textContent =
+"❌ Você precisa estar logado.";
 
-                    return;
-                }
+return;
 
+}
 
-                // Mensagem salva!
-                console.log(
-                    "✅ Mensagem salva no Supabase!"
-                );
 
+publishCommunityPostBtn.disabled =
+true;
 
-                // Limpa caixa
-                messageInput.value = "";
+postStatus.textContent =
+"⏳ Preparando imagem...";
 
 
-                // Atualiza imediatamente
-                await carregarMensagens();
+try{
 
-            }
+// ========================================
+// COMPRIMIR
+// ========================================
 
-            catch (erro) {
+const imagemComprimida =
+await comprimirImagem(
+arquivo
+);
 
-                console.error(
-                    "Erro inesperado:",
-                    erro
-                );
 
-                alert(
-                    "❌ Erro ao enviar a mensagem."
-                );
+if(!imagemComprimida){
 
-            }
+throw new Error(
+"Não foi possível processar a imagem."
+);
 
-            finally {
+}
 
-                sendBtn.disabled = false;
 
-                sendBtn.textContent =
-                    "Publicar Globalmente";
+postStatus.textContent =
+"⏳ Enviando imagem...";
 
-            }
 
-        }
-    );
+// ========================================
+// NOME ÚNICO
+// ========================================
 
+const nomeArquivo =
+usuario.id +
+"/" +
+crypto.randomUUID() +
+".jpg";
 
-    // ============================================
-    // CTRL + ENTER PARA PUBLICAR
-    // ============================================
 
-    messageInput.addEventListener(
-        "keydown",
-        function(event) {
+// ========================================
+// UPLOAD STORAGE
+// ========================================
 
-            if (
-                event.ctrlKey &&
-                event.key === "Enter"
-            ) {
+const {
+error:uploadError
+} =
+await supabaseClient.storage
+.from("post-images")
+.upload(
+nomeArquivo,
+imagemComprimida,
+{
+contentType:
+"image/jpeg",
 
-                event.preventDefault();
+upsert:false
+}
+);
 
-                sendBtn.click();
 
-            }
+if(uploadError){
 
-        }
-    );
+throw uploadError;
 
+}
 
-    // ============================================
-    // ENTER NO USUÁRIO → VAI PARA A MENSAGEM
-    // ============================================
 
-    usernameInput.addEventListener(
-        "keydown",
-        function(event) {
+// ========================================
+// URL PÚBLICA
+// ========================================
 
-            if (event.key === "Enter") {
+const {
+data:urlData
+} =
+supabaseClient.storage
+.from("post-images")
+.getPublicUrl(
+nomeArquivo
+);
 
-                event.preventDefault();
 
-                messageInput.focus();
+const imageUrl =
+urlData.publicUrl;
 
-            }
 
-        }
-    );
+if(!imageUrl){
 
+throw new Error(
+"Não foi possível obter a URL da imagem."
+);
 
-    // ============================================
-    // NÃO PERMITIR QUEBRA DE LINHA NO USUÁRIO
-    // ============================================
+}
 
-    usernameInput.addEventListener(
-        "input",
-        function() {
 
-            usernameInput.value =
-                usernameInput.value
-                    .replace(/[\r\n]/g, "");
+postStatus.textContent =
+"⏳ Salvando post...";
 
-        }
-    );
 
-</script><script>
+// ========================================
+// SALVAR POST NO BANCO
+// ========================================
 
-    // ============================================
-    // PRIMEIRO CARREGAMENTO
-    // ============================================
+const {
+error
+} =
+await supabaseClient
+.from("posts")
+.insert({
 
-    carregarMensagens();
+community_id:
+comunidadeAtual.id,
 
+author_id:
+usuario.id,
 
-    // ============================================
-    // ATUALIZA A CADA 5 SEGUNDOS
-    // ============================================
+content:
+conteudo,
 
-    setInterval(
-        function() {
+image_url:
+imageUrl
 
-            console.log(
-                "🔄 Atualizando mensagens..."
-            );
+});
 
-            carregarMensagens();
 
-        },
-        5000
-    );
+if(error){
 
+throw error;
 
-    // ============================================
-    // INFORMAÇÕES NO CONSOLE
-    // ============================================
+}
 
-    console.log(
-        "🌐 InternetBlox Global iniciado!"
-    );
 
-    console.log(
-        "📡 Supabase conectado."
-    );
+// ========================================
+// LIMPAR
+// ========================================
 
-    console.log(
-        "💾 Mensagens são salvas imediatamente."
-    );
+communityPostContent.value =
+"";
 
-    console.log(
-        "🔄 Feed atualiza a cada 5 segundos."
-    );
+communityPostImage.value =
+"";
 
+imagePreview.src =
+"";
 
-    // ============================================
-    // SE O USUÁRIO VOLTAR PARA A ABA
-    // ============================================
+imagePreview.style.display =
+"none";
 
-    document.addEventListener(
-        "visibilitychange",
-        function() {
+imageFileInfo.textContent =
+"Nenhuma imagem selecionada.";
 
-            if (!document.hidden) {
+postStatus.textContent =
+"✅ Post publicado!";
 
-                carregarMensagens();
 
-            }
+await carregarPosts(
+comunidadeAtual.id
+);
 
-        }
-    );
+}
 
-</script><script>
+catch(erro){
 
-    console.log(
-        "✅ InternetBlox Global está pronto!"
-    );
+console.error(
+"Erro ao publicar post:",
+erro
+);
 
-    console.log(
-        "🌎 Você está conectado ao mundo global."
-    );
+postStatus.textContent =
+"❌ " +
+erro.message;
 
-</script>
+}
 
-</body>
+finally{
+
+publishCommunityPostBtn.disabled =
+false;
+
+}
+
+});
+
+
+// ============================================
+// APAGAR POST
+// ============================================
+
+async function apagarPost(
+postId
+){
+
+const confirmar =
+confirm(
+"Deseja apagar seu post?"
+);
+
+
+if(!confirmar){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await supabaseClient
+.from("posts")
+.delete()
+.eq(
+"id",
+postId
+);
+
+
+if(error){
+
+console.error(error);
+
+alert(
+"❌ Não foi possível apagar o post.\n\n" +
+error.message
+);
+
+return;
+
+}
+
+
+if(comunidadeAtual){
+
+await carregarPosts(
+comunidadeAtual.id
+);
+
+}
+
+}// ============================================
+// ENVIAR MENSAGEM DA COMUNIDADE
+// ============================================
+
+sendCommunityMessageBtn.addEventListener(
+"click",
+async function(){
+
+if(!comunidadeAtual){
+
+return;
+
+}
+
+
+const conteudo =
+communityMessageContent.value.trim();
+
+
+if(!conteudo){
+
+messageStatus.textContent =
+"⚠️ Escreva uma mensagem.";
+
+return;
+
+}
+
+
+const {
+data:sessionData
+} =
+await supabaseClient.auth.getSession();
+
+
+const usuario =
+sessionData.session?.user;
+
+
+if(!usuario){
+
+messageStatus.textContent =
+"❌ Você precisa estar logado.";
+
+return;
+
+}
+
+
+sendCommunityMessageBtn.disabled =
+true;
+
+messageStatus.textContent =
+"⏳ Enviando...";
+
+
+try{
+
+const {
+error
+} =
+await supabaseClient
+.from("community_messages")
+.insert({
+
+community_id:
+comunidadeAtual.id,
+
+author_id:
+usuario.id,
+
+content:
+conteudo
+
+});
+
+
+if(error){
+
+throw error;
+
+}
+
+
+communityMessageContent.value =
+"";
+
+messageStatus.textContent =
+"✅ Mensagem enviada!";
+
+
+await carregarMensagens(
+comunidadeAtual.id
+);
+
+}
+
+catch(erro){
+
+console.error(
+"Erro ao enviar mensagem:",
+erro
+);
+
+messageStatus.textContent =
+"❌ " +
+erro.message;
+
+}
+
+finally{
+
+sendCommunityMessageBtn.disabled =
+false;
+
+}
+
+});
+
+
+// ============================================
+// CARREGAR MENSAGENS
+// ============================================
+
+async function carregarMensagens(
+communityId
+){
+
+communityMessagesList.innerHTML =
+'<p class="info">⏳ Carregando conversas...</p>';
+
+
+const {
+data,
+error
+} =
+await supabaseClient
+.from("community_messages")
+.select("*")
+.eq(
+"community_id",
+communityId
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(error);
+
+communityMessagesList.innerHTML =
+'<p class="erro">❌ Erro ao carregar conversas.</p>';
+
+return;
+
+}
+
+
+if(!data || data.length === 0){
+
+communityMessagesList.innerHTML =
+'<p class="info">💬 Nenhuma mensagem nesta comunidade ainda.</p>';
+
+return;
+
+}
+
+
+communityMessagesList.innerHTML =
+"";
+
+
+const {
+data:sessionData
+} =
+await supabaseClient.auth.getSession();
+
+
+const usuario =
+sessionData.session?.user;
+
+
+data.forEach(
+function(mensagem){
+
+const div =
+document.createElement("div");
+
+div.className =
+"message";
+
+
+const autor =
+document.createElement("div");
+
+autor.className =
+"message-usuario";
+
+autor.textContent =
+"👤 " +
+(
+mensagem.author_id === usuario?.id
+?
+"Você"
+:
+"Usuário"
+);
+
+
+const conteudo =
+document.createElement("div");
+
+conteudo.className =
+"message-conteudo";
+
+conteudo.textContent =
+mensagem.content;
+
+
+div.appendChild(
+autor
+);
+
+div.appendChild(
+conteudo
+);
+
+
+// ========================================
+// APAGAR PRÓPRIA MENSAGEM
+// ========================================
+
+if(
+usuario &&
+mensagem.author_id === usuario.id
+){
+
+const apagarBtn =
+document.createElement("button");
+
+apagarBtn.className =
+"danger-btn";
+
+apagarBtn.classList.add(
+"message-apagar"
+);
+
+apagarBtn.textContent =
+"🗑️ Apagar";
+
+
+apagarBtn.addEventListener(
+"click",
+function(){
+
+apagarMensagem(
+mensagem.id
+);
+
+}
+);
+
+
+div.appendChild(
+apagarBtn
+);
+
+}
+
+
+communityMessagesList.appendChild(
+div
+);
+
+}
+);
+
+}// ============================================
+// APAGAR PRÓPRIA MENSAGEM
+// ============================================
+
+async function apagarMensagem(
+messageId
+){
+
+const confirmar =
+confirm(
+"Deseja apagar sua mensagem?"
+);
+
+
+if(!confirmar){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await supabaseClient
+.from("community_messages")
+.delete()
+.eq(
+"id",
+messageId
+);
+
+
+if(error){
+
+console.error(error);
+
+alert(
+"❌ Não foi possível apagar a mensagem.\n\n" +
+error.message
+);
+
+return;
+
+}
+
+
+if(comunidadeAtual){
+
+await carregarMensagens(
+comunidadeAtual.id
+);
+
+}
+
+}
+
+
+// ============================================
+// LOGOUT
+// ============================================
+
+logoutBtn.addEventListener(
+"click",
+async function(){
+
+const confirmar =
+confirm(
+"Deseja sair da sua conta?"
+);
+
+
+if(!confirmar){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await supabaseClient.auth.signOut();
+
+
+if(error){
+
+console.error(error);
+
+alert(
+"❌ Erro ao sair."
+);
+
+return;
+
+}
+
+});
+
+
+// ============================================
+// DETECTAR LOGIN / LOGOUT
+// ============================================
+
+supabaseClient.auth.onAuthStateChange(
+function(
+event,
+session
+){
+
+console.log(
+"🔐 Evento de autenticação:",
+event
+);
+
+
+if(
+event === "SIGNED_OUT"
+){
+
+if(intervaloAtualizacao){
+
+clearInterval(
+intervaloAtualizacao
+);
+
+intervaloAtualizacao =
+null;
+
+}
+
+
+authScreen.style.display =
+"flex";
+
+communitiesScreen.style.display =
+"none";
+
+createCommunityScreen.style.display =
+"none";
+
+communityPageScreen.style.display =
+"none";
+
+comunidadeAtual =
+null;
+
+loginEmail.value =
+"";
+
+loginSenha.value =
+"";
+
+cadastroEmail.value =
+"";
+
+cadastroSenha.value =
+"";
+
+authStatus.textContent =
+"";
+
+}
+
+});
+
+
+// ============================================
+// CONSOLE
+// ============================================
+
+console.log(
+"🌐 InternetBlox Global 2.0 Beta iniciado!"
+);
+
+console.log(
+"👤 Sistema de usuários ativo."
+);
+
+console.log(
+"🧑‍🤝‍🧑 Sistema de comunidades ativo."
+);
+
+console.log(
+"📝 Sistema de posts ativo."
+);
+
+console.log(
+"💬 Sistema de conversas ativo."
+);
+
+console.log(
+"🖼️ Sistema de imagens ativo."
+);
+
+console.log(
+"🔐 Supabase Auth conectado."
+);
+
+</script></body>
 
 </html>
