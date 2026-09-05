@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InternetBlox Global 🌐</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            color: #f8fafc;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+
+            padding: 20px;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 550px;
+
+            background: #1e293b;
+
+            border: 1px solid #334155;
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #38bdf8;
+
+            font-size: 1.8rem;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 0.9rem;
+
+            margin-bottom: 20px;
+        }
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            background: #0f172a;
+
+            color: white;
+
+            border: 1px solid #334155;
+
+            border-radius: 8px;
+
+            padding: 12px;
+
+            margin-bottom: 12px;
+
+            font-size: 1rem;
+
+            outline: none;
+
+            resize: none;
+        }
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #38bdf8;
+
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+        }
+
+        textarea {
+            min-height: 90px;
+        }
+
+        button {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #38bdf8;
+
+            color: #0f172a;
+
+            font-size: 1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+            transform: translateY(-1px);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            font-size: 0.85rem;
+
+            color: #64748b;
+        }
+
+        .feed {
+
+            margin-top: 25px;
+
+            max-height: 500px;
+
+            overflow-y: auto;
+
+            padding-right: 5px;
+        }
+
+        .post {
+
+            background: #334155;
+
+            border-left: 4px solid #38bdf8;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            margin-bottom: 12px;
+        }
+
+        .post-usuario {
+
+            color: #38bdf8;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            word-break: break-word;
+        }
+
+        .post-mensagem {
+
+            color: #e2e8f0;
+
+            line-height: 1.5;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+        .info {
+
+            text-align: center;
+
+            color: #64748b;
+
+            padding: 15px;
+        }
+
+        .erro {
+
+            text-align: center;
+
+            color: #f87171;
+
+            padding: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <h1>InternetBlox Global 🌐</h1>
+
+        <div class="subtitulo">
+            Converse com o mundo!
+        </div>
+
+        <input
+            type="text"
+            id="username"
+            maxlength="30"
+            placeholder="Seu usuário (ex: @Player1)"
+        >
+
+        <textarea
+            id="message"
+            maxlength="500"
+            placeholder="Escreva uma mensagem..."
+        ></textarea>
+
+        <button id="sendBtn">
+            Publicar Globalmente
+        </button>
+
+        <div class="status" id="status">
+            🔄 Conectando...
+        </div>
+
+        <div class="feed" id="feed">
+
+            <p class="info">
+                Carregando mensagens globais...
+            </p>
+
+        </div>
+
+    </div><script>
+
+    // ============================================
+    // CONFIGURAÇÃO DO SUPABASE
+    // ============================================
+
+    const SUPABASE_URL =
+        "https://hjjnxdkvdourignxxtwl.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
+
+    // Cria a conexão
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+    // ============================================
+    // ELEMENTOS DA PÁGINA
+    // ============================================
+
+    const usernameInput =
+        document.getElementById("username");
+
+    const messageInput =
+        document.getElementById("message");
+
+    const sendBtn =
+        document.getElementById("sendBtn");
+
+    const feed =
+        document.getElementById("feed");
+
+    const status =
+        document.getElementById("status");
+
+
+    // ============================================
+    // CARREGAR MENSAGENS
+    // ============================================
+
+    async function carregarMensagens() {
+
+        try {
+
+            const resultado =
+                await supabaseClient
+                    .from("mensagens")
+                    .select("usuario, conteudo");
+
+
+            if (resultado.error) {
+
+                console.error(
+                    "Erro do Supabase:",
+                    resultado.error
+                );
+
+                status.textContent =
+                    "🔴 Erro ao conectar com o banco";
+
+                feed.innerHTML = "";
+
+                const erro =
+                    document.createElement("p");
+
+                erro.className = "erro";
+
+                erro.textContent =
+                    "❌ Não foi possível carregar as mensagens.";
+
+                feed.appendChild(erro);
+
+                return;
+            }
+
+
+            const mensagens =
+                resultado.data || [];
+
+
+            status.textContent =
+                "🟢 InternetBlox conectado";
+
+
+            // Nenhuma mensagem
+            if (mensagens.length === 0) {
+
+                feed.innerHTML = "";
+
+                const vazio =
+                    document.createElement("p");
+
+                vazio.className = "info";
+
+                vazio.textContent =
+                    "🌎 Nenhuma mensagem publicada ainda.";
+
+                feed.appendChild(vazio);
+
+                return;
+            }
+
+
+            // Limpa o feed
+            feed.innerHTML = "";
+
+
+            // Mostra as mensagens mais recentes primeiro
+            mensagens.reverse();
+
+
+            mensagens.forEach(function(post) {
+
+                const div =
+                    document.createElement("div");
+
+                div.className = "post";
+
+
+                const usuario =
+                    document.createElement("div");
+
+                usuario.className =
+                    "post-usuario";
+
+                usuario.textContent =
+                    post.usuario || "@usuário";
+
+
+                const mensagem =
+                    document.createElement("div");
+
+                mensagem.className =
+                    "post-mensagem";
+
+                mensagem.textContent =
+                    post.conteudo || "";
+
+
+                div.appendChild(usuario);
+
+                div.appendChild(mensagem);
+
+                feed.appendChild(div);
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro inesperado:",
+                erro
+            );
+
+            status.textContent =
+                "🔴 Erro inesperado";
+
+        }
+
+    }
+
+</script><script>
+
+    // ============================================
+    // PUBLICAR MENSAGEM
+    // ============================================
+
+    sendBtn.addEventListener(
+        "click",
+        async function() {
+
+            const usuario =
+                usernameInput.value.trim();
+
+            const conteudo =
+                messageInput.value.trim();
+
+
+            // Verificação
+            if (!usuario) {
+
+                alert(
+                    "⚠️ Digite seu usuário!"
+                );
+
+                usernameInput.focus();
+
+                return;
+            }
+
+
+            if (!conteudo) {
+
+                alert(
+                    "⚠️ Digite uma mensagem!"
+                );
+
+                messageInput.focus();
+
+                return;
+            }
+
+
+            // Desativa botão enquanto envia
+            sendBtn.disabled = true;
+
+            sendBtn.textContent =
+                "Enviando...";
+
+
+            try {
+
+                // Salva IMEDIATAMENTE no Supabase
+                const resultado =
+                    await supabaseClient
+                        .from("mensagens")
+                        .insert([
+                            {
+                                usuario: usuario,
+                                conteudo: conteudo
+                            }
+                        ]);
+
+
+                // Verifica erro
+                if (resultado.error) {
+
+                    console.error(
+                        "Erro ao publicar:",
+                        resultado.error
+                    );
+
+                    alert(
+                        "❌ Não foi possível publicar.\n\n" +
+                        resultado.error.message
+                    );
+
+                    return;
+                }
+
+
+                // Mensagem salva!
+                console.log(
+                    "✅ Mensagem salva no Supabase!"
+                );
+
+
+                // Limpa caixa
+                messageInput.value = "";
+
+
+                // Atualiza imediatamente
+                await carregarMensagens();
+
+            }
+
+            catch (erro) {
+
+                console.error(
+                    "Erro inesperado:",
+                    erro
+                );
+
+                alert(
+                    "❌ Erro ao enviar a mensagem."
+                );
+
+            }
+
+            finally {
+
+                sendBtn.disabled = false;
+
+                sendBtn.textContent =
+                    "Publicar Globalmente";
+
+            }
+
+        }
+    );
+
+
+    // ============================================
+    // CTRL + ENTER PARA PUBLICAR
+    // ============================================
+
+    messageInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.ctrlKey &&
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                sendBtn.click();
+
+            }
+
+        }
+    );
+
+
+    // ============================================
+    // ENTER NO USUÁRIO → VAI PARA A MENSAGEM
+    // ============================================
+
+    usernameInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                messageInput.focus();
+
+            }
+
+        }
+    );
+
+
+    // ============================================
+    // NÃO PERMITIR QUEBRA DE LINHA NO USUÁRIO
+    // ============================================
+
+    usernameInput.addEventListener(
+        "input",
+        function() {
+
+            usernameInput.value =
+                usernameInput.value
+                    .replace(/[\r\n]/g, "");
+
+        }
+    );
+
+</script><script>
+
+    // ============================================
+    // PRIMEIRO CARREGAMENTO
+    // ============================================
+
+    carregarMensagens();
+
+
+    // ============================================
+    // ATUALIZA A CADA 5 SEGUNDOS
+    // ============================================
+
+    setInterval(
+        function() {
+
+            console.log(
+                "🔄 Atualizando mensagens..."
+            );
+
+            carregarMensagens();
+
+        },
+        5000
+    );
+
+
+    // ============================================
+    // INFORMAÇÕES NO CONSOLE
+    // ============================================
+
+    console.log(
+        "🌐 InternetBlox Global iniciado!"
+    );
+
+    console.log(
+        "📡 Supabase conectado."
+    );
+
+    console.log(
+        "💾 Mensagens são salvas imediatamente."
+    );
+
+    console.log(
+        "🔄 Feed atualiza a cada 5 segundos."
+    );
+
+
+    // ============================================
+    // SE O USUÁRIO VOLTAR PARA A ABA
+    // ============================================
+
+    document.addEventListener(
+        "visibilitychange",
+        function() {
+
+            if (!document.hidden) {
+
+                carregarMensagens();
+
+            }
+
+        }
+    );
+
+</script><script>
+
+    console.log(
+        "✅ InternetBlox Global está pronto!"
+    );
+
+    console.log(
+        "🌎 Você está conectado ao mundo global."
+    );
+
+</script>
+
+</body>
+
+</html>
