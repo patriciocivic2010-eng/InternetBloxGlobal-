@@ -1,86 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>InternetBlox Global 🌐</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-/* ================================
-   INTERNETBLOX — VISUAL REFORM
-   Retro web / old YouTube inspired
-   Only visual styling is changed.
-   ================================ */
 :root{
-  --page:#dfe7ea;
-  --page-dark:#c7d3d8;
-  --panel:#ffffff;
-  --panel-soft:#f4f7f8;
-  --line:#b7c5ca;
-  --line-dark:#8fa2a9;
-  --blue:#1687b8;
-  --blue-dark:#075b82;
-  --blue-soft:#d9f1fb;
-  --text:#26343a;
-  --muted:#66777e;
-  --green:#3b8f57;
-  --red:#b84747;
-  --shadow:0 2px 7px rgba(39,63,72,.20);
+--page:#dfe7ea;--panel:#fff;--line:#b7c5ca;--line-dark:#8fa2a9;
+--blue:#1687b8;--blue-dark:#075b82;--text:#26343a;--muted:#66777e;
+--shadow:0 2px 7px rgba(39,63,72,.20)
 }
-
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-
 body{
-  background:
-    repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0,rgba(255,255,255,.28) 1px,transparent 1px,transparent 9px),
-    linear-gradient(#eef3f5,#d4dfe3);
-  color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:18px;
+background:repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0,rgba(255,255,255,.28) 1px,transparent 1px,transparent 9px),linear-gradient(#eef3f5,#d4dfe3);
+color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:18px
 }
-
 body:before{
-  content:"";position:fixed;left:0;right:0;top:0;height:8px;z-index:-1;
-  background:linear-gradient(90deg,#6e8f9a,#b8d8df,#6e8f9a);border-bottom:1px solid #8ca4ad;
+content:"";position:fixed;left:0;right:0;top:0;height:8px;z-index:-1;
+background:linear-gradient(90deg,#6e8f9a,#b8d8df,#6e8f9a);border-bottom:1px solid #8ca4ad
 }
-
 .app{
-  width:100%;max-width:1100px;background:var(--panel);border:1px solid #9eafb5;border-radius:3px;padding:0 20px 24px;
-  box-shadow:0 3px 12px rgba(41,63,72,.22);overflow:hidden;position:relative;
+width:100%;max-width:1100px;background:#fff;border:1px solid #9eafb5;border-radius:3px;
+padding:0 20px 24px;box-shadow:0 3px 12px rgba(41,63,72,.22);overflow:hidden;position:relative
 }
-
 .app:before{
-  content:"";display:block;height:43px;margin:0 -20px 20px;padding:0 20px;
-  background:linear-gradient(#3cabc9,#117aa5);border-bottom:3px solid #075b82;
+content:"";display:block;height:43px;margin:0 -20px 20px;padding:0 20px;
+background:linear-gradient(#3cabc9,#117aa5);border-bottom:3px solid #075b82
 }
-
 .app:after{
-  content:"InternetBlox Global  •  conecte-se, converse e compartilhe";
-  position:absolute;top:13px;left:24px;color:white;font-size:14px;font-weight:bold;text-shadow:0 1px 1px rgba(0,0,0,.35);letter-spacing:.2px;
+content:"InternetBlox Global  •  conecte-se, converse e compartilhe";position:absolute;top:13px;left:24px;
+color:white;font-size:14px;font-weight:bold;text-shadow:0 1px 1px rgba(0,0,0,.35);letter-spacing:.2px
 }
-
 h1,h2,h3{font-family:Arial,Helvetica,sans-serif}
 h1{text-align:left;color:var(--blue-dark);font-size:25px;margin-bottom:5px;border-bottom:1px solid var(--line);padding-bottom:8px}
 h2{color:var(--blue-dark);font-size:21px;margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
 h3{color:#31515d;font-size:17px;margin-bottom:7px}
-
 .subtitulo{text-align:left;color:var(--muted);font-size:13px;margin-bottom:15px}
-
 input,textarea,select{
-  width:100%;background:#fff;color:#25363d;border:1px solid #aebdc2;border-radius:2px;padding:10px 11px;margin-bottom:10px;font-size:15px;outline:none;resize:none;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.06);
+width:100%;background:#fff;color:#25363d;border:1px solid #aebdc2;border-radius:2px;padding:10px 11px;
+margin-bottom:10px;font-size:15px;outline:none;resize:none;box-shadow:inset 0 1px 2px rgba(0,0,0,.06)
 }
-input:focus,textarea:focus,select:focus{border-color:#1687b8;box-shadow:0 0 0 2px rgba(22,135,184,.13),inset 0 1px 2px rgba(0,0,0,.06)}
+input:focus,textarea:focus,select:focus{
+border-color:#1687b8;box-shadow:0 0 0 2px rgba(22,135,184,.13),inset 0 1px 2px rgba(0,0,0,.06)
+}
 textarea{min-height:90px}
-
 button{
-  width:100%;padding:9px 12px;border:1px solid #086b91;border-radius:3px;
-  background:linear-gradient(#4bb5d4,#1585ae);color:white;font-size:14px;font-weight:bold;cursor:pointer;transition:.15s;margin-bottom:9px;text-shadow:0 1px 1px rgba(0,0,0,.25);box-shadow:0 1px 2px rgba(0,0,0,.16)
+width:100%;padding:9px 12px;border:1px solid #086b91;border-radius:3px;
+background:linear-gradient(#4bb5d4,#1585ae);color:white;font-size:14px;font-weight:bold;
+cursor:pointer;transition:.15s;margin-bottom:9px;text-shadow:0 1px 1px rgba(0,0,0,.25);
+box-shadow:0 1px 2px rgba(0,0,0,.16)
 }
 button:hover{background:linear-gradient(#61c2df,#08769f);transform:none}
 button:active{box-shadow:inset 0 2px 3px rgba(0,0,0,.18)}
@@ -89,181 +59,312 @@ button:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .secondary-btn:hover{background:linear-gradient(#fff,#e4ecef)}
 .danger-btn{background:linear-gradient(#d96a6a,#aa3d3d);border-color:#923434;color:#fff}
 .danger-btn:hover{background:linear-gradient(#e17b7b,#b64242)}
-
 .status{text-align:center;margin-top:10px;font-size:13px;color:#718189;min-height:18px}
 .feed{margin-top:20px;max-height:500px;overflow-y:auto;padding-right:5px}
-
 .post,.community-card{
-  background:linear-gradient(#fff,#f2f6f7);border:1px solid #bcc9cd;border-left:5px solid #2b9ac1;border-radius:2px;padding:14px;margin-bottom:11px;box-shadow:var(--shadow)
+background:linear-gradient(#fff,#f2f6f7);border:1px solid #bcc9cd;border-left:5px solid #2b9ac1;
+border-radius:2px;padding:14px;margin-bottom:11px;box-shadow:var(--shadow)
 }
 .post:hover,.community-card:hover{border-left-color:#0b6e98}
 .post-usuario{color:#08729d;font-weight:bold;margin-bottom:7px;word-break:break-word;font-size:14px}
 .post-mensagem{color:#33464e;line-height:1.5;white-space:pre-wrap;word-break:break-word;margin-top:9px}
-.post-imagem{display:block;width:100%;max-height:450px;object-fit:contain;border:1px solid #c2ced2;border-radius:2px;margin-top:9px;background:#e9eef0}
+.post-imagem{
+display:block;width:100%;max-height:450px;object-fit:contain;border:1px solid #c2ced2;
+border-radius:2px;margin-top:9px;background:#e9eef0
+}
 .info{text-align:center;color:#788990;padding:18px}
 .erro{text-align:center;color:#b84747;padding:15px}
-
-.auth-screen{position:fixed;inset:0;background:linear-gradient(#dfe8eb,#cbd8dc);display:flex;justify-content:center;align-items:center;padding:20px;z-index:9999}
-.auth-box{width:100%;max-width:430px;background:#fff;border:1px solid #9aaeb5;border-radius:3px;padding:0 24px 22px;box-shadow:0 4px 18px rgba(35,58,68,.25);text-align:center;overflow:hidden}
-.auth-box:before{content:"INTERNETBLOX  •  GLOBAL COMMUNITY";display:block;margin:0 -24px 20px;padding:13px 18px;background:linear-gradient(#4aafc9,#117aa3);border-bottom:3px solid #075b82;color:#fff;font-size:14px;font-weight:bold;text-align:left;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.auth-screen{
+position:fixed;inset:0;background:linear-gradient(#dfe8eb,#cbd8dc);display:flex;
+justify-content:center;align-items:center;padding:20px;z-index:9999
+}
+.auth-box{
+width:100%;max-width:430px;background:#fff;border:1px solid #9aaeb5;border-radius:3px;
+padding:0 24px 22px;box-shadow:0 4px 18px rgba(35,58,68,.25);text-align:center;overflow:hidden
+}
+.auth-box:before{
+content:"INTERNETBLOX  •  GLOBAL COMMUNITY";display:block;margin:0 -24px 20px;padding:13px 18px;
+background:linear-gradient(#4aafc9,#117aa3);border-bottom:3px solid #075b82;color:#fff;font-size:14px;
+font-weight:bold;text-align:left;text-shadow:0 1px 1px rgba(0,0,0,.25)
+}
 .auth-box h1{color:var(--blue-dark);font-size:24px;margin-bottom:7px;text-align:center;border:0;padding:0}
 .auth-box p{color:#718189;margin-bottom:13px;font-size:13px}
 .auth-switch{font-size:13px;margin-top:4px}
-.auth-switch button{background:none;border:0;color:#0875a0;padding:0;width:auto;margin:0;font-size:13px;box-shadow:none;text-shadow:none}
+.auth-switch button{
+background:none;border:0;color:#0875a0;padding:0;width:auto;margin:0;font-size:13px;box-shadow:none;text-shadow:none
+}
 .auth-switch button:hover{background:none;transform:none;text-decoration:underline}
 .auth-box select{margin-bottom:10px}
-
 .screen{width:100%}
+.home-screen{width:100%}
+.home-welcome{text-align:center;padding:12px 10px 18px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.home-welcome h1{text-align:center;border:0;font-size:27px;margin-bottom:7px}
+.home-welcome p{color:#66777e;font-size:13px}
+.home-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:800px;margin:0 auto 20px}
+.home-card{
+background:linear-gradient(#fff,#edf3f5);border:1px solid #aebfc5;border-radius:3px;
+box-shadow:var(--shadow);padding:20px;text-align:center;min-height:190px;display:flex;
+flex-direction:column;justify-content:center;align-items:center
+}
+.home-card:hover{border-color:#6f9eae;background:linear-gradient(#fff,#e6f0f3)}
+.home-card-icon{font-size:43px;margin-bottom:9px}
+.home-card-title{color:#075f84;font-size:20px;font-weight:bold;margin-bottom:7px}
+.home-card-description{color:#62747b;font-size:13px;line-height:1.45;max-width:290px;margin-bottom:13px}
+.home-card button{width:auto;min-width:160px;margin-bottom:0}
+.home-card.video-card{border-top:4px solid #b44b4b}
+.home-card.video-card .home-card-title{color:#8e3030}
+.home-footer{border-top:1px solid var(--line);padding-top:14px;text-align:center}
+.home-footer button{width:auto;min-width:170px;margin-bottom:0}
 .community-description{color:#52656d;margin-bottom:10px;line-height:1.45;word-break:break-word}
 .community-owner{color:#7b8a90;font-size:12px;margin-bottom:11px}
 .community-actions{display:flex;gap:8px}
 .community-actions button{margin-bottom:0}
-.community-header{margin-bottom:18px;background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;padding:15px;border-radius:2px;box-shadow:var(--shadow)}
-.back-btn{background:linear-gradient(#f7f9fa,#dce5e8);color:#3f555e;border-color:#9eafb5;text-shadow:none;width:auto;padding:8px 13px;margin-bottom:13px}
+.community-header{
+margin-bottom:18px;background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;
+padding:15px;border-radius:2px;box-shadow:var(--shadow)
+}
+.back-btn{
+background:linear-gradient(#f7f9fa,#dce5e8);color:#3f555e;border-color:#9eafb5;text-shadow:none;
+width:auto;padding:8px 13px;margin-bottom:13px
+}
 .member-count{color:#718189;font-size:13px;margin-bottom:12px}
-
-.composer-box{background:linear-gradient(#fbfcfc,#edf3f5);border:1px solid #b9c7cc;border-radius:2px;padding:15px;margin-bottom:17px;box-shadow:var(--shadow)}
+.composer-box{
+background:linear-gradient(#fbfcfc,#edf3f5);border:1px solid #b9c7cc;border-radius:2px;
+padding:15px;margin-bottom:17px;box-shadow:var(--shadow)
+}
 .composer-title{color:#075f84;font-weight:bold;font-size:16px;margin-bottom:7px;border-bottom:1px dotted #b7c5ca;padding-bottom:7px}
 .composer-help{color:#7a898f;font-size:12px;margin-bottom:10px;line-height:1.4}
 .section-title{color:#075f84;font-size:17px;margin:0 0 11px;padding-bottom:7px;border-bottom:2px solid #8fc5d6}
-.message{background:#fff;border:1px solid #c3ced2;border-left:4px solid #8aa6b0;border-radius:2px;padding:11px;margin-bottom:9px;box-shadow:0 1px 3px rgba(39,63,72,.11)}
+.message{
+background:#fff;border:1px solid #c3ced2;border-left:4px solid #8aa6b0;border-radius:2px;
+padding:11px;margin-bottom:9px;box-shadow:0 1px 3px rgba(39,63,72,.11)
+}
 .message:hover{border-left-color:#238db4}
 .message-usuario{color:#49616b;font-weight:bold;font-size:13px;margin-bottom:5px}
 .message-conteudo{color:#354850;white-space:pre-wrap;word-break:break-word;line-height:1.5}
 .message-apagar{width:auto;padding:6px 9px;font-size:12px;margin-top:7px;margin-bottom:0}
-.image-preview{display:none;width:100%;max-height:250px;object-fit:contain;border:1px solid #b8c7cc;border-radius:2px;margin-bottom:11px;background:#edf2f4}
+.image-preview{
+display:none;width:100%;max-height:250px;object-fit:contain;border:1px solid #b8c7cc;
+border-radius:2px;margin-bottom:11px;background:#edf2f4
+}
 .file-info{color:#718189;font-size:12px;margin-top:-4px;margin-bottom:9px}
-
-.community-content-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:8px}
-.community-column{min-width:0;background:#eef3f5;border:1px solid #b9c7cc;border-radius:2px;padding:13px;box-shadow:var(--shadow)}
+.community-content-grid{
+display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:8px
+}
+.community-column{
+min-width:0;background:#eef3f5;border:1px solid #b9c7cc;border-radius:2px;padding:13px;box-shadow:var(--shadow)
+}
 .community-column .section-title{margin-top:0}
 .community-posts-list,.community-messages-list{max-height:650px;overflow-y:auto;padding-right:4px}
-
-/* Barra de rolagem com aparência de navegador antigo */
 ::-webkit-scrollbar{width:12px;height:12px}
 ::-webkit-scrollbar-track{background:#dbe3e6;border-left:1px solid #b7c5ca}
 ::-webkit-scrollbar-thumb{background:linear-gradient(#aebfc5,#879ba3);border:2px solid #dbe3e6;border-radius:2px}
 
+/* ============================================================
+   INTERNETBLOX VIDEOS
+   ============================================================ */
+
+.videos-header{
+margin-bottom:18px;
+background:linear-gradient(#f8fafb,#e8eef0);
+border:1px solid #bcc9cd;
+padding:15px;
+border-radius:2px;
+box-shadow:var(--shadow)
+}
+
+.videos-header h2{
+margin-bottom:6px;
+}
+
+.videos-subtitle{
+color:#718189;
+font-size:13px;
+line-height:1.45;
+}
+
+.videos-actions{
+display:flex;
+gap:10px;
+margin-bottom:18px;
+}
+
+.videos-actions button{
+margin-bottom:0;
+}
+
+.video-upload-box{
+background:linear-gradient(#fbfcfc,#edf3f5);
+border:1px solid #b9c7cc;
+border-radius:2px;
+padding:15px;
+margin-bottom:18px;
+box-shadow:var(--shadow);
+}
+
+.video-upload-title{
+color:#075f84;
+font-weight:bold;
+font-size:16px;
+margin-bottom:7px;
+border-bottom:1px dotted #b7c5ca;
+padding-bottom:7px;
+}
+
+.video-upload-help{
+color:#7a898f;
+font-size:12px;
+margin-bottom:12px;
+line-height:1.4;
+}
+
+.video-selected-info{
+color:#52656d;
+font-size:13px;
+background:#fff;
+border:1px solid #c3ced2;
+padding:10px;
+margin-bottom:10px;
+display:none;
+word-break:break-word;
+}
+
+.video-list-title{
+color:#075f84;
+font-size:18px;
+margin:0 0 11px;
+padding-bottom:7px;
+border-bottom:2px solid #8fc5d6;
+}
+
+.video-list{
+max-height:700px;
+overflow-y:auto;
+padding-right:4px;
+}
+
+.video-card{
+background:linear-gradient(#fff,#f2f6f7);
+border:1px solid #bcc9cd;
+border-left:5px solid #b44b4b;
+border-radius:2px;
+padding:14px;
+margin-bottom:12px;
+box-shadow:var(--shadow);
+}
+
+.video-card:hover{
+border-left-color:#8e3030;
+}
+
+.video-card-title{
+color:#8e3030;
+font-size:17px;
+font-weight:bold;
+margin-bottom:8px;
+word-break:break-word;
+}
+
+.video-card-author{
+color:#718189;
+font-size:12px;
+margin-bottom:8px;
+}
+
+.video-player{
+display:block;
+width:100%;
+max-height:600px;
+background:#111;
+border:1px solid #9eafb5;
+border-radius:2px;
+}
+
+.video-empty{
+text-align:center;
+color:#788990;
+padding:25px 10px;
+}
+
+.video-error{
+text-align:center;
+color:#b84747;
+padding:15px;
+}
+
+.video-loading{
+text-align:center;
+color:#718189;
+padding:18px;
+}
+
 @media(max-width:800px){
-  body{padding:8px}
-  .app{max-width:700px;padding:0 12px 18px}
-  .app:before{margin-left:-12px;margin-right:-12px}
-  .app:after{left:16px;font-size:12px}
-  .community-content-grid{grid-template-columns:1fr}
-  .community-posts-list,.community-messages-list{max-height:none}
-  .community-actions{flex-direction:column}
+body{padding:8px}
+.app{max-width:700px;padding:0 12px 18px}
+.app:before{margin-left:-12px;margin-right:-12px}
+.app:after{left:16px;font-size:12px}
+.community-content-grid{grid-template-columns:1fr}
+.community-posts-list,.community-messages-list{max-height:none}
+.community-actions{flex-direction:column}
+.home-menu{grid-template-columns:1fr}
+.videos-actions{flex-direction:column}
+.video-list{max-height:none}
 }
 
 @media(max-width:480px){
-  .auth-box{padding-left:16px;padding-right:16px}
-  .auth-box:before{margin-left:-16px;margin-right:-16px}
-  h1{font-size:21px}
-  h2{font-size:19px}
+.auth-box{padding-left:16px;padding-right:16px}
+.auth-box:before{margin-left:-16px;margin-right:-16px}
+h1{font-size:21px}
+h2{font-size:19px}
+.home-welcome h1{font-size:23px}
+.home-card{min-height:175px;padding:16px}
+.video-player{max-height:400px}
 }
-
-/* FIM DA REFORMA VISUAL */
 </style>
-
 </head>
 
 <body>
 
-<!-- ==========================================
-     TELA DE AUTENTICAÇÃO
-     ========================================== -->
-
 <div id="authScreen" class="auth-screen">
-
 <div class="auth-box">
 
 <h1>🌐 InternetBlox Global</h1>
 
-<p id="authSubtitle">
-Crie sua conta para entrar.
-</p>
+<p id="authSubtitle">Crie sua conta para entrar.</p>
 
 <div id="cadastroArea">
 
-<input
-type="text"
-id="cadastroUsername"
-maxlength="30"
-placeholder="@SeuUsuario"
->
-
-<input
-type="email"
-id="cadastroEmail"
-placeholder="Seu e-mail"
->
-
-<input
-type="password"
-id="cadastroSenha"
-minlength="6"
-placeholder="Senha"
->
+<input type="text" id="cadastroUsername" maxlength="30" placeholder="@SeuUsuario">
+<input type="email" id="cadastroEmail" placeholder="Seu e-mail">
+<input type="password" id="cadastroSenha" minlength="6" placeholder="Senha">
 
 <select id="cadastroAvatar">
-
-<option value="avatar1">
-😀 Avatar 1
-</option>
-
-<option value="avatar2">
-😎 Avatar 2
-</option>
-
-<option value="avatar3">
-😈 Avatar 3
-</option>
-
-<option value="avatar4">
-🤖 Avatar 4
-</option>
-
-<option value="avatar5">
-👽 Avatar 5
-</option>
-
+<option value="avatar1">😀 Avatar 1</option>
+<option value="avatar2">😎 Avatar 2</option>
+<option value="avatar3">😈 Avatar 3</option>
+<option value="avatar4">🤖 Avatar 4</option>
+<option value="avatar5">👽 Avatar 5</option>
 </select>
 
-<button id="criarContaBtn">
-Criar conta
-</button>
+<button id="criarContaBtn">Criar conta</button>
 
 <p class="auth-switch">
 Já possui uma conta?
-<button id="mostrarLoginBtn">
-Entrar
-</button>
+<button id="mostrarLoginBtn">Entrar</button>
 </p>
 
 </div>
 
 <div id="loginArea" style="display:none;">
 
-<input
-type="email"
-id="loginEmail"
-placeholder="Seu e-mail"
->
+<input type="email" id="loginEmail" placeholder="Seu e-mail">
+<input type="password" id="loginSenha" placeholder="Sua senha">
 
-<input
-type="password"
-id="loginSenha"
-placeholder="Sua senha"
->
-
-<button id="entrarBtn">
-Entrar
-</button>
+<button id="entrarBtn">Entrar</button>
 
 <p class="auth-switch">
 Ainda não possui uma conta?
-<button id="mostrarCadastroBtn">
-Criar conta
-</button>
+<button id="mostrarCadastroBtn">Criar conta</button>
 </p>
 
 </div>
@@ -271,1221 +372,803 @@ Criar conta
 <p id="authStatus"></p>
 
 </div>
-
 </div>
-
-
-<!-- ==========================================
-     APLICAÇÃO
-     ========================================== -->
 
 <div class="app">
 
-<div
-id="communitiesScreen"
-class="screen"
-style="display:none;"
->
+<div id="homeScreen" class="screen home-screen" style="display:none;">
 
-<h1>
-🌐 InternetBlox Global
-</h1>
-
-<div class="subtitulo">
-Suas comunidades
+<div class="home-welcome">
+<h1>🌐 Bem-vindo ao InternetBlox!</h1>
+<p>Sua central para comunidades, conversas e vídeos.</p>
 </div>
 
-<button id="novaComunidadeBtn">
-➕ Criar comunidade
-</button>
+<div class="home-menu">
 
-<button
-id="logoutBtn"
-class="secondary-btn"
->
-🚪 Sair da conta
-</button>
+<div class="home-card">
+<div class="home-card-icon">👥</div>
+<div class="home-card-title">Comunidades</div>
+<div class="home-card-description">
+Encontre comunidades, participe de conversas e compartilhe posts com outras pessoas.
+</div>
+<button id="homeCommunitiesBtn">Entrar nas comunidades</button>
+</div>
 
-<div id="communitiesList">
+<div class="home-card video-card">
+<div class="home-card-icon">🎬</div>
+<div class="home-card-title">InternetBlox Videos</div>
+<div class="home-card-description">
+Assista e publique vídeos no InternetBlox.
+</div>
+<button id="homeVideosBtn" class="secondary-btn">Entrar nos vídeos</button>
+</div>
 
-<p class="info">
-Carregando comunidades...
+</div>
+
+<div class="home-footer">
+<button id="homeLogoutBtn" class="danger-btn">🚪 Sair da conta</button>
+</div>
+
+</div>
+
+<div id="videosScreen" class="screen" style="display:none;">
+
+<div class="videos-header">
+
+<button id="backFromVideosBtn" class="back-btn">← Voltar para início</button>
+
+<h2>🎬 InternetBlox Videos</h2>
+
+<p class="videos-subtitle">
+Assista aos vídeos publicados pela comunidade e publique seus próprios vídeos.
 </p>
 
 </div>
 
-<p
-id="communityStatus"
-class="status"
-></p>
+<div class="video-upload-box">
+
+<div class="video-upload-title">⬆️ Publicar um vídeo</div>
+
+<div class="video-upload-help">
+Selecione um arquivo de vídeo. Ele será enviado para o Supabase e aparecerá na lista de vídeos.
+</div>
+
+<button id="selectVideoBtn">🎬 Selecionar vídeo</button>
+
+<div id="videoSelectedInfo" class="video-selected-info"></div>
+
+<button id="publishVideoBtn">📤 Publicar vídeo</button>
+
+<p id="videoStatus" class="status"></p>
 
 </div>
 
+<h3 class="video-list-title">📺 Vídeos publicados</h3>
 
-<!-- ======================================
-     TELA DE CRIAR COMUNIDADE
-     ====================================== -->
+<div id="videosList" class="video-list">
 
-<div
-id="createCommunityScreen"
-class="screen"
-style="display:none;"
->
+<p class="video-loading">⏳ Carregando vídeos...</p>
 
-<h2>
-➕ Criar comunidade
-</h2>
+</div>
 
-<input
-type="text"
-id="communityName"
-maxlength="60"
-placeholder="Nome da comunidade"
->
+</div>
 
-<textarea
-id="communityDescription"
-maxlength="300"
-placeholder="Descrição da comunidade"
-></textarea>
+<div id="communitiesScreen" class="screen" style="display:none;">
 
-<button id="createCommunityBtn">
-Criar comunidade
-</button>
+<h1>🌐 InternetBlox Global</h1>
+<div class="subtitulo">Suas comunidades</div>
 
-<button
-id="cancelCommunityBtn"
-class="secondary-btn"
->
-Cancelar
-</button>
+<button id="novaComunidadeBtn">➕ Criar comunidade</button>
 
-<p
-id="createCommunityStatus"
-class="status"
-></p>
+<button id="backToHomeBtn" class="secondary-btn">← Voltar para início</button>
 
-</div><!-- ==========================================
-     TELA DA COMUNIDADE
-     ========================================== -->
+<div id="communitiesList">
+<p class="info">Carregando comunidades...</p>
+</div>
 
-<div
-id="communityPageScreen"
-class="screen"
-style="display:none;"
->
+<p id="communityStatus" class="status"></p>
+
+</div>
+
+<div id="createCommunityScreen" class="screen" style="display:none;">
+
+<h2>➕ Criar comunidade</h2>
+
+<input type="text" id="communityName" maxlength="60" placeholder="Nome da comunidade">
+
+<textarea id="communityDescription" maxlength="300" placeholder="Descrição da comunidade"></textarea>
+
+<button id="createCommunityBtn">Criar comunidade</button>
+
+<button id="cancelCommunityBtn" class="secondary-btn">Cancelar</button>
+
+<p id="createCommunityStatus" class="status"></p>
+
+</div>
+
+<div id="communityPageScreen" class="screen" style="display:none;">
 
 <div class="community-header">
 
-<button
-id="backToCommunitiesBtn"
-class="back-btn"
->
-← Voltar para comunidades
-</button>
+<button id="backToCommunitiesBtn" class="back-btn">← Voltar para comunidades</button>
 
-<h2 id="openedCommunityName">
-Comunidade
-</h2>
+<h2 id="openedCommunityName">Comunidade</h2>
 
-<p
-id="openedCommunityDescription"
-class="community-description"
-></p>
+<p id="openedCommunityDescription" class="community-description"></p>
 
-<p
-id="openedCommunityMembers"
-class="member-count"
->
-👥 0 membros
-</p>
+<p id="openedCommunityMembers" class="member-count">👥 0 membros</p>
 
-<button
-id="leaveCommunityBtn"
-class="danger-btn"
->
-🚪 Sair da comunidade
-</button>
+<button id="leaveCommunityBtn" class="danger-btn">🚪 Sair da comunidade</button>
 
 </div>
-
-
-<!-- ======================================
-     NOVA MENSAGEM
-     ====================================== -->
 
 <div class="composer-box">
 
-<div class="composer-title">
-💬 Enviar mensagem
-</div>
+<div class="composer-title">💬 Enviar mensagem</div>
 
 <div class="composer-help">
 Mensagens são conversas normais. Elas não aparecem como posts.
 </div>
 
-<textarea
-id="communityMessageContent"
-maxlength="500"
-placeholder="Escreva uma mensagem..."
-></textarea>
+<textarea id="communityMessageContent" maxlength="500" placeholder="Escreva uma mensagem..."></textarea>
 
-<button id="sendCommunityMessageBtn">
-💬 Enviar mensagem
-</button>
+<button id="sendCommunityMessageBtn">💬 Enviar mensagem</button>
 
-<p
-id="messageStatus"
-class="status"
-></p>
+<p id="messageStatus" class="status"></p>
 
 </div>
-
-
-<!-- ======================================
-     NOVO POST
-     ====================================== -->
 
 <div class="composer-box">
 
-<div class="composer-title">
-📝 Criar post
-</div>
+<div class="composer-title">📝 Criar post</div>
 
 <div class="composer-help">
 Posts precisam ter uma imagem. Você pode adicionar uma legenda opcional.
 </div>
 
-<textarea
-id="communityPostContent"
-maxlength="1000"
-placeholder="Legenda do post (opcional)..."
-></textarea>
+<textarea id="communityPostContent" maxlength="1000" placeholder="Legenda do post (opcional)..."></textarea>
 
-<input
-type="file"
-id="communityPostImage"
-accept="image/*"
->
+<input type="file" id="communityPostImage" accept="image/*">
 
-<p
-id="imageFileInfo"
-class="file-info"
->
-Nenhuma imagem selecionada.
-</p>
+<p id="imageFileInfo" class="file-info">Nenhuma imagem selecionada.</p>
 
-<img
-id="imagePreview"
-class="image-preview"
-alt="Pré-visualização da imagem"
->
+<img id="imagePreview" class="image-preview" alt="Pré-visualização da imagem">
 
-<button id="publishCommunityPostBtn">
-📝 Publicar post
-</button>
+<button id="publishCommunityPostBtn">📝 Publicar post</button>
 
-<p
-id="postStatus"
-class="status"
-></p>
+<p id="postStatus" class="status"></p>
 
 </div>
-
-
-<!-- ======================================
-     POSTS E CONVERSAS LADO A LADO
-     ====================================== -->
 
 <div class="community-content-grid">
 
 <div class="community-column">
 
-<h3 class="section-title">
-📝 Posts
-</h3>
+<h3 class="section-title">📝 Posts</h3>
 
-<div
-id="communityPostsList"
-class="community-posts-list"
->
-
-<p class="info">
-Carregando posts...
-</p>
-
+<div id="communityPostsList" class="community-posts-list">
+<p class="info">Carregando posts...</p>
 </div>
 
 </div>
-
 
 <div class="community-column">
 
-<h3 class="section-title">
-💬 Conversas
-</h3>
+<h3 class="section-title">💬 Conversas</h3>
 
-<div
-id="communityMessagesList"
-class="community-messages-list"
->
+<div id="communityMessagesList" class="community-messages-list">
+<p class="info">Carregando conversas...</p>
+</div>
 
-<p class="info">
-Carregando conversas...
-</p>
+</div>
 
+</div>
+</div>
+
+<div id="oldSystemScreen" class="screen" style="display:none;">
+
+<h1>InternetBlox Global 🌐</h1>
+
+<div class="subtitulo">Converse com o mundo!</div>
+
+<input type="text" id="username" maxlength="30" placeholder="Seu usuário">
+
+<textarea id="message" maxlength="500" placeholder="Escreva uma mensagem..."></textarea>
+
+<button id="sendBtn">Publicar Globalmente</button>
+
+<div class="status" id="status">🔄 Conectando...</div>
+
+<div class="feed" id="feed">
+<p class="info">Carregando mensagens globais...</p>
 </div>
 
 </div>
 
 </div>
 
-</div>
+<script>const SUPABASE_URL="https://hjjnxdkvdourignxxtwl.supabase.co";
 
+const SUPABASE_KEY="sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
 
-<!-- ==========================================
-     SISTEMA ANTIGO
-     ========================================== -->
-
-<div
-id="oldSystemScreen"
-class="screen"
-style="display:none;"
->
-
-<h1>
-InternetBlox Global 🌐
-</h1>
-
-<div class="subtitulo">
-Converse com o mundo!
-</div>
-
-<input
-type="text"
-id="username"
-maxlength="30"
-placeholder="Seu usuário"
->
-
-<textarea
-id="message"
-maxlength="500"
-placeholder="Escreva uma mensagem..."
-></textarea>
-
-<button id="sendBtn">
-Publicar Globalmente
-</button>
-
-<div
-class="status"
-id="status"
->
-🔄 Conectando...
-</div>
-
-<div
-class="feed"
-id="feed"
->
-
-<p class="info">
-Carregando mensagens globais...
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-<script>
-
-// ============================================
-// CONFIGURAÇÃO DO SUPABASE
-// ============================================
-
-const SUPABASE_URL =
-"https://hjjnxdkvdourignxxtwl.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
-
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient=window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
-// ============================================
-// ELEMENTOS
-// ============================================
-
-const authScreen =
-document.getElementById("authScreen");
-
-const cadastroArea =
-document.getElementById("cadastroArea");
-
-const loginArea =
-document.getElementById("loginArea");
-
-const authSubtitle =
-document.getElementById("authSubtitle");
-
-const cadastroUsername =
-document.getElementById("cadastroUsername");
-
-const cadastroEmail =
-document.getElementById("cadastroEmail");
-
-const cadastroSenha =
-document.getElementById("cadastroSenha");
-
-const cadastroAvatar =
-document.getElementById("cadastroAvatar");
-
-const criarContaBtn =
-document.getElementById("criarContaBtn");
-
-const entrarBtn =
-document.getElementById("entrarBtn");
-
-const loginEmail =
-document.getElementById("loginEmail");
-
-const loginSenha =
-document.getElementById("loginSenha");
-
-const mostrarLoginBtn =
-document.getElementById("mostrarLoginBtn");
-
-const mostrarCadastroBtn =
-document.getElementById("mostrarCadastroBtn");
-
-const authStatus =
-document.getElementById("authStatus");const communitiesScreen =
-document.getElementById("communitiesScreen");
-
-const createCommunityScreen =
-document.getElementById("createCommunityScreen");
-
-const communityPageScreen =
-document.getElementById("communityPageScreen");
-
-
-const novaComunidadeBtn =
-document.getElementById("novaComunidadeBtn");
-
-const createCommunityBtn =
-document.getElementById("createCommunityBtn");
-
-const cancelCommunityBtn =
-document.getElementById("cancelCommunityBtn");
-
-const communityName =
-document.getElementById("communityName");
-
-const communityDescription =
-document.getElementById("communityDescription");
-
-const communitiesList =
-document.getElementById("communitiesList");
-
-const communityStatus =
-document.getElementById("communityStatus");
-
-const createCommunityStatus =
-document.getElementById("createCommunityStatus");
-
-const logoutBtn =
-document.getElementById("logoutBtn");
-
-
-const backToCommunitiesBtn =
-document.getElementById("backToCommunitiesBtn");
-
-const openedCommunityName =
-document.getElementById("openedCommunityName");
-
-const openedCommunityDescription =
-document.getElementById("openedCommunityDescription");
-
-const openedCommunityMembers =
-document.getElementById("openedCommunityMembers");
-
-const leaveCommunityBtn =
-document.getElementById("leaveCommunityBtn");
-
-
-const communityMessageContent =
-document.getElementById("communityMessageContent");
-
-const sendCommunityMessageBtn =
-document.getElementById("sendCommunityMessageBtn");
-
-const communityMessagesList =
-document.getElementById("communityMessagesList");
-
-const messageStatus =
-document.getElementById("messageStatus");
-
-
-const communityPostContent =
-document.getElementById("communityPostContent");
-
-const communityPostImage =
-document.getElementById("communityPostImage");
-
-const imagePreview =
-document.getElementById("imagePreview");
-
-const imageFileInfo =
-document.getElementById("imageFileInfo");
-
-const publishCommunityPostBtn =
-document.getElementById("publishCommunityPostBtn");
-
-const communityPostsList =
-document.getElementById("communityPostsList");
-
-const postStatus =
-document.getElementById("postStatus");
-
-
-let comunidadeAtual = null;
-
-let intervaloAtualizacao = null;
-
-
-// ============================================
-// LOGIN / CADASTRO
-// ============================================
-
-mostrarLoginBtn.addEventListener(
-"click",
-function(){
-
-cadastroArea.style.display = "none";
-loginArea.style.display = "block";
-
-authSubtitle.textContent =
-"Entre na sua conta.";
-
-authStatus.textContent = "";
-
-}
-);
-
-
-mostrarCadastroBtn.addEventListener(
-"click",
-function(){
-
-loginArea.style.display = "none";
-cadastroArea.style.display = "block";
-
-authSubtitle.textContent =
-"Crie sua conta para entrar.";
-
-authStatus.textContent = "";
-
-}
-);
-
-
-criarContaBtn.addEventListener(
-"click",
-async function(){
-
-let username =
-cadastroUsername.value.trim();
-
-const email =
-cadastroEmail.value.trim();
-
-const senha =
-cadastroSenha.value;
-
-const avatar =
-cadastroAvatar.value;
-
+const authScreen=document.getElementById("authScreen");
+const cadastroArea=document.getElementById("cadastroArea");
+const loginArea=document.getElementById("loginArea");
+const authSubtitle=document.getElementById("authSubtitle");
+const cadastroUsername=document.getElementById("cadastroUsername");
+const cadastroEmail=document.getElementById("cadastroEmail");
+const cadastroSenha=document.getElementById("cadastroSenha");
+const cadastroAvatar=document.getElementById("cadastroAvatar");
+const criarContaBtn=document.getElementById("criarContaBtn");
+const entrarBtn=document.getElementById("entrarBtn");
+const loginEmail=document.getElementById("loginEmail");
+const loginSenha=document.getElementById("loginSenha");
+const mostrarLoginBtn=document.getElementById("mostrarLoginBtn");
+const mostrarCadastroBtn=document.getElementById("mostrarCadastroBtn");
+const authStatus=document.getElementById("authStatus");
+
+const homeScreen=document.getElementById("homeScreen");
+const homeCommunitiesBtn=document.getElementById("homeCommunitiesBtn");
+const homeVideosBtn=document.getElementById("homeVideosBtn");
+const homeLogoutBtn=document.getElementById("homeLogoutBtn");
+const backToHomeBtn=document.getElementById("backToHomeBtn");
+
+const videosScreen=document.getElementById("videosScreen");
+const backFromVideosBtn=document.getElementById("backFromVideosBtn");
+const selectVideoBtn=document.getElementById("selectVideoBtn");
+const publishVideoBtn=document.getElementById("publishVideoBtn");
+const videosList=document.getElementById("videosList");
+const videoSelectedInfo=document.getElementById("videoSelectedInfo");
+const videoStatus=document.getElementById("videoStatus");
+
+const communitiesScreen=document.getElementById("communitiesScreen");
+const createCommunityScreen=document.getElementById("createCommunityScreen");
+const communityPageScreen=document.getElementById("communityPageScreen");
+
+const novaComunidadeBtn=document.getElementById("novaComunidadeBtn");
+const createCommunityBtn=document.getElementById("createCommunityBtn");
+const cancelCommunityBtn=document.getElementById("cancelCommunityBtn");
+const communityName=document.getElementById("communityName");
+const communityDescription=document.getElementById("communityDescription");
+const communitiesList=document.getElementById("communitiesList");
+const communityStatus=document.getElementById("communityStatus");
+const createCommunityStatus=document.getElementById("createCommunityStatus");
+
+const backToCommunitiesBtn=document.getElementById("backToCommunitiesBtn");
+const openedCommunityName=document.getElementById("openedCommunityName");
+const openedCommunityDescription=document.getElementById("openedCommunityDescription");
+const openedCommunityMembers=document.getElementById("openedCommunityMembers");
+const leaveCommunityBtn=document.getElementById("leaveCommunityBtn");
+
+const communityMessageContent=document.getElementById("communityMessageContent");
+const sendCommunityMessageBtn=document.getElementById("sendCommunityMessageBtn");
+const communityMessagesList=document.getElementById("communityMessagesList");
+const messageStatus=document.getElementById("messageStatus");
+
+const communityPostContent=document.getElementById("communityPostContent");
+const communityPostImage=document.getElementById("communityPostImage");
+const imagePreview=document.getElementById("imagePreview");
+const imageFileInfo=document.getElementById("imageFileInfo");
+const publishCommunityPostBtn=document.getElementById("publishCommunityPostBtn");
+const communityPostsList=document.getElementById("communityPostsList");
+const postStatus=document.getElementById("postStatus");
+
+let comunidadeAtual=null;
+let intervaloAtualizacao=null;
+let videoSelecionado=null;
+
+mostrarLoginBtn.addEventListener("click",()=>{
+
+cadastroArea.style.display="none";
+loginArea.style.display="block";
+authSubtitle.textContent="Entre na sua conta.";
+authStatus.textContent="";
+
+});
+
+mostrarCadastroBtn.addEventListener("click",()=>{
+
+loginArea.style.display="none";
+cadastroArea.style.display="block";
+authSubtitle.textContent="Crie sua conta para entrar.";
+authStatus.textContent="";
+
+});
+
+criarContaBtn.addEventListener("click",async()=>{
+
+let username=cadastroUsername.value.trim();
+const email=cadastroEmail.value.trim();
+const senha=cadastroSenha.value;
+const avatar=cadastroAvatar.value;
 
 if(!username){
 
-authStatus.textContent =
-"⚠️ Digite um nome de usuário.";
-
+authStatus.textContent="⚠️ Digite um nome de usuário.";
 return;
 
 }
 
-
-if(username.startsWith("@")){
-
-username =
-username.substring(1);
-
-}
-
+if(username.startsWith("@"))
+username=username.substring(1);
 
 if(!email){
 
-authStatus.textContent =
-"⚠️ Digite seu e-mail.";
-
+authStatus.textContent="⚠️ Digite seu e-mail.";
 return;
 
 }
 
+if(senha.length<6){
 
-if(senha.length < 6){
-
-authStatus.textContent =
-"⚠️ A senha precisa ter pelo menos 6 caracteres.";
-
+authStatus.textContent="⚠️ A senha precisa ter pelo menos 6 caracteres.";
 return;
 
 }
 
-
-criarContaBtn.disabled = true;
-
-criarContaBtn.textContent =
-"Criando conta...";
-
-authStatus.textContent =
-"⏳ Criando sua conta...";
-
+criarContaBtn.disabled=true;
+criarContaBtn.textContent="Criando conta...";
+authStatus.textContent="⏳ Criando sua conta...";
 
 try{
 
-const resultado =
-await supabaseClient.auth.signUp({
+const resultado=await supabaseClient.auth.signUp({
 
-email:email,
-
+email,
 password:senha,
 
 options:{
 data:{
-username:username,
-avatar:avatar
+username,
+avatar
 }
 }
 
 });
 
+if(resultado.error)
+throw resultado.error;
 
-if(resultado.error){
-
-console.error(resultado.error);
-
-authStatus.textContent =
-"❌ " +
-resultado.error.message;
-
-return;
-
-}console.log(
-"Conta criada:",
-resultado.data.user
-);
-
+console.log("Conta criada:",resultado.data.user);
 
 if(resultado.data.session){
 
-authStatus.textContent =
-"✅ Conta criada! Entrando...";
-
+authStatus.textContent="✅ Conta criada! Entrando...";
 await entrarNoInternetBlox();
 
-}
+}else{
 
-else{
-
-authStatus.textContent =
-"📧 Conta criada! Verifique seu e-mail.";
+authStatus.textContent="📧 Conta criada! Verifique seu e-mail.";
 
 }
 
-}
-
-catch(erro){
+}catch(erro){
 
 console.error(erro);
+authStatus.textContent="❌ "+erro.message;
 
-authStatus.textContent =
-"❌ Ocorreu um erro inesperado.";
+}finally{
 
-}
-
-finally{
-
-criarContaBtn.disabled = false;
-
-criarContaBtn.textContent =
-"Criar conta";
+criarContaBtn.disabled=false;
+criarContaBtn.textContent="Criar conta";
 
 }
 
-}
-);
+});
 
+entrarBtn.addEventListener("click",async()=>{
 
-entrarBtn.addEventListener(
-"click",
-async function(){
-
-const email =
-loginEmail.value.trim();
-
-const senha =
-loginSenha.value;
-
+const email=loginEmail.value.trim();
+const senha=loginSenha.value;
 
 if(!email){
 
-authStatus.textContent =
-"⚠️ Digite seu e-mail.";
-
+authStatus.textContent="⚠️ Digite seu e-mail.";
 return;
 
 }
-
 
 if(!senha){
 
-authStatus.textContent =
-"⚠️ Digite sua senha.";
-
+authStatus.textContent="⚠️ Digite sua senha.";
 return;
 
 }
 
-
-entrarBtn.disabled = true;
-
-entrarBtn.textContent =
-"Entrando...";
-
-authStatus.textContent =
-"⏳ Entrando na sua conta...";
-
+entrarBtn.disabled=true;
+entrarBtn.textContent="Entrando...";
+authStatus.textContent="⏳ Entrando na sua conta...";
 
 try{
 
-const resultado =
-await supabaseClient.auth.signInWithPassword({
+const resultado=await supabaseClient.auth.signInWithPassword({
 
-email:email,
-
+email,
 password:senha
 
 });
 
+if(resultado.error)
+throw resultado.error;
 
-if(resultado.error){
-
-console.error(resultado.error);
-
-authStatus.textContent =
-"❌ " +
-resultado.error.message;
-
-return;
-
-}
-
-
-authStatus.textContent =
-"✅ Login realizado!";
+authStatus.textContent="✅ Login realizado!";
 
 await entrarNoInternetBlox();
 
-}
-
-catch(erro){
+}catch(erro){
 
 console.error(erro);
+authStatus.textContent="❌ "+erro.message;
 
-authStatus.textContent =
-"❌ Ocorreu um erro inesperado.";
+}finally{
 
-}
-
-finally{
-
-entrarBtn.disabled = false;
-
-entrarBtn.textContent =
-"Entrar";
+entrarBtn.disabled=false;
+entrarBtn.textContent="Entrar";
 
 }
 
-}
-);
-
-
-// ============================================
-// ENTRAR NO INTERNETBLOX
-// ============================================
+});
 
 async function entrarNoInternetBlox(){
 
-authScreen.style.display = "none";
+authScreen.style.display="none";
 
-communitiesScreen.style.display = "block";
+homeScreen.style.display="block";
 
-createCommunityScreen.style.display = "none";
-
-communityPageScreen.style.display = "none";
+videosScreen.style.display="none";
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
 await carregarComunidades();
 
 }
 
-
-// ============================================
-// VERIFICAR LOGIN
-// ============================================
-
 async function verificarSessao(){
 
-const {
-data,
-error
-} =
-await supabaseClient.auth.getSession();
-
+const {data,error}=await supabaseClient.auth.getSession();
 
 if(error){
 
-console.error(error);
-
+console.error("Erro ao verificar sessão:",error);
 return;
 
 }
-
 
 if(data.session){
 
 await entrarNoInternetBlox();
 
+}else{
+
+authScreen.style.display="flex";
+
+homeScreen.style.display="none";
+videosScreen.style.display="none";
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
+
 }
 
-else{
+}
 
-authScreen.style.display = "flex";
+supabaseClient.auth.onAuthStateChange((event,session)=>{
 
-communitiesScreen.style.display = "none";
+console.log("🔐 Estado da autenticação:",event);
+
+if(session?.user){
+
+console.log("👤 Usuário conectado:",session.user.id);
+
+}else{
+
+console.log("👤 Nenhum usuário conectado.");
 
 }
 
-}
+});
 
 verificarSessao();
 
+homeCommunitiesBtn.addEventListener("click",async()=>{
 
-// ============================================
-// NOVA COMUNIDADE
-// ============================================
+homeScreen.style.display="none";
+videosScreen.style.display="none";
+communitiesScreen.style.display="block";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
-novaComunidadeBtn.addEventListener(
-"click",
-function(){
+await carregarComunidades();
 
-communitiesScreen.style.display = "none";
+});
 
-createCommunityScreen.style.display = "block";
+homeVideosBtn.addEventListener("click",async()=>{
 
-communityName.value = "";
+homeScreen.style.display="none";
 
-communityDescription.value = "";
+videosScreen.style.display="block";
 
-createCommunityStatus.textContent = "";
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
-}
-);
+videoStatus.textContent="";
 
+await carregarVideos();
 
-cancelCommunityBtn.addEventListener(
-"click",
-function(){
+});
 
-createCommunityScreen.style.display = "none";
+backFromVideosBtn.addEventListener("click",()=>{
 
-communitiesScreen.style.display = "block";
+videosScreen.style.display="none";
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
-createCommunityStatus.textContent = "";
+homeScreen.style.display="block";
 
-}
-);// ============================================
-// CRIAR COMUNIDADE
-// ============================================
+});
 
-createCommunityBtn.addEventListener(
-"click",
-async function(){
+backToHomeBtn.addEventListener("click",()=>{
 
-const nome =
-communityName.value.trim();
+communitiesScreen.style.display="none";
+videosScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
-const descricao =
-communityDescription.value.trim();
+homeScreen.style.display="block";
 
+});
+
+novaComunidadeBtn.addEventListener("click",()=>{
+
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="block";
+
+communityName.value="";
+communityDescription.value="";
+createCommunityStatus.textContent="";
+
+});
+
+cancelCommunityBtn.addEventListener("click",()=>{
+
+createCommunityScreen.style.display="none";
+communitiesScreen.style.display="block";
+
+createCommunityStatus.textContent="";
+
+});
+
+createCommunityBtn.addEventListener("click",async()=>{
+
+const nome=communityName.value.trim();
+const descricao=communityDescription.value.trim();
 
 if(!nome){
 
-createCommunityStatus.textContent =
-"⚠️ Digite um nome.";
-
+createCommunityStatus.textContent="⚠️ Digite um nome para a comunidade.";
 return;
 
 }
 
-
-createCommunityBtn.disabled = true;
-
-createCommunityStatus.textContent =
-"⏳ Criando comunidade...";
-
+createCommunityBtn.disabled=true;
+createCommunityStatus.textContent="⏳ Criando comunidade...";
 
 try{
 
-const {
-data:sessionData,
-error:sessionError
-} =
+const {data:sessionData,error:sessionError}=
 await supabaseClient.auth.getSession();
 
-
-if(sessionError){
-
+if(sessionError)
 throw sessionError;
 
-}
-
-
-const usuario =
-sessionData.session?.user;
-
+const usuario=sessionData.session?.user;
 
 if(!usuario){
 
-createCommunityStatus.textContent =
-"❌ Você precisa estar logado.";
-
+createCommunityStatus.textContent="❌ Você precisa estar logado.";
 return;
 
 }
 
+const {data:comunidade,error}=await supabaseClient
 
-const {
-data:comunidade,
-error
-} =
-await supabaseClient
 .from("communities")
+
 .insert({
 
 name:nome,
-
 description:descricao,
-
 owner_id:usuario.id
 
 })
+
 .select()
 .single();
 
-
-if(error){
-
+if(error)
 throw error;
 
-}
+const {error:membroError}=await supabaseClient
 
-
-const {
-error:membroError
-} =
-await supabaseClient
 .from("community_members")
+
 .insert({
 
 community_id:comunidade.id,
-
 user_id:usuario.id
 
 });
 
-
 if(membroError){
 
-console.error(membroError);
+console.error("Erro ao adicionar criador:",membroError);
 
-createCommunityStatus.textContent =
-"⚠️ Comunidade criada, mas houve erro ao entrar nela.";
+createCommunityStatus.textContent=
+"⚠️ Comunidade criada, mas não foi possível entrar nela.";
 
 return;
 
 }
 
+createCommunityStatus.textContent="✅ Comunidade criada!";
 
-createCommunityStatus.textContent =
-"✅ Comunidade criada!";
-
-communityName.value = "";
-
-communityDescription.value = "";
+communityName.value="";
+communityDescription.value="";
 
 await carregarComunidades();
 
+setTimeout(()=>{
 
-setTimeout(
-function(){
+createCommunityScreen.style.display="none";
+communitiesScreen.style.display="block";
+createCommunityStatus.textContent="";
 
-createCommunityScreen.style.display = "none";
+},800);
 
-communitiesScreen.style.display = "block";
+}catch(erro){
 
-},
-700
-);
+console.error("Erro ao criar comunidade:",erro);
 
-}
+createCommunityStatus.textContent="❌ "+erro.message;
 
-catch(erro){
+}finally{
 
-console.error(
-"Erro ao criar comunidade:",
-erro
-);
-
-createCommunityStatus.textContent =
-"❌ " +
-erro.message;
-
-}
-
-finally{
-
-createCommunityBtn.disabled = false;
+createCommunityBtn.disabled=false;
 
 }
 
 });
 
-
-// ============================================
-// CARREGAR COMUNIDADES
-// ============================================
-
 async function carregarComunidades(){
 
-communitiesList.innerHTML =
+communitiesList.innerHTML=
 '<p class="info">⏳ Carregando comunidades...</p>';
 
+const {data,error}=await supabaseClient
 
-const {
-data,
-error
-} =
-await supabaseClient
 .from("communities")
 .select("*")
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
+.order("created_at",{ascending:false});
 
 if(error){
 
 console.error(error);
 
-communitiesList.innerHTML =
+communitiesList.innerHTML=
 '<p class="erro">❌ Erro ao carregar comunidades.</p>';
 
 return;
 
 }
 
+if(!data||data.length===0){
 
-if(!data || data.length === 0){
-
-communitiesList.innerHTML =
+communitiesList.innerHTML=
 '<p class="info">🌎 Nenhuma comunidade criada ainda.</p>';
 
 return;
 
 }
 
-
-communitiesList.innerHTML = "";
-
+communitiesList.innerHTML="";
 
 for(const comunidade of data){
 
-const card =
-document.createElement("div");
+const card=document.createElement("div");
+card.className="community-card";
 
-card.className = "community-card";
+const titulo=document.createElement("h3");
+titulo.textContent="🌐 "+comunidade.name;
 
+const descricao=document.createElement("p");
+descricao.className="community-description";
+descricao.textContent=comunidade.description||"Sem descrição.";
 
-const titulo =
-document.createElement("h3");
+const owner=document.createElement("p");
+owner.className="community-owner";
+owner.textContent="👑 Comunidade criada por um usuário";
 
-titulo.textContent =
-"🌐 " +
-comunidade.name;
+const actions=document.createElement("div");
+actions.className="community-actions";
 
+const abrirBtn=document.createElement("button");
 
-const descricao =
-document.createElement("p");
+abrirBtn.textContent="👀 Abrir";
 
-descricao.className =
-"community-description";
-
-descricao.textContent =
-comunidade.description ||
-"Sem descrição.";
-
-
-const owner =
-document.createElement("p");
-
-owner.className =
-"community-owner";
-
-owner.textContent =
-"👑 Comunidade criada por um usuário";
-
-
-const actions =
-document.createElement("div");
-
-actions.className =
-"community-actions";
-
-
-const abrirBtn =
-document.createElement("button");
-
-abrirBtn.textContent =
-"👀 Abrir";
-
-abrirBtn.addEventListener(
-"click",
-function(){
+abrirBtn.addEventListener("click",()=>{
 
 abrirComunidade(comunidade);
 
-}
-);
+});
 
+const entrarBtnComunidade=document.createElement("button");
 
-const entrarBtnComunidade =
-document.createElement("button");
-
-entrarBtnComunidade.className =
-"secondary-btn";
-
-entrarBtnComunidade.textContent =
-"➕ Entrar";
+entrarBtnComunidade.className="secondary-btn";
+entrarBtnComunidade.textContent="➕ Entrar";
 
 entrarBtnComunidade.addEventListener(
 "click",
-function(){
-
-entrarNaComunidade(comunidade.id);
-
-}
+()=>entrarNaComunidade(comunidade.id)
 );
-
 
 actions.appendChild(abrirBtn);
-
-actions.appendChild(
-entrarBtnComunidade
-);
+actions.appendChild(entrarBtnComunidade);
 
 card.appendChild(titulo);
-
 card.appendChild(descricao);
-
 card.appendChild(owner);
-
 card.appendChild(actions);
 
 communitiesList.appendChild(card);
 
 }
 
-}// ============================================
-// ENTRAR NA COMUNIDADE
-// ============================================
+}
 
-async function entrarNaComunidade(
-communityId
-){
+async function entrarNaComunidade(communityId){
 
-const {
-data:sessionData
-} =
-await supabaseClient.auth.getSession();
+const {data:sessionData}=await supabaseClient.auth.getSession();
 
-const usuario =
-sessionData.session?.user;
-
+const usuario=sessionData.session?.user;
 
 if(!usuario){
 
-alert(
-"❌ Você precisa estar logado."
-);
-
+alert("❌ Você precisa estar logado.");
 return;
 
 }
 
+const {error}=await supabaseClient
 
-const {
-error
-} =
-await supabaseClient
 .from("community_members")
+
 .insert({
 
 community_id:communityId,
-
 user_id:usuario.id
 
 });
 
-
 if(error){
 
-if(error.code === "23505"){
+if(error.code==="23505"){
 
-alert(
-"ℹ️ Você já está nessa comunidade!"
-);
+alert("ℹ️ Você já está nessa comunidade!");
 
-}
-
-else{
+}else{
 
 console.error(error);
 
 alert(
-"❌ Não foi possível entrar.\n\n" +
+"❌ Não foi possível entrar.\n\n"+
 error.message
 );
 
@@ -1495,252 +1178,134 @@ return;
 
 }
 
-
-alert(
-"✅ Você entrou na comunidade!"
-);
+alert("✅ Você entrou na comunidade!");
 
 await carregarComunidades();
 
-}
+}async function abrirComunidade(comunidade){
 
+comunidadeAtual=comunidade;
 
-// ============================================
-// ABRIR COMUNIDADE
-// ============================================
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+videosScreen.style.display="none";
+communityPageScreen.style.display="block";
 
-async function abrirComunidade(
-comunidade
-){
+openedCommunityName.textContent="🌐 "+comunidade.name;
 
-comunidadeAtual =
-comunidade;
+openedCommunityDescription.textContent=
+comunidade.description||"Sem descrição.";
 
-communitiesScreen.style.display =
-"none";
+communityPostContent.value="";
+communityPostImage.value="";
+communityMessageContent.value="";
 
-createCommunityScreen.style.display =
-"none";
+imagePreview.src="";
+imagePreview.style.display="none";
 
-communityPageScreen.style.display =
-"block";
+imageFileInfo.textContent="Nenhuma imagem selecionada.";
 
-openedCommunityName.textContent =
-"🌐 " +
-comunidade.name;
+postStatus.textContent="";
+messageStatus.textContent="";
 
-openedCommunityDescription.textContent =
-comunidade.description ||
-"Sem descrição.";
+await atualizarQuantidadeMembros(comunidade.id);
 
-communityPostContent.value = "";
+await carregarPosts(comunidade.id,true);
 
-communityPostImage.value = "";
-
-communityMessageContent.value = "";
-
-imagePreview.src = "";
-
-imagePreview.style.display = "none";
-
-imageFileInfo.textContent =
-"Nenhuma imagem selecionada.";
-
-postStatus.textContent = "";
-
-messageStatus.textContent = "";
-
-
-await atualizarQuantidadeMembros(
-comunidade.id
-);
-
-await carregarPosts(
-comunidade.id,
-true
-);
-
-await carregarMensagens(
-comunidade.id,
-true
-);
-
+await carregarMensagens(comunidade.id,true);
 
 if(intervaloAtualizacao){
 
-clearInterval(
-intervaloAtualizacao
-);
+clearInterval(intervaloAtualizacao);
 
 }
 
+intervaloAtualizacao=setInterval(async()=>{
 
-intervaloAtualizacao =
-setInterval(
-async function(){
-
-if(!comunidadeAtual){
-
+if(!comunidadeAtual)
 return;
 
-}
+await carregarPosts(comunidadeAtual.id);
+await carregarMensagens(comunidadeAtual.id);
+await atualizarQuantidadeMembros(comunidadeAtual.id);
 
-await carregarPosts(
-comunidadeAtual.id
-);
-
-await carregarMensagens(
-comunidadeAtual.id
-);
-
-},
-5000
-);
+},5000);
 
 }
 
+async function atualizarQuantidadeMembros(communityId){
 
-// ============================================
-// QUANTIDADE DE MEMBROS
-// ============================================
+const {count,error}=await supabaseClient
 
-async function atualizarQuantidadeMembros(
-communityId
-){
-
-const {
-count,
-error
-} =
-await supabaseClient
 .from("community_members")
-.select(
-"*",
-{
+
+.select("*",{
 count:"exact",
 head:true
-}
-)
-.eq(
-"community_id",
-communityId
-);
+})
 
+.eq("community_id",communityId);
 
 if(error){
 
 console.error(error);
-
 return;
 
 }
 
-
-openedCommunityMembers.textContent =
-"👥 " +
-(count || 0) +
-" membros";
+openedCommunityMembers.textContent=
+"👥 "+(count||0)+" membros";
 
 }
 
-
-// ============================================
-// VOLTAR
-// ============================================
-
-backToCommunitiesBtn.addEventListener(
-"click",
-async function(){
+backToCommunitiesBtn.addEventListener("click",async()=>{
 
 if(intervaloAtualizacao){
 
-clearInterval(
-intervaloAtualizacao
-);
-
-intervaloAtualizacao = null;
+clearInterval(intervaloAtualizacao);
+intervaloAtualizacao=null;
 
 }
 
-communityPageScreen.style.display =
-"none";
+communityPageScreen.style.display="none";
+communitiesScreen.style.display="block";
 
-communitiesScreen.style.display =
-"block";
-
-comunidadeAtual = null;
+comunidadeAtual=null;
 
 await carregarComunidades();
 
 });
 
+leaveCommunityBtn.addEventListener("click",async()=>{
 
-// ============================================
-// SAIR
-// ============================================
-
-leaveCommunityBtn.addEventListener(
-"click",
-async function(){
-
-if(!comunidadeAtual){
-
+if(!comunidadeAtual)
 return;
 
-}
-
-
-const confirmar =
-confirm(
-"Tem certeza que deseja sair desta comunidade?"
-);
-
-
-if(!confirmar){
-
+if(!confirm("Tem certeza que deseja sair desta comunidade?"))
 return;
 
-}
+const {data:sessionData}=await supabaseClient.auth.getSession();
 
+const usuario=sessionData.session?.user;
 
-const {
-data:sessionData
-} =
-await supabaseClient.auth.getSession();
-
-const usuario =
-sessionData.session?.user;
-
-
-if(!usuario){
-
+if(!usuario)
 return;
 
-}
+const {error}=await supabaseClient
 
-
-const {
-error
-} =
-await supabaseClient
 .from("community_members")
-.delete()
-.eq(
-"community_id",
-comunidadeAtual.id
-)
-.eq(
-"user_id",
-usuario.id
-);
 
+.delete()
+
+.eq("community_id",comunidadeAtual.id)
+.eq("user_id",usuario.id);
 
 if(error){
 
 console.error(error);
 
 alert(
-"❌ Não foi possível sair.\n\n" +
+"❌ Não foi possível sair da comunidade.\n\n"+
 error.message
 );
 
@@ -1748,289 +1313,444 @@ return;
 
 }
 
+alert("✅ Você saiu da comunidade!");
 
 if(intervaloAtualizacao){
 
-clearInterval(
-intervaloAtualizacao
-);
-
-intervaloAtualizacao = null;
+clearInterval(intervaloAtualizacao);
+intervaloAtualizacao=null;
 
 }
 
+communityPageScreen.style.display="none";
+communitiesScreen.style.display="block";
 
-alert(
-"🚪 Você saiu da comunidade."
-);
-
-communityPageScreen.style.display =
-"none";
-
-communitiesScreen.style.display =
-"block";
-
-comunidadeAtual = null;
+comunidadeAtual=null;
 
 await carregarComunidades();
 
-}
-);// ============================================
-// PROCESSAMENTO RÁPIDO DA IMAGEM
-// ============================================
+});
 
-async function prepararImagem(
-arquivo
-){
+communityPostImage.addEventListener("change",()=>{
 
-const LIMITE_DIRETO =
-1.5 * 1024 * 1024;
-
-
-if(
-arquivo.size <= LIMITE_DIRETO &&
-(
-arquivo.type === "image/jpeg" ||
-arquivo.type === "image/webp"
-)
-){
-
-return {
-blob:arquivo,
-nome:"imagem." +
-(
-arquivo.type === "image/webp"
-? "webp"
-: "jpg"
-),
-tipo:arquivo.type
-};
-
-}
-
-
-const imagem =
-await createImageBitmap(
-arquivo
-);
-
-const tamanhoMaximo = 1280;
-
-const escala =
-Math.min(
-1,
-tamanhoMaximo /
-Math.max(
-imagem.width,
-imagem.height
-)
-);
-
-
-const canvas =
-document.createElement("canvas");
-
-canvas.width =
-Math.max(
-1,
-Math.round(
-imagem.width * escala
-)
-);
-
-canvas.height =
-Math.max(
-1,
-Math.round(
-imagem.height * escala
-)
-);
-
-
-const contexto =
-canvas.getContext(
-"2d",
-{
-alpha:false
-}
-);
-
-contexto.drawImage(
-imagem,
-0,
-0,
-canvas.width,
-canvas.height
-);
-
-
-const blob =
-await new Promise(
-function(resolve,reject){
-
-canvas.toBlob(
-function(resultado){
-
-if(resultado){
-
-resolve(resultado);
-
-}
-
-else{
-
-reject(
-new Error(
-"Não foi possível processar a imagem."
-)
-);
-
-}
-
-},
-"image/jpeg",
-0.80
-);
-
-}
-);
-
-
-imagem.close();
-
-
-return {
-blob:blob,
-nome:"imagem.jpg",
-tipo:"image/jpeg"
-};
-
-}
-
-
-// ============================================
-// ESCOLHER IMAGEM
-// ============================================
-
-communityPostImage.addEventListener(
-"change",
-function(){
-
-const arquivo =
-communityPostImage.files[0];
-
+const arquivo=communityPostImage.files[0];
 
 if(!arquivo){
 
-imagePreview.style.display =
-"none";
+imagePreview.src="";
+imagePreview.style.display="none";
 
-imagePreview.src = "";
-
-imageFileInfo.textContent =
+imageFileInfo.textContent=
 "Nenhuma imagem selecionada.";
 
 return;
 
 }
 
+imageFileInfo.textContent=
+"📁 "+arquivo.name+
+" • "+Math.round(arquivo.size/1024)+" KB";
 
-const cincoMB =
-5 * 1024 * 1024;
+const leitor=new FileReader();
 
+leitor.onload=event=>{
 
-if(arquivo.size > cincoMB){
+imagePreview.src=event.target.result;
+imagePreview.style.display="block";
 
-communityPostImage.value = "";
+};
 
-imagePreview.style.display =
-"none";
+leitor.readAsDataURL(arquivo);
 
-imagePreview.src = "";
+});
 
-imageFileInfo.textContent =
-"❌ A imagem ultrapassa o limite de 5 MB.";
+sendCommunityMessageBtn.addEventListener("click",async()=>{
 
-postStatus.textContent =
-"⚠️ Escolha uma imagem de até 5 MB.";
+if(!comunidadeAtual)
+return;
+
+const conteudo=communityMessageContent.value.trim();
+
+if(!conteudo){
+
+messageStatus.textContent=
+"⚠️ Escreva uma mensagem.";
 
 return;
 
 }
 
+sendCommunityMessageBtn.disabled=true;
 
-const tamanhoMB =
-(
-arquivo.size /
-1024 /
-1024
-).toFixed(2);
+messageStatus.textContent="⏳ Enviando...";
 
+try{
 
-imageFileInfo.textContent =
-"🖼️ " +
-arquivo.name +
-" • " +
-tamanhoMB +
-" MB";
+const {data:sessionData,error:sessionError}=
+await supabaseClient.auth.getSession();
 
+if(sessionError)
+throw sessionError;
 
-const url =
-URL.createObjectURL(
-arquivo
-);
+const usuario=sessionData.session?.user;
 
-imagePreview.src = url;
+if(!usuario){
 
-imagePreview.style.display =
-"block";
+messageStatus.textContent=
+"❌ Você precisa estar logado.";
 
+return;
 
-imagePreview.onload =
-function(){
+}
 
-URL.revokeObjectURL(url);
+const {error}=await supabaseClient
 
-};
+.from("community_messages")
+
+.insert({
+
+community_id:comunidadeAtual.id,
+author_id:usuario.id,
+content:conteudo
 
 });
 
+if(error)
+throw error;
 
-// ============================================
-// CARREGAR POSTS
-// ============================================
+communityMessageContent.value="";
 
-async function carregarPosts(
-communityId,
-mostrarCarregando = false
-){
+messageStatus.textContent=
+"✅ Mensagem enviada!";
 
-if(mostrarCarregando){
+await carregarMensagens(
+comunidadeAtual.id,
+true
+);
 
-communityPostsList.innerHTML =
-'<p class="info">⏳ Carregando posts...</p>';
+}catch(erro){
+
+console.error(
+"Erro ao enviar mensagem:",
+erro
+);
+
+messageStatus.textContent=
+"❌ "+erro.message;
+
+}finally{
+
+sendCommunityMessageBtn.disabled=false;
 
 }
 
+});
 
-const {
-data,
-error
-} =
-await supabaseClient
-.from("posts")
-.select("*")
-.eq(
-"community_id",
-communityId
+async function carregarMensagens(
+communityId,
+rolarParaBaixo=false
+){
+
+const {data,error}=await supabaseClient
+
+.from("community_messages")
+
+.select(`
+*,
+profiles (
+username,
+avatar
 )
-.order(
-"created_at",
+`)
+
+.eq("community_id",communityId)
+
+.order("created_at",{
+ascending:true
+});
+
+if(error){
+
+console.error(
+"Erro ao carregar mensagens:",
+error
+);
+
+communityMessagesList.innerHTML=
+'<p class="erro">❌ Erro ao carregar mensagens.</p>';
+
+return;
+
+}
+
+if(!data||data.length===0){
+
+communityMessagesList.innerHTML=
+'<p class="info">💬 Nenhuma mensagem ainda.</p>';
+
+return;
+
+}
+
+communityMessagesList.innerHTML="";
+
+const {data:sessionData}=
+await supabaseClient.auth.getSession();
+
+const usuarioAtual=
+sessionData.session?.user;
+
+for(const mensagem of data){
+
+const div=document.createElement("div");
+
+div.className="message";
+
+const usuario=document.createElement("div");
+
+usuario.className="message-usuario";
+
+usuario.textContent=
+"@"+(
+mensagem.profiles?.username||
+"Usuário"
+);
+
+const conteudo=document.createElement("div");
+
+conteudo.className="message-conteudo";
+
+conteudo.textContent=
+mensagem.content;
+
+div.appendChild(usuario);
+div.appendChild(conteudo);
+
+if(
+usuarioAtual &&
+mensagem.author_id===usuarioAtual.id
+){
+
+const apagarBtn=document.createElement("button");
+
+apagarBtn.className=
+"message-apagar danger-btn";
+
+apagarBtn.textContent="🗑️ Apagar";
+
+apagarBtn.addEventListener(
+"click",
+async()=>{
+
+if(!confirm("Apagar esta mensagem?"))
+return;
+
+const {error}=await supabaseClient
+
+.from("community_messages")
+
+.delete()
+
+.eq("id",mensagem.id);
+
+if(error){
+
+console.error(error);
+
+alert(
+"❌ Não foi possível apagar."
+);
+
+return;
+
+}
+
+await carregarMensagens(
+communityId,
+true
+);
+
+});
+
+div.appendChild(apagarBtn);
+
+}
+
+communityMessagesList.appendChild(div);
+
+}
+
+if(rolarParaBaixo){
+
+communityMessagesList.scrollTop=
+communityMessagesList.scrollHeight;
+
+}
+
+}
+
+publishCommunityPostBtn.addEventListener(
+"click",
+async()=>{
+
+if(!comunidadeAtual)
+return;
+
+const conteudo=
+communityPostContent.value.trim();
+
+const arquivo=
+communityPostImage.files[0];
+
+if(!arquivo){
+
+postStatus.textContent=
+"⚠️ Selecione uma imagem.";
+
+return;
+
+}
+
+publishCommunityPostBtn.disabled=true;
+
+postStatus.textContent=
+"⏳ Enviando imagem...";
+
+try{
+
+const {data:sessionData,error:sessionError}=
+await supabaseClient.auth.getSession();
+
+if(sessionError)
+throw sessionError;
+
+const usuario=
+sessionData.session?.user;
+
+if(!usuario){
+
+postStatus.textContent=
+"❌ Você precisa estar logado.";
+
+return;
+
+}
+
+const extensao=
+arquivo.name
+.split(".")
+.pop()
+.toLowerCase();
+
+const nomeArquivo=
+crypto.randomUUID()+"."+extensao;
+
+const {error:uploadError}=
+await supabaseClient
+
+.storage
+
+.from("post-images")
+
+.upload(
+nomeArquivo,
+arquivo,
 {
-ascending:false
+contentType:arquivo.type,
+upsert:false
 }
 );
 
+if(uploadError)
+throw uploadError;
+
+const {data:urlData}=
+supabaseClient
+
+.storage
+
+.from("post-images")
+
+.getPublicUrl(nomeArquivo);
+
+const imagemUrl=
+urlData.publicUrl;
+
+postStatus.textContent=
+"⏳ Salvando post...";
+
+const {error:postError}=
+await supabaseClient
+
+.from("posts")
+
+.insert({
+
+community_id:comunidadeAtual.id,
+author_id:usuario.id,
+content:conteudo,
+image_url:imagemUrl
+
+});
+
+if(postError)
+throw postError;
+
+communityPostContent.value="";
+communityPostImage.value="";
+
+imagePreview.src="";
+imagePreview.style.display="none";
+
+imageFileInfo.textContent=
+"Nenhuma imagem selecionada.";
+
+postStatus.textContent=
+"✅ Post publicado!";
+
+await carregarPosts(
+comunidadeAtual.id,
+true
+);
+
+}catch(erro){
+
+console.error(
+"Erro ao publicar post:",
+erro
+);
+
+postStatus.textContent=
+"❌ "+erro.message;
+
+}finally{
+
+publishCommunityPostBtn.disabled=false;
+
+}
+
+});async function carregarPosts(
+communityId,
+rolarParaBaixo=false
+){
+
+const {data,error}=await supabaseClient
+
+.from("posts")
+
+.select(`
+*,
+profiles (
+username,
+avatar
+)
+`)
+
+.eq("community_id",communityId)
+
+.order("created_at",{
+ascending:false
+});
 
 if(error){
 
@@ -2039,973 +1759,172 @@ console.error(
 error
 );
 
-if(mostrarCarregando){
-
-communityPostsList.innerHTML =
+communityPostsList.innerHTML=
 '<p class="erro">❌ Erro ao carregar posts.</p>';
 
+return;
+
 }
+
+if(!data||data.length===0){
+
+communityPostsList.innerHTML=
+'<p class="info">📝 Nenhum post ainda.</p>';
 
 return;
 
 }
 
+communityPostsList.innerHTML="";
 
-if(!data || data.length === 0){
-
-communityPostsList.innerHTML =
-'<p class="info">📝 Nenhum post nesta comunidade ainda.</p>';
-
-return;
-
-}
-
-
-const {
-data:sessionData
-} =
+const {data:sessionData}=
 await supabaseClient.auth.getSession();
 
-const usuario =
+const usuarioAtual=
 sessionData.session?.user;
 
+for(const post of data){
 
-const idsAutores =
-[
-...new Set(
-data.map(
-post => post.author_id
-)
-)
-];
+const div=document.createElement("div");
 
+div.className="post";
 
-const {
-data:perfis,
-error:perfilError
-} =
-await supabaseClient
-.from("profiles")
-.select(
-"id, username, avatar"
-)
-.in(
-"id",
-idsAutores
+const usuario=document.createElement("div");
+
+usuario.className="post-usuario";
+
+usuario.textContent=
+"@"+(
+post.profiles?.username||
+"Usuário"
 );
 
+div.appendChild(usuario);
 
-if(perfilError){
+if(post.content){
 
-console.error(
-"Erro ao carregar perfis:",
-perfilError
-);
-
-}
-
-
-const mapaPerfis = {};
-
-if(perfis){
-
-perfis.forEach(
-function(perfil){
-
-mapaPerfis[
-perfil.id
-] = perfil;
-
-}
-);
-
-}// ============================================
-// MONTAR POSTS SEM APAGAR A LISTA ATUAL
-// ============================================
-
-const novaLista =
-document.createDocumentFragment();
-
-
-data.forEach(
-function(post){
-
-const div =
+const mensagem=
 document.createElement("div");
 
-div.className = "post";
+mensagem.className="post-mensagem";
 
-
-if(post.image_url){
-
-const imagem =
-document.createElement("img");
-
-imagem.className =
-"post-imagem";
-
-imagem.src =
-post.image_url;
-
-imagem.alt =
-"Imagem do post";
-
-imagem.loading =
-"lazy";
-
-div.appendChild(imagem);
-
-}
-
-
-if(
-post.content &&
-post.content.trim() !== ""
-){
-
-const mensagem =
-document.createElement("div");
-
-mensagem.className =
-"post-mensagem";
-
-mensagem.textContent =
+mensagem.textContent=
 post.content;
 
 div.appendChild(mensagem);
 
 }
 
+if(post.image_url){
 
-const autor =
-document.createElement("div");
+const imagem=
+document.createElement("img");
 
-autor.className =
-"post-usuario";
+imagem.className="post-imagem";
 
+imagem.src=
+post.image_url;
 
-const perfil =
-mapaPerfis[
-post.author_id
-];
+imagem.alt=
+"Imagem do post";
 
+div.appendChild(imagem);
 
-const nomeAutor =
-perfil?.username ||
-"Usuário";
-
-
-autor.textContent =
-"👤 " +
-nomeAutor;
-
-
-div.appendChild(autor);
-
+}
 
 if(
-usuario &&
-post.author_id === usuario.id
+usuarioAtual &&
+post.author_id===usuarioAtual.id
 ){
 
-const apagarBtn =
+const apagarBtn=
 document.createElement("button");
 
-apagarBtn.textContent =
-"🗑️ Apagar";
-
-apagarBtn.className =
+apagarBtn.className=
 "danger-btn";
+
+apagarBtn.textContent=
+"🗑️ Apagar post";
 
 apagarBtn.addEventListener(
 "click",
-function(){
+async()=>{
 
-apagarPost(post.id);
-
-}
-);
-
-div.appendChild(apagarBtn);
-
-}
-
-
-novaLista.appendChild(div);
-
-}
-);
-
-
-// TROCA A LISTA SOMENTE DEPOIS
-// QUE TUDO FOI CARREGADO
-
-communityPostsList.replaceChildren(
-novaLista
-);
-
-}
-
-
-// ============================================
-// PUBLICAR POST
-// ============================================
-
-publishCommunityPostBtn.addEventListener(
-"click",
-async function(){
-
-if(!comunidadeAtual){
-
+if(!confirm("Apagar este post?"))
 return;
 
-}
+const {error}=await supabaseClient
 
-
-const conteudo =
-communityPostContent.value.trim();
-
-const arquivo =
-communityPostImage.files[0];
-
-
-if(!arquivo){
-
-postStatus.textContent =
-"⚠️ Um post precisa ter uma imagem.";
-
-return;
-
-}
-
-
-const cincoMB =
-5 * 1024 * 1024;
-
-
-if(arquivo.size > cincoMB){
-
-postStatus.textContent =
-"⚠️ A imagem precisa ter no máximo 5 MB.";
-
-return;
-
-}
-
-
-const {
-data:sessionData
-} =
-await supabaseClient.auth.getSession();
-
-const usuario =
-sessionData.session?.user;
-
-
-if(!usuario){
-
-postStatus.textContent =
-"❌ Você precisa estar logado.";
-
-return;
-
-}
-
-
-publishCommunityPostBtn.disabled = true;
-
-postStatus.textContent =
-"⏳ Preparando imagem...";
-
-
-try{
-
-const imagemPreparada =
-await prepararImagem(arquivo);
-
-
-if(
-!imagemPreparada ||
-!imagemPreparada.blob
-){
-
-throw new Error(
-"Não foi possível processar a imagem."
-);
-
-}
-
-
-postStatus.textContent =
-"⏫ Enviando imagem...";
-
-
-const nomeArquivo =
-usuario.id +
-"/" +
-crypto.randomUUID() +
-"." +
-(
-imagemPreparada.tipo === "image/webp"
-? "webp"
-: "jpg"
-);
-
-
-const {
-error:uploadError
-} =
-await supabaseClient.storage
-.from("post-images")
-.upload(
-nomeArquivo,
-imagemPreparada.blob,
-{
-contentType:
-imagemPreparada.tipo,
-
-upsert:false
-}
-);
-
-
-if(uploadError){
-
-throw uploadError;
-
-}const {
-data:urlData
-} =
-supabaseClient.storage
-.from("post-images")
-.getPublicUrl(
-nomeArquivo
-);
-
-
-const imageUrl =
-urlData.publicUrl;
-
-
-if(!imageUrl){
-
-throw new Error(
-"Não foi possível obter a URL da imagem."
-);
-
-}
-
-
-postStatus.textContent =
-"💾 Salvando post...";
-
-
-const {
-error
-} =
-await supabaseClient
 .from("posts")
-.insert({
 
-community_id:
-comunidadeAtual.id,
-
-author_id:
-usuario.id,
-
-content:
-conteudo,
-
-image_url:
-imageUrl
-
-});
-
-
-if(error){
-
-throw error;
-
-}
-
-
-communityPostContent.value = "";
-
-communityPostImage.value = "";
-
-imagePreview.src = "";
-
-imagePreview.style.display =
-"none";
-
-imageFileInfo.textContent =
-"Nenhuma imagem selecionada.";
-
-postStatus.textContent =
-"✅ Post publicado!";
-
-setTimeout(
-function(){
-postStatus.textContent = "";
-},
-3000
-);
-
-await carregarPosts(
-comunidadeAtual.id
-);
-
-}
-
-catch(erro){
-
-console.error(
-"Erro ao publicar post:",
-erro
-);
-
-postStatus.textContent =
-"❌ " +
-erro.message;
-
-}
-
-finally{
-
-publishCommunityPostBtn.disabled =
-false;
-
-}
-
-});
-
-
-// ============================================
-// APAGAR POST
-// ============================================
-
-async function apagarPost(
-postId
-){
-
-const confirmar =
-confirm(
-"Deseja apagar seu post?"
-);
-
-
-if(!confirmar){
-
-return;
-
-}
-
-
-const {
-error
-} =
-await supabaseClient
-.from("posts")
 .delete()
-.eq(
-"id",
-postId
-);
 
+.eq("id",post.id);
 
 if(error){
 
 console.error(error);
 
 alert(
-"❌ Não foi possível apagar o post.\n\n" +
-error.message
+"❌ Não foi possível apagar o post."
 );
 
 return;
 
 }
-
-
-if(comunidadeAtual){
 
 await carregarPosts(
-comunidadeAtual.id
-);
-
-}
-
-}
-
-
-// ============================================
-// ENVIAR MENSAGEM
-// ============================================
-
-sendCommunityMessageBtn.addEventListener(
-"click",
-async function(){
-
-if(!comunidadeAtual){
-
-return;
-
-}
-
-
-const conteudo =
-communityMessageContent.value.trim();
-
-
-if(!conteudo){
-
-messageStatus.textContent =
-"⚠️ Escreva uma mensagem.";
-
-return;
-
-}
-
-
-const {
-data:sessionData
-} =
-await supabaseClient.auth.getSession();
-
-const usuario =
-sessionData.session?.user;
-
-
-if(!usuario){
-
-messageStatus.textContent =
-"❌ Você precisa estar logado.";
-
-return;
-
-}
-
-
-sendCommunityMessageBtn.disabled = true;
-
-messageStatus.textContent =
-"⏳ Enviando...";
-
-
-try{
-
-const {
-error
-} =
-await supabaseClient
-.from("community_messages")
-.insert({
-
-community_id:
-comunidadeAtual.id,
-
-author_id:
-usuario.id,
-
-content:
-conteudo
-
-});
-
-
-if(error){
-
-throw error;
-
-}
-
-
-communityMessageContent.value = "";
-
-messageStatus.textContent =
-"✅ Mensagem enviada!";
-
-setTimeout(
-function(){
-messageStatus.textContent = "";
-},
-3000
-);
-
-await carregarMensagens(
-comunidadeAtual.id
-);
-
-}
-
-catch(erro){
-
-console.error(erro);
-
-messageStatus.textContent =
-"❌ " +
-erro.message;
-
-}
-
-finally{
-
-sendCommunityMessageBtn.disabled = false;
-
-}
-
-});
-
-
-// ============================================
-// CARREGAR MENSAGENS
-// ============================================
-
-async function carregarMensagens(
 communityId,
-mostrarCarregando = false
-){
-
-if(mostrarCarregando){
-
-communityMessagesList.innerHTML =
-'<p class="info">⏳ Carregando conversas...</p>';
-
-}
-
-
-const {
-data,
-error
-} =
-await supabaseClient
-.from("community_messages")
-.select("*")
-.eq(
-"community_id",
-communityId
-)
-.order(
-"created_at",
-{
-ascending:false
-}
+true
 );
 
-
-if(error){
-
-console.error(error);
-
-if(mostrarCarregando){
-
-communityMessagesList.innerHTML =
-'<p class="erro">❌ Erro ao carregar conversas.</p>';
-
-}
-
-return;
-
-}
-
-
-if(!data || data.length === 0){
-
-communityMessagesList.innerHTML =
-'<p class="info">💬 Nenhuma mensagem nesta comunidade ainda.</p>';
-
-return;
-
-}
-
-
-const {
-data:sessionData
-} =
-await supabaseClient.auth.getSession();
-
-const usuario =
-sessionData.session?.user;
-
-
-const idsAutores =
-[
-...new Set(
-data.map(
-mensagem => mensagem.author_id
-)
-)
-];
-
-
-const {
-data:perfis,
-error:perfilError
-} =
-await supabaseClient
-.from("profiles")
-.select(
-"id, username, avatar"
-)
-.in(
-"id",
-idsAutores
-);
-
-
-if(perfilError){
-
-console.error(
-"Erro ao carregar perfis:",
-perfilError
-);
-
-}
-
-
-const mapaPerfis = {};
-
-
-if(perfis){
-
-perfis.forEach(
-function(perfil){
-
-mapaPerfis[
-perfil.id
-] = perfil;
-
-}
-);
-
-}
-
-
-// ============================================
-// MONTAR MENSAGENS FORA DA TELA
-// ============================================
-
-const novaLista =
-document.createDocumentFragment();
-
-
-data.forEach(
-function(mensagem){
-
-const div =
-document.createElement("div");
-
-div.className = "message";
-
-
-const autor =
-document.createElement("div");
-
-autor.className =
-"message-usuario";
-
-
-const perfil =
-mapaPerfis[
-mensagem.author_id
-];
-
-
-const nomeAutor =
-perfil?.username ||
-"Usuário";
-
-
-autor.textContent =
-"👤 " +
-nomeAutor;
-
-
-const conteudo =
-document.createElement("div");
-
-conteudo.className =
-"message-conteudo";
-
-conteudo.textContent =
-mensagem.content;
-
-
-div.appendChild(autor);
-
-div.appendChild(conteudo);
-
-
-if(
-usuario &&
-mensagem.author_id === usuario.id
-){
-
-const apagarBtn =
-document.createElement("button");
-
-apagarBtn.className =
-"danger-btn";
-
-apagarBtn.classList.add(
-"message-apagar"
-);
-
-apagarBtn.textContent =
-"🗑️ Apagar";
-
-
-apagarBtn.addEventListener(
-"click",
-function(){
-
-apagarMensagem(
-mensagem.id
-);
-
-}
-);
-
+});
 
 div.appendChild(apagarBtn);
 
 }
 
-
-novaLista.appendChild(div);
-
-}
-);
-
-
-// SÓ AGORA SUBSTITUI A LISTA ANTIGA
-
-communityMessagesList.replaceChildren(
-novaLista
-);
+communityPostsList.appendChild(div);
 
 }
 
+if(rolarParaBaixo){
 
-// ============================================
-// APAGAR MENSAGEM
-// ============================================
+communityPostsList.scrollTop=0;
 
-async function apagarMensagem(
-messageId
+}
+
+}
+
+setInterval(async()=>{
+
+if(
+communitiesScreen.style.display!=="none"
 ){
 
-const confirmar =
-confirm(
-"Deseja apagar sua mensagem?"
-);
-
-
-if(!confirmar){
-
-return;
+await carregarComunidades();
 
 }
 
+},10000);
 
-const {
-error
-} =
-await supabaseClient
-.from("community_messages")
-.delete()
-.eq(
-"id",
-messageId
-);
-
-
-if(error){
-
-console.error(error);
-
-alert(
-"❌ Não foi possível apagar a mensagem.\n\n" +
-error.message
-);
-
-return;
-
-}
-
-
-if(comunidadeAtual){
-
-await carregarMensagens(
-comunidadeAtual.id
-);
-
-}
-
-}
-
-
-// ============================================
-// LOGOUT
-// ============================================
-
-logoutBtn.addEventListener(
+homeLogoutBtn.addEventListener(
 "click",
-async function(){
+async()=>{
 
-const confirmar =
-confirm(
-"Deseja sair da sua conta?"
-);
-
-
-if(!confirmar){
-
-return;
-
-}
-
-
-const {
-error
-} =
+const {error}=
 await supabaseClient.auth.signOut();
 
-
 if(error){
 
-console.error(error);
-
-alert(
-"❌ Erro ao sair."
+console.error(
+"Erro ao sair:",
+error
 );
 
 return;
 
 }
-
-});
-
-
-// ============================================
-// DETECTAR LOGIN / LOGOUT
-// ============================================
-
-supabaseClient.auth.onAuthStateChange(
-function(
-event,
-session
-){
-
-console.log(
-"🔐 Evento de autenticação:",
-event
-);
-
-
-if(
-event === "SIGNED_OUT"
-){
 
 if(intervaloAtualizacao){
 
@@ -3013,82 +1932,681 @@ clearInterval(
 intervaloAtualizacao
 );
 
-intervaloAtualizacao = null;
+intervaloAtualizacao=null;
 
 }
 
+comunidadeAtual=null;
 
-authScreen.style.display =
-"flex";
+homeScreen.style.display="none";
+videosScreen.style.display="none";
+communitiesScreen.style.display="none";
+createCommunityScreen.style.display="none";
+communityPageScreen.style.display="none";
 
-communitiesScreen.style.display =
-"none";
+authScreen.style.display="flex";
 
-createCommunityScreen.style.display =
-"none";
+cadastroArea.style.display="none";
+loginArea.style.display="block";
 
-communityPageScreen.style.display =
-"none";
+authSubtitle.textContent=
+"Entre na sua conta.";
 
-comunidadeAtual = null;
-
-loginEmail.value = "";
-
-loginSenha.value = "";
-
-cadastroEmail.value = "";
-
-cadastroSenha.value = "";
-
-authStatus.textContent = "";
-
-}
+authStatus.textContent="";
 
 });
 
+function verificarVideo(arquivo){
 
-// ============================================
-// CONSOLE
-// ============================================
+if(!arquivo)
+return false;
+
+if(!arquivo.type.startsWith("video/")){
+
+alert(
+"❌ O arquivo selecionado não é um vídeo."
+);
+
+return false;
+
+}
+
+return true;
+
+}
+
+function selecionarVideo(){
+
+const input=
+document.createElement("input");
+
+input.type="file";
+input.accept="video/*";
+
+input.addEventListener(
+"change",
+()=>{
+
+const arquivo=
+input.files[0];
+
+if(!arquivo){
 
 console.log(
-"🌐 InternetBlox Global 2.0 Beta iniciado!"
+"🎬 Nenhum vídeo selecionado."
+);
+
+return;
+
+}
+
+if(!verificarVideo(arquivo))
+return;
+
+videoSelecionado=arquivo;
+
+videoSelectedInfo.style.display="block";
+
+videoSelectedInfo.textContent=
+"🎬 "+arquivo.name+
+" • "+
+Math.round(arquivo.size/1024/1024)+
+" MB";
+
+videoStatus.textContent=
+"✅ Vídeo selecionado. Agora clique em Publicar vídeo.";
+
+console.log(
+"🎬 Vídeo selecionado:",
+arquivo.name
 );
 
 console.log(
-"👤 Sistema de usuários ativo."
+"📦 Tipo:",
+arquivo.type
 );
 
 console.log(
-"🧑‍🤝‍🧑 Sistema de comunidades ativo."
+"📏 Tamanho:",
+arquivo.size
+);
+
+}
+);
+
+input.click();
+
+}
+
+selectVideoBtn.addEventListener(
+"click",
+()=>{
+
+selecionarVideo();
+
+});
+
+async function fazerUploadVideo(arquivo){
+
+if(!arquivo){
+
+console.error(
+"❌ Nenhum vídeo foi selecionado."
+);
+
+return null;
+
+}
+
+if(!arquivo.type.startsWith("video/")){
+
+console.error(
+"❌ O arquivo não é um vídeo."
+);
+
+return null;
+
+}
+
+console.log(
+"⬆️ Iniciando upload do vídeo..."
 );
 
 console.log(
-"📝 Sistema de posts ativo."
+"📁 Arquivo:",
+arquivo.name
+);
+
+videoStatus.textContent=
+"⏳ Enviando vídeo para o Supabase...";
+
+const nomeArquivo=
+crypto.randomUUID()+
+"-"+
+arquivo.name;
+
+const caminhoArquivo=
+"videos/"+nomeArquivo;
+
+try{
+
+const {data,error}=
+await supabaseClient
+
+.storage
+
+.from("videos")
+
+.upload(
+caminhoArquivo,
+arquivo,
+{
+contentType:arquivo.type,
+upsert:false
+}
+);
+
+if(error)
+throw error;
+
+console.log(
+"✅ Upload concluído!"
 );
 
 console.log(
-"💬 Sistema de conversas ativo."
+"📦 Caminho:",
+data.path
+);
+
+const {data:urlData}=
+supabaseClient
+
+.storage
+
+.from("videos")
+
+.getPublicUrl(data.path);
+
+const videoUrl=
+urlData.publicUrl;
+
+console.log(
+"🔗 URL do vídeo:",
+videoUrl
+);
+
+return videoUrl;
+
+}catch(erro){
+
+console.error(
+"❌ Erro no upload:",
+erro
+);
+
+videoStatus.textContent=
+"❌ Erro ao enviar vídeo: "+
+erro.message;
+
+return null;
+
+}
+
+}
+
+async function salvarVideoNoBanco(
+videoUrl,
+titulo
+){
+
+if(!videoUrl){
+
+console.error(
+"❌ URL do vídeo não encontrada."
+);
+
+return null;
+
+}
+
+try{
+
+const {
+data:sessionData,
+error:sessionError
+}=
+await supabaseClient.auth.getSession();
+
+if(sessionError)
+throw sessionError;
+
+const usuario=
+sessionData.session?.user;
+
+if(!usuario){
+
+console.error(
+"❌ Você precisa estar logado."
+);
+
+return null;
+
+}
+
+const {data,error}=
+await supabaseClient
+
+.from("videos")
+
+.insert({
+
+user_id:usuario.id,
+title:titulo||"Vídeo sem título",
+video_url:videoUrl
+
+})
+
+.select()
+.single();
+
+if(error)
+throw error;
+
+console.log(
+"💾 Vídeo salvo no banco!"
 );
 
 console.log(
-"🖼️ Sistema de imagens ativo."
+"🆔 ID:",
+data.id
+);
+
+return data;
+
+}catch(erro){
+
+console.error(
+"❌ Erro ao salvar vídeo:",
+erro
+);
+
+videoStatus.textContent=
+"❌ Erro ao salvar vídeo: "+
+erro.message;
+
+return null;
+
+}
+
+}async function publicarVideo(){
+
+if(!videoSelecionado){
+
+videoStatus.textContent=
+"⚠️ Primeiro selecione um vídeo.";
+
+selecionarVideo();
+
+return;
+
+}
+
+publishVideoBtn.disabled=true;
+selectVideoBtn.disabled=true;
+
+videoStatus.textContent=
+"⏳ Preparando publicação...";
+
+console.log(
+"🎬 Preparando publicação..."
+);
+
+try{
+
+const arquivo=
+videoSelecionado;
+
+const url=
+await fazerUploadVideo(arquivo);
+
+if(!url){
+
+console.error(
+"❌ O vídeo não foi enviado."
+);
+
+return;
+
+}
+
+videoStatus.textContent=
+"⏳ Salvando vídeo no banco...";
+
+const titulo=
+arquivo.name;
+
+const videoSalvo=
+await salvarVideoNoBanco(
+url,
+titulo
+);
+
+if(!videoSalvo){
+
+console.error(
+"❌ Não foi possível salvar a publicação."
+);
+
+return;
+
+}
+
+console.log(
+"🎉 VÍDEO PUBLICADO COM SUCESSO!"
 );
 
 console.log(
-"🔐 Supabase Auth conectado."
+"📺 URL:",
+url
+);
+
+videoSelecionado=null;
+
+videoSelectedInfo.textContent="";
+videoSelectedInfo.style.display="none";
+
+videoStatus.textContent=
+"✅ Vídeo publicado com sucesso!";
+
+await carregarVideos();
+
+}catch(erro){
+
+console.error(
+"❌ Erro ao publicar vídeo:",
+erro
+);
+
+videoStatus.textContent=
+"❌ "+erro.message;
+
+}finally{
+
+publishVideoBtn.disabled=false;
+selectVideoBtn.disabled=false;
+
+}
+
+}
+
+publishVideoBtn.addEventListener(
+"click",
+async()=>{
+
+await publicarVideo();
+
+});
+
+async function carregarVideos(
+mostrarCarregando=true
+){
+
+if(!videosList)
+return;
+
+console.log(
+"📺 Buscando vídeos..."
+);
+
+if(mostrarCarregando){
+
+videosList.innerHTML=
+'<p class="video-loading">⏳ Carregando vídeos...</p>';
+
+}
+
+try{
+
+const {data,error}=
+await supabaseClient
+
+.from("videos")
+
+.select("*")
+
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error)
+throw error;
+
+console.log(
+"✅ Vídeos encontrados:",
+data.length
+);
+
+videosList.innerHTML="";
+
+if(!data||data.length===0){
+
+videosList.innerHTML=
+'<p class="video-empty">🎬 Nenhum vídeo publicado ainda.<br><br>Seja o primeiro a publicar!</p>';
+
+return;
+
+}
+
+for(const video of data){
+
+console.log(
+"🎬 "+video.title
 );
 
 console.log(
-"👤 Sistema de perfis e nomes ativo."
+"🔗 "+video.video_url
+);
+
+const card=
+document.createElement("div");
+
+card.className=
+"video-card";
+
+const titulo=
+document.createElement("div");
+
+titulo.className=
+"video-card-title";
+
+titulo.textContent=
+"🎬 "+(
+video.title||
+"Vídeo sem título"
+);
+
+const autor=
+document.createElement("div");
+
+autor.className=
+"video-card-author";
+
+autor.textContent=
+"📺 InternetBlox Videos";
+
+const player=
+document.createElement("video");
+
+player.className=
+"video-player";
+
+player.controls=true;
+player.preload="metadata";
+player.playsInline=true;
+player.src=video.video_url;
+
+card.appendChild(titulo);
+card.appendChild(autor);
+card.appendChild(player);
+
+videosList.appendChild(card);
+
+}
+
+}catch(erro){
+
+console.error(
+"❌ Erro ao carregar vídeos:",
+erro
+);
+
+videosList.innerHTML=
+'<p class="video-error">❌ Erro ao carregar os vídeos.<br><br>'+
+erro.message+
+'</p>';
+
+}
+
+}
+
+function escolherVideo(){
+
+selecionarVideo();
+
+}
+
+async function testarUploadVideo(){
+
+if(!videoSelecionado){
+
+console.log(
+"🎬 Primeiro selecione um vídeo."
+);
+
+selecionarVideo();
+
+return;
+
+}
+
+const url=
+await fazerUploadVideo(
+videoSelecionado
+);
+
+if(url){
+
+console.log(
+"🎉 Vídeo enviado com sucesso!"
+);
+
+console.log(url);
+
+}
+
+}
+
+async function testarPublicacaoVideo(){
+
+if(!videoSelecionado){
+
+selecionarVideo();
+
+console.log(
+"🎬 Selecione o vídeo para continuar."
+);
+
+return;
+
+}
+
+await publicarVideo();
+
+}
+
+async function publicarEAtualizarVideo(){
+
+await publicarVideo();
+
+}
+
+async function testarListaVideos(){
+
+await carregarVideos();
+
+}
+
+async function testarVideoCompleto(){
+
+if(!videoSelecionado){
+
+console.log(
+"🎬 Selecione um vídeo primeiro."
+);
+
+selecionarVideo();
+
+return;
+
+}
+
+await publicarVideo();
+
+console.log(
+"🎉 Processo completo finalizado!"
+);
+
+}setInterval(
+async()=>{
+
+if(
+document.visibilityState==="visible" &&
+videosScreen.style.display!=="none"
+){
+
+const algumVideoTocando=
+[...videosList.querySelectorAll("video")]
+.some(video=>!video.paused&&!video.ended);
+
+if(algumVideoTocando){
+
+console.log(
+"▶️ Vídeo em reprodução. Atualização automática ignorada."
+);
+
+return;
+
+}
+
+await carregarVideos(false);
+
+}
+
+},
+15000
 );
 
 console.log(
-"⚡ Sistema de upload rápido de imagens ativo."
+"🎬 InternetBlox Videos: sistema de vídeos carregado!"
+);
+
+console.log(
+"👉 Clique em 'Entrar nos vídeos' na Home."
+);
+
+console.log(
+"👉 Depois use 'Selecionar vídeo'."
+);
+
+console.log(
+"👉 Depois clique em 'Publicar vídeo'."
+
 );
 
 </script>
 
 </body>
- 
 </html>
