@@ -13,417 +13,155 @@ content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Segoe UI",sans-serif;
+/* ================================
+   INTERNETBLOX — VISUAL REFORM
+   Retro web / old YouTube inspired
+   Only visual styling is changed.
+   ================================ */
+:root{
+  --page:#dfe7ea;
+  --page-dark:#c7d3d8;
+  --panel:#ffffff;
+  --panel-soft:#f4f7f8;
+  --line:#b7c5ca;
+  --line-dark:#8fa2a9;
+  --blue:#1687b8;
+  --blue-dark:#075b82;
+  --blue-soft:#d9f1fb;
+  --text:#26343a;
+  --muted:#66777e;
+  --green:#3b8f57;
+  --red:#b84747;
+  --shadow:0 2px 7px rgba(39,63,72,.20);
 }
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 
 body{
-background:#0f172a;
-color:#f8fafc;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:flex-start;
-padding:20px;
+  background:
+    repeating-linear-gradient(135deg,rgba(255,255,255,.28) 0,rgba(255,255,255,.28) 1px,transparent 1px,transparent 9px),
+    linear-gradient(#eef3f5,#d4dfe3);
+  color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:18px;
+}
+
+body:before{
+  content:"";position:fixed;left:0;right:0;top:0;height:8px;z-index:-1;
+  background:linear-gradient(90deg,#6e8f9a,#b8d8df,#6e8f9a);border-bottom:1px solid #8ca4ad;
 }
 
 .app{
-width:100%;
-max-width:1100px;
-background:#1e293b;
-border:1px solid #334155;
-border-radius:16px;
-padding:25px;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
+  width:100%;max-width:1100px;background:var(--panel);border:1px solid #9eafb5;border-radius:3px;padding:0 20px 24px;
+  box-shadow:0 3px 12px rgba(41,63,72,.22);overflow:hidden;position:relative;
 }
 
-h1{
-text-align:center;
-color:#38bdf8;
-font-size:1.8rem;
-margin-bottom:8px;
+.app:before{
+  content:"";display:block;height:43px;margin:0 -20px 20px;padding:0 20px;
+  background:linear-gradient(#3cabc9,#117aa5);border-bottom:3px solid #075b82;
 }
 
-h2{
-color:#38bdf8;
-margin-bottom:15px;
+.app:after{
+  content:"InternetBlox Global  •  conecte-se, converse e compartilhe";
+  position:absolute;top:13px;left:24px;color:white;font-size:14px;font-weight:bold;text-shadow:0 1px 1px rgba(0,0,0,.35);letter-spacing:.2px;
 }
 
-h3{
-color:#f8fafc;
-margin-bottom:6px;
-}
+h1,h2,h3{font-family:Arial,Helvetica,sans-serif}
+h1{text-align:left;color:var(--blue-dark);font-size:25px;margin-bottom:5px;border-bottom:1px solid var(--line);padding-bottom:8px}
+h2{color:var(--blue-dark);font-size:21px;margin-bottom:14px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{color:#31515d;font-size:17px;margin-bottom:7px}
 
-.subtitulo{
-text-align:center;
-color:#94a3b8;
-font-size:.9rem;
-margin-bottom:20px;
-}
+.subtitulo{text-align:left;color:var(--muted);font-size:13px;margin-bottom:15px}
 
-input,
-textarea,
-select{
-width:100%;
-background:#0f172a;
-color:white;
-border:1px solid #334155;
-border-radius:8px;
-padding:12px;
-margin-bottom:12px;
-font-size:1rem;
-outline:none;
-resize:none;
+input,textarea,select{
+  width:100%;background:#fff;color:#25363d;border:1px solid #aebdc2;border-radius:2px;padding:10px 11px;margin-bottom:10px;font-size:15px;outline:none;resize:none;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.06);
 }
-
-input:focus,
-textarea:focus,
-select:focus{
-border-color:#38bdf8;
-box-shadow:0 0 0 2px rgba(56,189,248,.1);
-}
-
-textarea{
-min-height:90px;
-}
+input:focus,textarea:focus,select:focus{border-color:#1687b8;box-shadow:0 0 0 2px rgba(22,135,184,.13),inset 0 1px 2px rgba(0,0,0,.06)}
+textarea{min-height:90px}
 
 button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:8px;
-background:#38bdf8;
-color:#0f172a;
-font-size:1rem;
-font-weight:bold;
-cursor:pointer;
-transition:.2s;
-margin-bottom:10px;
+  width:100%;padding:9px 12px;border:1px solid #086b91;border-radius:3px;
+  background:linear-gradient(#4bb5d4,#1585ae);color:white;font-size:14px;font-weight:bold;cursor:pointer;transition:.15s;margin-bottom:9px;text-shadow:0 1px 1px rgba(0,0,0,.25);box-shadow:0 1px 2px rgba(0,0,0,.16)
 }
+button:hover{background:linear-gradient(#61c2df,#08769f);transform:none}
+button:active{box-shadow:inset 0 2px 3px rgba(0,0,0,.18)}
+button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.secondary-btn{background:linear-gradient(#f7f9fa,#dce5e8);border-color:#9eafb5;color:#3f555e;text-shadow:none}
+.secondary-btn:hover{background:linear-gradient(#fff,#e4ecef)}
+.danger-btn{background:linear-gradient(#d96a6a,#aa3d3d);border-color:#923434;color:#fff}
+.danger-btn:hover{background:linear-gradient(#e17b7b,#b64242)}
 
-button:hover{
-background:#0ea5e9;
-transform:translateY(-1px);
+.status{text-align:center;margin-top:10px;font-size:13px;color:#718189;min-height:18px}
+.feed{margin-top:20px;max-height:500px;overflow-y:auto;padding-right:5px}
+
+.post,.community-card{
+  background:linear-gradient(#fff,#f2f6f7);border:1px solid #bcc9cd;border-left:5px solid #2b9ac1;border-radius:2px;padding:14px;margin-bottom:11px;box-shadow:var(--shadow)
 }
+.post:hover,.community-card:hover{border-left-color:#0b6e98}
+.post-usuario{color:#08729d;font-weight:bold;margin-bottom:7px;word-break:break-word;font-size:14px}
+.post-mensagem{color:#33464e;line-height:1.5;white-space:pre-wrap;word-break:break-word;margin-top:9px}
+.post-imagem{display:block;width:100%;max-height:450px;object-fit:contain;border:1px solid #c2ced2;border-radius:2px;margin-top:9px;background:#e9eef0}
+.info{text-align:center;color:#788990;padding:18px}
+.erro{text-align:center;color:#b84747;padding:15px}
 
-button:disabled{
-opacity:.6;
-cursor:not-allowed;
-transform:none;
-}
+.auth-screen{position:fixed;inset:0;background:linear-gradient(#dfe8eb,#cbd8dc);display:flex;justify-content:center;align-items:center;padding:20px;z-index:9999}
+.auth-box{width:100%;max-width:430px;background:#fff;border:1px solid #9aaeb5;border-radius:3px;padding:0 24px 22px;box-shadow:0 4px 18px rgba(35,58,68,.25);text-align:center;overflow:hidden}
+.auth-box:before{content:"INTERNETBLOX  •  GLOBAL COMMUNITY";display:block;margin:0 -24px 20px;padding:13px 18px;background:linear-gradient(#4aafc9,#117aa3);border-bottom:3px solid #075b82;color:#fff;font-size:14px;font-weight:bold;text-align:left;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.auth-box h1{color:var(--blue-dark);font-size:24px;margin-bottom:7px;text-align:center;border:0;padding:0}
+.auth-box p{color:#718189;margin-bottom:13px;font-size:13px}
+.auth-switch{font-size:13px;margin-top:4px}
+.auth-switch button{background:none;border:0;color:#0875a0;padding:0;width:auto;margin:0;font-size:13px;box-shadow:none;text-shadow:none}
+.auth-switch button:hover{background:none;transform:none;text-decoration:underline}
+.auth-box select{margin-bottom:10px}
 
-.secondary-btn{
-background:#334155;
-color:#f8fafc;
-}
+.screen{width:100%}
+.community-description{color:#52656d;margin-bottom:10px;line-height:1.45;word-break:break-word}
+.community-owner{color:#7b8a90;font-size:12px;margin-bottom:11px}
+.community-actions{display:flex;gap:8px}
+.community-actions button{margin-bottom:0}
+.community-header{margin-bottom:18px;background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;padding:15px;border-radius:2px;box-shadow:var(--shadow)}
+.back-btn{background:linear-gradient(#f7f9fa,#dce5e8);color:#3f555e;border-color:#9eafb5;text-shadow:none;width:auto;padding:8px 13px;margin-bottom:13px}
+.member-count{color:#718189;font-size:13px;margin-bottom:12px}
 
-.secondary-btn:hover{
-background:#475569;
-}
+.composer-box{background:linear-gradient(#fbfcfc,#edf3f5);border:1px solid #b9c7cc;border-radius:2px;padding:15px;margin-bottom:17px;box-shadow:var(--shadow)}
+.composer-title{color:#075f84;font-weight:bold;font-size:16px;margin-bottom:7px;border-bottom:1px dotted #b7c5ca;padding-bottom:7px}
+.composer-help{color:#7a898f;font-size:12px;margin-bottom:10px;line-height:1.4}
+.section-title{color:#075f84;font-size:17px;margin:0 0 11px;padding-bottom:7px;border-bottom:2px solid #8fc5d6}
+.message{background:#fff;border:1px solid #c3ced2;border-left:4px solid #8aa6b0;border-radius:2px;padding:11px;margin-bottom:9px;box-shadow:0 1px 3px rgba(39,63,72,.11)}
+.message:hover{border-left-color:#238db4}
+.message-usuario{color:#49616b;font-weight:bold;font-size:13px;margin-bottom:5px}
+.message-conteudo{color:#354850;white-space:pre-wrap;word-break:break-word;line-height:1.5}
+.message-apagar{width:auto;padding:6px 9px;font-size:12px;margin-top:7px;margin-bottom:0}
+.image-preview{display:none;width:100%;max-height:250px;object-fit:contain;border:1px solid #b8c7cc;border-radius:2px;margin-bottom:11px;background:#edf2f4}
+.file-info{color:#718189;font-size:12px;margin-top:-4px;margin-bottom:9px}
 
-.danger-btn{
-background:#7f1d1d;
-color:white;
-}
+.community-content-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:8px}
+.community-column{min-width:0;background:#eef3f5;border:1px solid #b9c7cc;border-radius:2px;padding:13px;box-shadow:var(--shadow)}
+.community-column .section-title{margin-top:0}
+.community-posts-list,.community-messages-list{max-height:650px;overflow-y:auto;padding-right:4px}
 
-.danger-btn:hover{
-background:#991b1b;
-}
-
-.status{
-text-align:center;
-margin-top:12px;
-font-size:.85rem;
-color:#64748b;
-}
-
-.feed{
-margin-top:25px;
-max-height:500px;
-overflow-y:auto;
-padding-right:5px;
-}
-
-.post{
-background:#334155;
-border-left:4px solid #38bdf8;
-border-radius:10px;
-padding:15px;
-margin-bottom:12px;
-}
-
-.post-usuario{
-color:#38bdf8;
-font-weight:bold;
-margin-bottom:7px;
-word-break:break-word;
-}
-
-.post-mensagem{
-color:#e2e8f0;
-line-height:1.5;
-white-space:pre-wrap;
-word-break:break-word;
-}
-
-.post-imagem{
-display:block;
-width:100%;
-max-height:450px;
-object-fit:contain;
-border-radius:10px;
-margin-top:10px;
-background:#0f172a;
-}
-
-.info{
-text-align:center;
-color:#64748b;
-padding:15px;
-}
-
-.erro{
-text-align:center;
-color:#f87171;
-padding:15px;
-}
-
-.auth-screen{
-position:fixed;
-inset:0;
-background:#0f172a;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-z-index:9999;
-}
-
-.auth-box{
-width:100%;
-max-width:400px;
-background:#1e293b;
-border:1px solid #334155;
-border-radius:16px;
-padding:25px;
-box-shadow:0 10px 30px rgba(0,0,0,.35);
-text-align:center;
-}
-
-.auth-box h1{
-color:#38bdf8;
-margin-bottom:10px;
-}
-
-.auth-box p{
-color:#94a3b8;
-margin-bottom:15px;
-}
-
-.auth-switch{
-font-size:.9rem;
-margin-top:5px;
-}
-
-.auth-switch button{
-background:none;
-color:#38bdf8;
-padding:0;
-width:auto;
-margin:0;
-font-size:.9rem;
-}
-
-.auth-switch button:hover{
-background:none;
-transform:none;
-text-decoration:underline;
-}
-
-.screen{
-width:100%;
-}
-
-.community-card{
-background:#334155;
-border-radius:10px;
-padding:15px;
-margin-bottom:12px;
-border-left:4px solid #38bdf8;
-}
-
-.community-description{
-color:#cbd5e1;
-margin-bottom:12px;
-line-height:1.4;
-word-break:break-word;
-}
-
-.community-owner{
-color:#94a3b8;
-font-size:.85rem;
-margin-bottom:12px;
-}
-
-.community-actions{
-display:flex;
-gap:8px;
-}
-
-.community-actions button{
-margin-bottom:0;
-}
-
-.community-header{
-margin-bottom:20px;
-}
-
-.back-btn{
-background:#334155;
-color:white;
-}
-
-.community-post-box{
-margin-bottom:20px;
-}
-
-.member-count{
-color:#94a3b8;
-font-size:.9rem;
-margin-bottom:15px;
-}
-
-.composer-box{
-background:#0f172a;
-border:1px solid #334155;
-border-radius:12px;
-padding:15px;
-margin-bottom:20px;
-}
-
-.composer-title{
-color:#38bdf8;
-font-weight:bold;
-font-size:1.05rem;
-margin-bottom:12px;
-}
-
-.composer-help{
-color:#94a3b8;
-font-size:.8rem;
-margin-bottom:10px;
-line-height:1.4;
-}.section-title{
-color:#38bdf8;
-font-size:1.2rem;
-margin:20px 0 12px 0;
-}
-
-.message{
-background:#263449;
-border-radius:10px;
-padding:12px;
-margin-bottom:10px;
-border-left:3px solid #64748b;
-}
-
-.message-usuario{
-color:#cbd5e1;
-font-weight:bold;
-font-size:.9rem;
-margin-bottom:5px;
-}
-
-.message-conteudo{
-color:#e2e8f0;
-white-space:pre-wrap;
-word-break:break-word;
-line-height:1.5;
-}
-
-.message-apagar{
-width:auto;
-padding:7px 10px;
-font-size:.8rem;
-margin-top:8px;
-margin-bottom:0;
-}
-
-.image-preview{
-display:none;
-width:100%;
-max-height:250px;
-object-fit:contain;
-border-radius:10px;
-margin-bottom:12px;
-background:#0f172a;
-}
-
-.file-info{
-color:#94a3b8;
-font-size:.8rem;
-margin-top:-5px;
-margin-bottom:10px;
-}
-
-
-/* ==========================================
-   POSTS E CONVERSAS LADO A LADO
-   ========================================== */
-
-.community-content-grid{
-display:grid;
-grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-gap:20px;
-align-items:start;
-margin-top:10px;
-}
-
-.community-column{
-min-width:0;
-background:#0f172a;
-border:1px solid #334155;
-border-radius:12px;
-padding:15px;
-}
-
-.community-column .section-title{
-margin-top:0;
-}
-
-.community-posts-list,
-.community-messages-list{
-max-height:650px;
-overflow-y:auto;
-padding-right:5px;
-}
+/* Barra de rolagem com aparência de navegador antigo */
+::-webkit-scrollbar{width:12px;height:12px}
+::-webkit-scrollbar-track{background:#dbe3e6;border-left:1px solid #b7c5ca}
+::-webkit-scrollbar-thumb{background:linear-gradient(#aebfc5,#879ba3);border:2px solid #dbe3e6;border-radius:2px}
 
 @media(max-width:800px){
-
-.app{
-max-width:700px;
+  body{padding:8px}
+  .app{max-width:700px;padding:0 12px 18px}
+  .app:before{margin-left:-12px;margin-right:-12px}
+  .app:after{left:16px;font-size:12px}
+  .community-content-grid{grid-template-columns:1fr}
+  .community-posts-list,.community-messages-list{max-height:none}
+  .community-actions{flex-direction:column}
 }
 
-.community-content-grid{
-grid-template-columns:1fr;
+@media(max-width:480px){
+  .auth-box{padding-left:16px;padding-right:16px}
+  .auth-box:before{margin-left:-16px;margin-right:-16px}
+  h1{font-size:21px}
+  h2{font-size:19px}
 }
 
-.community-posts-list,
-.community-messages-list{
-max-height:none;
-}
-
-}
-
-
-/* ==========================================
-   FIM DO LAYOUT
-   ========================================== */
-
+/* FIM DA REFORMA VISUAL */
 </style>
 
 </head>
@@ -2706,6 +2444,12 @@ imageFileInfo.textContent =
 postStatus.textContent =
 "✅ Post publicado!";
 
+setTimeout(
+function(){
+postStatus.textContent = "";
+},
+3000
+);
 
 await carregarPosts(
 comunidadeAtual.id
@@ -2881,6 +2625,12 @@ communityMessageContent.value = "";
 messageStatus.textContent =
 "✅ Mensagem enviada!";
 
+setTimeout(
+function(){
+messageStatus.textContent = "";
+},
+3000
+);
 
 await carregarMensagens(
 comunidadeAtual.id
