@@ -1,6 +1,6 @@
 # 🌐 InternetBlox Global
 
-Uma plataforma de mensagens online onde pessoas podem publicar mensagens e conversar pela internet!
+Uma plataforma de mensagens online onde pessoas podem publicar mensagens, posts, e conversar pela internet!
 
 ## 🚀 Tecnologias
 
@@ -11,6 +11,7 @@ Uma plataforma de mensagens online onde pessoas podem publicar mensagens e conve
 
 ## 💬 Recursos
 
+- 🧑‍💻 Layout inspirado na internet dos anos 2000
 - 👤 Escolha seu nome de usuário
 - 🌎 Publique mensagens globalmente
 - ☁️ Mensagens salvas na nuvem
