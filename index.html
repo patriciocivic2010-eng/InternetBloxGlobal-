@@ -161,143 +161,24 @@ min-width:0;background:#eef3f5;border:1px solid #b9c7cc;border-radius:2px;paddin
 ::-webkit-scrollbar-thumb{background:linear-gradient(#aebfc5,#879ba3);border:2px solid #dbe3e6;border-radius:2px}
 
 /* ============================================================
-   INTERNETBLOX VIDEOS
+   INTERNETBLOX VIDEOS 1.0 + CANAIS 2.1
    ============================================================ */
+.videos-header{margin-bottom:16px;background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;padding:12px 14px;border-radius:2px;box-shadow:var(--shadow)}
+.videos-topbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.videos-topbar .back-btn{margin:0}.videos-brand{font-size:20px;font-weight:bold;color:#075b82;flex:1;min-width:180px}
+.channel-create-btn{width:42px;height:42px;min-width:42px;padding:0;margin:0;border-radius:50%;font-size:24px;line-height:38px;display:flex;align-items:center;justify-content:center;background:linear-gradient(#4bb5d4,#1585ae);border:2px solid #075b82}
+.channel-create-btn:hover{background:linear-gradient(#61c2df,#08769f);transform:none}.videos-subtitle{color:#718189;font-size:13px;line-height:1.45;margin-top:9px}
+.videos-layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:16px;align-items:start}.videos-sidebar{background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #b9c7cc;border-radius:2px;box-shadow:var(--shadow);padding:11px;position:sticky;top:10px;max-height:calc(100vh - 30px);overflow-y:auto}.videos-sidebar-title{font-size:15px;font-weight:bold;color:#075f84;padding:4px 3px 9px;border-bottom:2px solid #8fc5d6;margin-bottom:8px}.sidebar-config-btn{width:100%;margin:7px 0 0;padding:8px;font-size:12px}.sidebar-channel{display:flex;align-items:center;gap:8px;width:100%;padding:7px 6px;margin:0;border:0;border-bottom:1px solid #d4dee1;background:transparent;color:#405861;text-align:left;box-shadow:none;text-shadow:none;font-weight:bold;font-size:12px;cursor:pointer}.sidebar-channel:hover{background:#e7f0f3;transform:none}.sidebar-channel-avatar{width:32px;height:32px;min-width:32px;border-radius:50%;object-fit:cover;border:1px solid #9fb1b8;background:#e1eaed;display:flex;align-items:center;justify-content:center;font-size:18px}.sidebar-channel-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sidebar-empty{color:#7b8a90;font-size:12px;line-height:1.4;padding:10px 4px;text-align:center}.videos-main{min-width:0}
+.video-list-title{color:#075f84;font-size:18px;margin:0 0 11px;padding-bottom:7px;border-bottom:2px solid #8fc5d6}.video-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-height:700px;overflow-y:auto;padding:2px 4px 4px 1px}.video-card{background:linear-gradient(#fff,#f2f6f7);border:1px solid #bcc9cd;border-top:4px solid #b44b4b;border-radius:2px;padding:8px;box-shadow:var(--shadow);min-width:0}.video-card:hover{border-top-color:#8e3030}.video-thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#111;border:1px solid #9eafb5;border-radius:2px;margin-bottom:8px}.video-card-title{color:#26343a;font-size:14px;font-weight:bold;line-height:1.3;margin-bottom:5px;word-break:break-word}.video-card-author{color:#718189;font-size:11px;word-break:break-word;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.video-card-channel-btn{width:auto;margin:7px 0 0;padding:5px 7px;font-size:10px;background:linear-gradient(#f7f9fa,#dce5e8);border-color:#9eafb5;color:#3f555e;text-shadow:none}.video-card-channel-btn:hover{background:linear-gradient(#fff,#e4ecef)}.video-empty,.video-error,.video-loading{text-align:center;color:#788990;padding:25px 10px;grid-column:1/-1}.video-error{color:#b84747}
+.channel-screen{min-width:0}.channel-page-header{background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;padding:15px;border-radius:2px;box-shadow:var(--shadow);margin-bottom:16px}.channel-page-top{display:flex;align-items:center;gap:13px}.channel-page-avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #8fa2a9;background:#e1eaed;display:flex;align-items:center;justify-content:center;font-size:40px;flex:none}.channel-page-info{min-width:0;flex:1}.channel-page-name{font-size:23px;color:#075b82;font-weight:bold;word-break:break-word;margin-bottom:5px}.channel-page-description{font-size:13px;color:#66777e;line-height:1.45;white-space:pre-wrap;word-break:break-word}.channel-page-actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}.channel-page-actions button{width:auto;margin:0}.channel-publish-box{background:linear-gradient(#fbfcfc,#edf3f5);border:1px solid #b9c7cc;border-radius:2px;padding:15px;margin-bottom:17px;box-shadow:var(--shadow)}.channel-publish-title{color:#075f84;font-weight:bold;font-size:16px;margin-bottom:7px;border-bottom:1px dotted #b7c5ca;padding-bottom:7px}.channel-publish-help{color:#7a898f;font-size:12px;margin-bottom:12px;line-height:1.4}.channel-publish-box input{margin-bottom:9px}.channel-publish-box button{width:auto}.channel-video-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.channel-modal{position:fixed;inset:0;background:rgba(35,55,63,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:10000}.channel-modal-box{width:100%;max-width:480px;max-height:90vh;overflow-y:auto;background:#fff;border:1px solid #8fa2a9;border-radius:3px;box-shadow:0 6px 25px rgba(20,40,48,.35);padding:0 20px 20px}.channel-modal-header{margin:0 -20px 18px;padding:13px 17px;background:linear-gradient(#4aafc9,#117aa3);border-bottom:3px solid #075b82;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px}.channel-modal-header strong{font-size:17px;text-shadow:0 1px 1px rgba(0,0,0,.25)}.channel-close-btn{width:30px;height:30px;min-width:30px;padding:0;margin:0;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);font-size:17px;line-height:28px}.channel-photo-area{text-align:center;padding:4px 0 14px}.channel-photo-preview{width:120px;height:120px;border-radius:50%;border:3px solid #8fa2a9;background:linear-gradient(#edf3f5,#d7e2e5);display:block;margin:0 auto 10px;object-fit:cover;box-shadow:0 2px 7px rgba(39,63,72,.18)}.channel-photo-placeholder{display:flex;align-items:center;justify-content:center;font-size:47px;color:#78909a}.channel-photo-help{color:#7a898f;font-size:12px;line-height:1.4;margin-bottom:9px}.channel-photo-input{display:none}.channel-photo-button{width:auto;margin:0 auto 8px;display:block}.channel-photo-file{font-size:11px;color:#718189;min-height:15px;word-break:break-word}.channel-field-label{display:block;color:#49616b;font-size:13px;font-weight:bold;margin:8px 0 5px}.channel-description-input{min-height:100px}.channel-save-buttons{display:flex;gap:8px;margin-top:4px}.channel-save-buttons button{margin-bottom:0}.channel-profile-status{min-height:18px;margin-top:9px;text-align:center;font-size:13px;color:#718189}.sidebar-modal-list{max-height:300px;overflow-y:auto;border:1px solid #c3ced2;background:#f7fafb;margin-bottom:12px}.sidebar-option{display:flex;align-items:center;gap:9px;padding:8px;border-bottom:1px solid #d5dfe2}.sidebar-option:last-child{border-bottom:0}.sidebar-option-info{flex:1;min-width:0}.sidebar-option-name{font-size:13px;font-weight:bold;color:#405861;word-break:break-word}.sidebar-option-sub{font-size:10px;color:#7b8a90}.sidebar-option button{width:auto;margin:0;padding:5px 8px;font-size:10px}
+/* ============================================================
+   INTERNETBLOX VIDEOS 2.4 — PESQUISA + VÍDEO INDIVIDUAL + LIKES + COMENTÁRIOS
+   ============================================================ */
+.video-search-box{display:flex;gap:8px;margin-bottom:12px}.video-search-box input{margin:0;flex:1}.video-search-btn{width:auto;margin:0;padding:9px 14px}.video-card-title{cursor:pointer}.video-card-title:hover{text-decoration:underline}.video-card-stats{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-top:7px;font-size:11px;color:#718189}.video-card-open{width:auto;margin:7px 0 0;padding:5px 8px;font-size:10px}.video-detail{min-width:0}.video-detail-header{background:linear-gradient(#f8fafb,#e8eef0);border:1px solid #bcc9cd;padding:12px 14px;border-radius:2px;box-shadow:var(--shadow);margin-bottom:16px}.video-detail-box{background:#fff;border:1px solid #bcc9cd;border-radius:2px;padding:14px;box-shadow:var(--shadow)}.video-detail-player{display:block;width:100%;max-height:680px;background:#111;border:1px solid #8fa2a9;border-radius:2px}.video-detail-title{font-size:22px;color:#075b82;font-weight:bold;line-height:1.3;margin:13px 0 6px;word-break:break-word}.video-detail-author{font-size:13px;color:#66777e;margin-bottom:12px}.video-detail-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 0;border-top:1px solid #d4dee1;border-bottom:1px solid #d4dee1}.video-like-btn{width:auto;margin:0;padding:8px 12px}.video-like-btn.liked{background:linear-gradient(#4bb5d4,#1585ae);border-color:#075b82;color:#fff}.video-description-box{margin-top:14px;background:#f1f5f6;border:1px solid #c4d0d4;border-radius:2px;padding:12px}.video-description-title{font-size:13px;font-weight:bold;color:#405861;margin-bottom:6px}.video-description-text{font-size:13px;color:#4f636b;line-height:1.5;white-space:pre-wrap;word-break:break-word}.video-comments{margin-top:17px}.video-comments h3{color:#075f84;border-bottom:2px solid #8fc5d6;padding-bottom:7px}.comment-form{display:flex;gap:8px;align-items:flex-start;margin-bottom:13px}.comment-form textarea{margin:0;min-height:70px}.comment-form button{width:auto;margin:0}.comment-item{border:1px solid #c8d3d7;background:#f8fafb;border-radius:2px;padding:10px;margin-bottom:8px}.comment-author{font-size:12px;font-weight:bold;color:#405861;margin-bottom:4px}.comment-date{font-size:10px;color:#849299;margin-left:6px}.comment-content{font-size:13px;color:#465b63;line-height:1.45;white-space:pre-wrap;word-break:break-word}.comments-empty{color:#7b8a90;font-size:12px;padding:12px;text-align:center}.video-detail-loading{text-align:center;color:#718189;padding:30px}.comment-replies{margin:8px 0 0 22px;padding-left:10px;border-left:2px solid #d5e0e3}.comment-reply-btn,.comment-delete-btn{width:auto;margin:7px 6px 0 0;padding:5px 8px;font-size:10px}.video-owner-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.video-owner-actions button{width:auto;margin:0;padding:6px 9px;font-size:11px}
+.channel-publish-box textarea{min-height:85px;margin-bottom:9px}
+@media(max-width:600px){.video-search-box{flex-direction:column}.video-search-btn{width:100%}.video-detail-title{font-size:19px}.comment-form{flex-direction:column}.comment-form button{width:100%}}
 
-.videos-header{
-margin-bottom:18px;
-background:linear-gradient(#f8fafb,#e8eef0);
-border:1px solid #bcc9cd;
-padding:15px;
-border-radius:2px;
-box-shadow:var(--shadow)
-}
-
-.videos-header h2{
-margin-bottom:6px;
-}
-
-.videos-subtitle{
-color:#718189;
-font-size:13px;
-line-height:1.45;
-}
-
-.videos-actions{
-display:flex;
-gap:10px;
-margin-bottom:18px;
-}
-
-.videos-actions button{
-margin-bottom:0;
-}
-
-.video-upload-box{
-background:linear-gradient(#fbfcfc,#edf3f5);
-border:1px solid #b9c7cc;
-border-radius:2px;
-padding:15px;
-margin-bottom:18px;
-box-shadow:var(--shadow);
-}
-
-.video-upload-title{
-color:#075f84;
-font-weight:bold;
-font-size:16px;
-margin-bottom:7px;
-border-bottom:1px dotted #b7c5ca;
-padding-bottom:7px;
-}
-
-.video-upload-help{
-color:#7a898f;
-font-size:12px;
-margin-bottom:12px;
-line-height:1.4;
-}
-
-.video-selected-info{
-color:#52656d;
-font-size:13px;
-background:#fff;
-border:1px solid #c3ced2;
-padding:10px;
-margin-bottom:10px;
-display:none;
-word-break:break-word;
-}
-
-.video-list-title{
-color:#075f84;
-font-size:18px;
-margin:0 0 11px;
-padding-bottom:7px;
-border-bottom:2px solid #8fc5d6;
-}
-
-.video-list{
-max-height:700px;
-overflow-y:auto;
-padding-right:4px;
-}
-
-.video-card{
-background:linear-gradient(#fff,#f2f6f7);
-border:1px solid #bcc9cd;
-border-left:5px solid #b44b4b;
-border-radius:2px;
-padding:14px;
-margin-bottom:12px;
-box-shadow:var(--shadow);
-}
-
-.video-card:hover{
-border-left-color:#8e3030;
-}
-
-.video-card-title{
-color:#8e3030;
-font-size:17px;
-font-weight:bold;
-margin-bottom:8px;
-word-break:break-word;
-}
-
-.video-card-author{
-color:#718189;
-font-size:12px;
-margin-bottom:8px;
-}
-
-.video-player{
-display:block;
-width:100%;
-max-height:600px;
-background:#111;
-border:1px solid #9eafb5;
-border-radius:2px;
-}
-
-.video-empty{
-text-align:center;
-color:#788990;
-padding:25px 10px;
-}
-
-.video-error{
-text-align:center;
-color:#b84747;
-padding:15px;
-}
-
-.video-loading{
-text-align:center;
-color:#718189;
-padding:18px;
-}
-
+@media(max-width:900px){.video-list,.channel-video-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){
 body{padding:8px}
 .app{max-width:700px;padding:0 12px 18px}
@@ -308,7 +189,9 @@ body{padding:8px}
 .community-actions{flex-direction:column}
 .home-menu{grid-template-columns:1fr}
 .videos-actions{flex-direction:column}
-.video-list{max-height:none}
+.videos-layout{grid-template-columns:1fr}
+.videos-sidebar{position:static;max-height:none}
+.video-list,.channel-video-list{max-height:none}
 }
 
 @media(max-width:480px){
@@ -319,6 +202,15 @@ h2{font-size:19px}
 .home-welcome h1{font-size:23px}
 .home-card{min-height:175px;padding:16px}
 .video-player{max-height:400px}
+.videos-topbar{align-items:stretch}
+.videos-brand{font-size:18px}
+.channel-page-top{align-items:flex-start}
+.channel-page-avatar{width:72px;height:72px;font-size:32px}
+.video-list,.channel-video-list{grid-template-columns:1fr}
+.channel-modal{padding:10px}
+.channel-modal-box{max-height:94vh;padding-left:14px;padding-right:14px}
+.channel-modal-header{margin-left:-14px;margin-right:-14px;padding-left:13px;padding-right:13px}
+.channel-photo-preview{width:105px;height:105px}
 }
 </style>
 </head>
@@ -412,47 +304,17 @@ Assista e publique vídeos no InternetBlox.
 </div>
 
 <div id="videosScreen" class="screen" style="display:none;">
-
-<div class="videos-header">
-
-<button id="backFromVideosBtn" class="back-btn">← Voltar para início</button>
-
-<h2>🎬 InternetBlox Videos</h2>
-
-<p class="videos-subtitle">
-Assista aos vídeos publicados pela comunidade e publique seus próprios vídeos.
-</p>
-
+<div class="videos-header"><div class="videos-topbar"><button id="backFromVideosBtn" class="back-btn">← Voltar</button><div class="videos-brand">🎬 InternetBlox Videos</div><button id="openChannelBtn" class="channel-create-btn" title="Meu canal" type="button">+</button></div><p class="videos-subtitle">Assista aos vídeos publicados pela comunidade. Para publicar, entre no seu canal.</p></div>
+<div class="videos-layout"><aside class="videos-sidebar"><div class="videos-sidebar-title">📺 Inscrições</div><div id="subscriptionsList"></div><button id="configureSidebarBtn" class="secondary-btn sidebar-config-btn" type="button">⚙️ Configurar barra</button></aside><main class="videos-main"><div class="video-search-box"><input id="videoSearchInput" type="search" maxlength="100" placeholder="🔎 Pesquisar vídeos..."><button id="videoSearchBtn" class="secondary-btn video-search-btn" type="button">Pesquisar</button></div><h3 class="video-list-title">🎬 Vídeos publicados</h3><div id="videosList" class="video-list"><p class="video-loading">⏳ Carregando vídeos...</p></div></main></div></div>
+<div id="videoDetailScreen" class="screen video-detail" style="display:none;">
+<div class="video-detail-header"><button id="backFromVideoDetailBtn" class="back-btn" type="button">← Voltar para vídeos</button></div>
+<div id="videoDetailContent" class="video-detail-box"><div class="video-detail-loading">⏳ Carregando vídeo...</div></div>
 </div>
-
-<div class="video-upload-box">
-
-<div class="video-upload-title">⬆️ Publicar um vídeo</div>
-
-<div class="video-upload-help">
-Selecione um arquivo de vídeo. Ele será enviado para o Supabase e aparecerá na lista de vídeos.
-</div>
-
-<button id="selectVideoBtn">🎬 Selecionar vídeo</button>
-
-<div id="videoSelectedInfo" class="video-selected-info"></div>
-
-<button id="publishVideoBtn">📤 Publicar vídeo</button>
-
-<p id="videoStatus" class="status"></p>
-
-</div>
-
-<h3 class="video-list-title">📺 Vídeos publicados</h3>
-
-<div id="videosList" class="video-list">
-
-<p class="video-loading">⏳ Carregando vídeos...</p>
-
-</div>
-
-</div>
-
+<div id="channelScreen" class="screen channel-screen" style="display:none;"><div class="channel-page-header"><button id="backFromChannelBtn" class="back-btn">← Voltar para vídeos</button><div class="channel-page-top"><img id="channelPageAvatar" class="channel-page-avatar" alt="Foto do canal" style="display:none;"><div id="channelPageAvatarPlaceholder" class="channel-page-avatar">👤</div><div class="channel-page-info"><div id="channelPageName" class="channel-page-name">Meu canal</div><div id="channelPageDescription" class="channel-page-description">Seu canal ainda não tem descrição.</div></div></div><div class="channel-page-actions"><button id="editChannelFromPageBtn" type="button">⚙️ Configurar canal</button></div></div>
+<div id="channelPublishBox" class="channel-publish-box"><div class="channel-publish-title">⬆️ Publicar no meu canal</div><div class="channel-publish-help">Os vídeos publicados aqui aparecem automaticamente no InternetBlox Videos.</div><input type="text" id="channelVideoTitleInput" maxlength="100" placeholder="Título do vídeo"><textarea id="channelVideoDescriptionInput" maxlength="2000" placeholder="Descrição do vídeo (opcional)..."></textarea><button id="channelSelectVideoBtn" type="button">🎬 Escolher vídeo</button><div id="channelSelectedVideoInfo" class="video-selected-info"></div><button id="channelPublishVideoBtn" type="button">📤 Publicar no canal</button><p id="channelVideoStatus" class="status"></p></div>
+<h3 class="video-list-title">📺 Vídeos deste canal</h3><div id="channelVideosList" class="channel-video-list"><p class="video-loading">⏳ Carregando vídeos...</p></div></div>
+<div id="channelModal" class="channel-modal"><div class="channel-modal-box"><div class="channel-modal-header"><strong id="channelModalTitle">👤 Meu canal</strong><button id="closeChannelModalBtn" class="channel-close-btn" type="button">✕</button></div><div class="channel-photo-area"><img id="channelPhotoPreview" class="channel-photo-preview" alt="Foto do canal" style="display:none;"><div id="channelPhotoPlaceholder" class="channel-photo-preview channel-photo-placeholder">👤</div><div class="channel-photo-help">Escolha uma foto para seu canal.<br>A imagem será cortada automaticamente para ficar quadrada.</div><input type="file" id="channelPhotoInput" class="channel-photo-input" accept="image/*"><button id="chooseChannelPhotoBtn" class="secondary-btn channel-photo-button" type="button">📷 Escolher foto</button><div id="channelPhotoFile" class="channel-photo-file">Nenhuma foto selecionada.</div></div><label class="channel-field-label" for="channelNameInput">Nome do canal</label><input type="text" id="channelNameInput" maxlength="40" placeholder="Ex: Meu Canal"><label class="channel-field-label" for="channelDescriptionInput">Descrição</label><textarea id="channelDescriptionInput" class="channel-description-input" maxlength="500" placeholder="Fale um pouco sobre seu canal..."></textarea><div class="channel-save-buttons"><button id="saveChannelBtn" type="button">💾 Salvar canal</button><button id="cancelChannelBtn" class="secondary-btn" type="button">Cancelar</button></div><p id="channelProfileStatus" class="channel-profile-status"></p></div></div>
+<div id="sidebarModal" class="channel-modal"><div class="channel-modal-box"><div class="channel-modal-header"><strong>⚙️ Configurar barra lateral</strong><button id="closeSidebarModalBtn" class="channel-close-btn" type="button">✕</button></div><p class="channel-photo-help" style="text-align:left;">Escolha quais canais você quer deixar nas suas inscrições. Os canais aparecem aqui quando já existem vídeos publicados por eles.</p><div id="sidebarChannelsList" class="sidebar-modal-list"></div><button id="closeSidebarBtn" class="secondary-btn" type="button">Fechar</button></div></div>
 <div id="communitiesScreen" class="screen" style="display:none;">
 
 <h1>🌐 InternetBlox Global</h1>
@@ -620,11 +482,49 @@ const backToHomeBtn=document.getElementById("backToHomeBtn");
 
 const videosScreen=document.getElementById("videosScreen");
 const backFromVideosBtn=document.getElementById("backFromVideosBtn");
-const selectVideoBtn=document.getElementById("selectVideoBtn");
-const publishVideoBtn=document.getElementById("publishVideoBtn");
 const videosList=document.getElementById("videosList");
-const videoSelectedInfo=document.getElementById("videoSelectedInfo");
-const videoStatus=document.getElementById("videoStatus");
+const videoSearchInput=document.getElementById("videoSearchInput");
+const videoSearchBtn=document.getElementById("videoSearchBtn");
+const videoDetailScreen=document.getElementById("videoDetailScreen");
+const backFromVideoDetailBtn=document.getElementById("backFromVideoDetailBtn");
+const videoDetailContent=document.getElementById("videoDetailContent");
+const channelVideoDescriptionInput=document.getElementById("channelVideoDescriptionInput");
+const subscriptionsList=document.getElementById("subscriptionsList");
+const configureSidebarBtn=document.getElementById("configureSidebarBtn");
+const sidebarModal=document.getElementById("sidebarModal");
+const closeSidebarModalBtn=document.getElementById("closeSidebarModalBtn");
+const closeSidebarBtn=document.getElementById("closeSidebarBtn");
+const sidebarChannelsList=document.getElementById("sidebarChannelsList");
+const channelScreen=document.getElementById("channelScreen");
+const openChannelBtn=document.getElementById("openChannelBtn");
+const backFromChannelBtn=document.getElementById("backFromChannelBtn");
+const editChannelFromPageBtn=document.getElementById("editChannelFromPageBtn");
+const channelPageAvatar=document.getElementById("channelPageAvatar");
+const channelPageAvatarPlaceholder=document.getElementById("channelPageAvatarPlaceholder");
+const channelPageName=document.getElementById("channelPageName");
+const channelPageDescription=document.getElementById("channelPageDescription");
+const channelVideosList=document.getElementById("channelVideosList");
+const channelPublishBox=document.getElementById("channelPublishBox");
+const channelVideoTitleInput=document.getElementById("channelVideoTitleInput");
+const channelSelectVideoBtn=document.getElementById("channelSelectVideoBtn");
+const channelSelectedVideoInfo=document.getElementById("channelSelectedVideoInfo");
+const channelPublishVideoBtn=document.getElementById("channelPublishVideoBtn");
+const channelVideoStatus=document.getElementById("channelVideoStatus");
+const channelModal=document.getElementById("channelModal");
+const closeChannelModalBtn=document.getElementById("closeChannelModalBtn");
+const cancelChannelBtn=document.getElementById("cancelChannelBtn");
+const saveChannelBtn=document.getElementById("saveChannelBtn");
+const channelModalTitle=document.getElementById("channelModalTitle");
+const channelNameInput=document.getElementById("channelNameInput");
+const channelDescriptionInput=document.getElementById("channelDescriptionInput");
+const channelPhotoInput=document.getElementById("channelPhotoInput");
+const chooseChannelPhotoBtn=document.getElementById("chooseChannelPhotoBtn");
+const channelPhotoPreview=document.getElementById("channelPhotoPreview");
+const channelPhotoPlaceholder=document.getElementById("channelPhotoPlaceholder");
+const channelPhotoFile=document.getElementById("channelPhotoFile");
+const channelProfileStatus=document.getElementById("channelProfileStatus");
+let canalFotoProcessada=null;
+let canalAtualVisualizado=null;
 
 const communitiesScreen=document.getElementById("communitiesScreen");
 const createCommunityScreen=document.getElementById("createCommunityScreen");
@@ -850,6 +750,7 @@ authScreen.style.display="flex";
 
 homeScreen.style.display="none";
 videosScreen.style.display="none";
+channelScreen.style.display="none";
 communitiesScreen.style.display="none";
 createCommunityScreen.style.display="none";
 communityPageScreen.style.display="none";
@@ -888,32 +789,9 @@ await carregarComunidades();
 
 });
 
-homeVideosBtn.addEventListener("click",async()=>{
+homeVideosBtn.addEventListener("click",async()=>{homeScreen.style.display="none";videosScreen.style.display="block";videoDetailScreen.style.display="none";channelScreen.style.display="none";communitiesScreen.style.display="none";createCommunityScreen.style.display="none";communityPageScreen.style.display="none";await carregarVideos();await carregarBarraLateral();});
 
-homeScreen.style.display="none";
-
-videosScreen.style.display="block";
-
-communitiesScreen.style.display="none";
-createCommunityScreen.style.display="none";
-communityPageScreen.style.display="none";
-
-videoStatus.textContent="";
-
-await carregarVideos();
-
-});
-
-backFromVideosBtn.addEventListener("click",()=>{
-
-videosScreen.style.display="none";
-communitiesScreen.style.display="none";
-createCommunityScreen.style.display="none";
-communityPageScreen.style.display="none";
-
-homeScreen.style.display="block";
-
-});
+backFromVideosBtn.addEventListener("click",()=>{videosScreen.style.display="none";videoDetailScreen.style.display="none";channelScreen.style.display="none";communitiesScreen.style.display="none";createCommunityScreen.style.display="none";communityPageScreen.style.display="none";homeScreen.style.display="block";});
 
 backToHomeBtn.addEventListener("click",()=>{
 
@@ -1095,6 +973,10 @@ descricao.textContent=comunidade.description||"Sem descrição.";
 const owner=document.createElement("p");
 owner.className="community-owner";
 owner.textContent="👑 Comunidade criada por um usuário";
+try{
+ const {data:criador}=await supabaseClient.from("channels").select("name").eq("id",comunidade.owner_id).maybeSingle();
+ if(criador?.name)owner.textContent="👑 Criada por @"+criador.name;
+}catch(e){console.warn("Criador da comunidade:",e.message)}
 
 const actions=document.createElement("div");
 actions.className="community-actions";
@@ -1940,6 +1822,7 @@ comunidadeAtual=null;
 
 homeScreen.style.display="none";
 videosScreen.style.display="none";
+channelScreen.style.display="none";
 communitiesScreen.style.display="none";
 createCommunityScreen.style.display="none";
 communityPageScreen.style.display="none";
@@ -1956,656 +1839,276 @@ authStatus.textContent="";
 
 });
 
-function verificarVideo(arquivo){
+function verificarVideo(arquivo){if(!arquivo)return false;if(!arquivo.type.startsWith("video/")){alert("❌ O arquivo selecionado não é um vídeo.");return false}return true}
+function selecionarVideoPara(callback){const input=document.createElement("input");input.type="file";input.accept="video/*";input.addEventListener("change",()=>{const arquivo=input.files[0];if(arquivo&&verificarVideo(arquivo))callback(arquivo)});input.click()}
+async function obterUsuarioAtual(){const {data,error}=await supabaseClient.auth.getSession();if(error)throw error;return data.session?.user||null}
+function obterNomeCanalUsuario(usuario){return usuario?.user_metadata?.channel_name||usuario?.user_metadata?.username||"Usuário"}
+function obterFotoCanalUsuario(usuario){return usuario?.user_metadata?.channel_photo||null}
+async function obterInscricoes(){
+ const u=await obterUsuarioAtual();
+ if(!u)return[];
+ const {data,error}=await supabaseClient.from("channel_subscriptions").select("channel_id").eq("subscriber_id",u.id);
+ if(error)throw error;
+ return(data||[]).map(x=>x.channel_id);
+}
+async function alternarInscricao(channelId){
+ const u=await obterUsuarioAtual();
+ if(!u)throw new Error("Você precisa estar logado.");
+ if(channelId===u.id)throw new Error("Você não pode se inscrever no próprio canal.");
+ const {data,error:checkError}=await supabaseClient.from("channel_subscriptions").select("id").eq("subscriber_id",u.id).eq("channel_id",channelId).maybeSingle();
+ if(checkError)throw checkError;
+ if(data){
+  const {error}=await supabaseClient.from("channel_subscriptions").delete().eq("id",data.id);
+  if(error)throw error;
+ }else{
+  const {error}=await supabaseClient.from("channel_subscriptions").insert({subscriber_id:u.id,channel_id:channelId});
+  if(error)throw error;
+ }
+}
+async function fazerUploadVideo(arquivo,statusElement=channelVideoStatus){if(!arquivo||!verificarVideo(arquivo))return null;statusElement.textContent="⏳ Enviando vídeo para o Supabase...";try{const nomeArquivo=crypto.randomUUID()+"-"+arquivo.name;const {data,error}=await supabaseClient.storage.from("videos").upload("videos/"+nomeArquivo,arquivo,{contentType:arquivo.type,upsert:false});if(error)throw error;return supabaseClient.storage.from("videos").getPublicUrl(data.path).data.publicUrl}catch(erro){console.error(erro);statusElement.textContent="❌ Erro ao enviar vídeo: "+erro.message;return null}}
+async function obterCanaisDisponiveis(){
+ const {data,error}=await supabaseClient.from("channels").select("id,name,description,photo_url").order("created_at",{ascending:true});
+ if(error)throw error;
+ return(data||[]).map(c=>({id:c.id,nome:c.name||"Meu Canal",foto:c.photo_url||null,descricao:c.description||""}));
+}
+function criarAvatarElemento(foto,nome,classe="sidebar-channel-avatar"){if(foto){const img=document.createElement("img");img.className=classe;img.src=foto;img.alt=nome;return img}const div=document.createElement("div");div.className=classe;div.textContent="👤";return div}
+async function carregarBarraLateral(){
+ try{
+  const canais=await obterCanaisDisponiveis();
+  const inscritos=await obterInscricoes();
+  subscriptionsList.innerHTML="";
+  const escolhidos=canais.filter(c=>inscritos.includes(c.id));
+  if(!escolhidos.length){subscriptionsList.innerHTML='<div class="sidebar-empty">Nenhuma inscrição ainda.<br><br>Use ⚙️ Configurar barra.</div>';return}
+  for(const canal of escolhidos){
+   const b=document.createElement("button");b.className="sidebar-channel";b.type="button";
+   b.appendChild(criarAvatarElemento(canal.foto,canal.nome));
+   const n=document.createElement("span");n.className="sidebar-channel-name";n.textContent=canal.nome;b.appendChild(n);
+   b.onclick=()=>abrirCanal(canal.id);subscriptionsList.appendChild(b);
+  }
+ }catch(e){console.error(e);subscriptionsList.innerHTML='<div class="sidebar-empty">❌ Erro ao carregar inscrições.</div>'}
+}
+async function abrirConfiguracaoBarra(){
+ sidebarModal.style.display="flex";sidebarChannelsList.innerHTML='<div class="sidebar-empty">⏳ Carregando canais...</div>';
+ try{
+  const canais=await obterCanaisDisponiveis();const inscritos=await obterInscricoes();const u=await obterUsuarioAtual();
+  sidebarChannelsList.innerHTML="";
+  if(!canais.length){sidebarChannelsList.innerHTML='<div class="sidebar-empty">Nenhum canal encontrado.</div>';return}
+  for(const canal of canais){
+   const row=document.createElement("div");row.className="sidebar-option";row.appendChild(criarAvatarElemento(canal.foto,canal.nome));
+   const info=document.createElement("div");info.className="sidebar-option-info";
+   const nm=document.createElement("div");nm.className="sidebar-option-name";nm.textContent=canal.nome;info.appendChild(nm);
+   const sub=document.createElement("div");sub.className="sidebar-option-sub";sub.textContent=canal.id===u?.id?"Seu canal":"Canal";info.appendChild(sub);row.appendChild(info);
+   const b=document.createElement("button");b.type="button";
+   const inscrito=inscritos.includes(canal.id);b.className=inscrito?"danger-btn":"secondary-btn";b.textContent=inscrito?"Remover":"Inscrever";
+   if(canal.id===u?.id){b.disabled=true;b.textContent="Seu canal"}else b.onclick=async()=>{b.disabled=true;try{await alternarInscricao(canal.id);await abrirConfiguracaoBarra();await carregarBarraLateral()}catch(e){alert("❌ Não foi possível alterar a inscrição.\n\n"+e.message);b.disabled=false}};
+   row.appendChild(b);sidebarChannelsList.appendChild(row);
+  }
+ }catch(e){console.error(e);sidebarChannelsList.innerHTML='<div class="sidebar-empty">❌ '+e.message+'</div>'}
+}
+configureSidebarBtn.onclick=abrirConfiguracaoBarra;closeSidebarModalBtn.onclick=()=>sidebarModal.style.display="none";closeSidebarBtn.onclick=()=>sidebarModal.style.display="none";sidebarModal.onclick=e=>{if(e.target===sidebarModal)sidebarModal.style.display="none"};
+function abrirModalCanal(){channelModal.style.display="flex";channelModalTitle.textContent="👤 Configurar meu canal";channelProfileStatus.textContent="";carregarDadosDoCanal()}
+function fecharModalCanal(){channelModal.style.display="none";channelProfileStatus.textContent=""}
+async function carregarDadosDoCanal(){const u=await obterUsuarioAtual();if(!u)return;const m=u.user_metadata||{};channelNameInput.value=m.channel_name||"";channelDescriptionInput.value=m.channel_description||"";canalFotoProcessada=m.channel_photo||null;if(canalFotoProcessada){channelPhotoPreview.src=canalFotoProcessada;channelPhotoPreview.style.display="block";channelPhotoPlaceholder.style.display="none";channelPhotoFile.textContent="📷 Foto carregada."}else{channelPhotoPreview.style.display="none";channelPhotoPlaceholder.style.display="flex";channelPhotoFile.textContent="Nenhuma foto selecionada."}}
+openChannelBtn.onclick=()=>abrirCanal();editChannelFromPageBtn.onclick=abrirModalCanal;closeChannelModalBtn.onclick=fecharModalCanal;cancelChannelBtn.onclick=fecharModalCanal;channelModal.onclick=e=>{if(e.target===channelModal)fecharModalCanal()};chooseChannelPhotoBtn.onclick=()=>channelPhotoInput.click();
+channelPhotoInput.onchange=()=>{const arquivo=channelPhotoInput.files[0];if(!arquivo)return;if(!arquivo.type.startsWith("image/")){channelProfileStatus.textContent="❌ Escolha uma imagem válida.";return}const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>{const t=Math.min(im.width,im.height),x=(im.width-t)/2,y=(im.height-t)/2,c=document.createElement("canvas");c.width=600;c.height=600;c.getContext("2d").drawImage(im,x,y,t,t,0,0,600,600);canalFotoProcessada=c.toDataURL("image/jpeg",.88);channelPhotoPreview.src=canalFotoProcessada;channelPhotoPreview.style.display="block";channelPhotoPlaceholder.style.display="none";channelPhotoFile.textContent="✅ Foto quadrada preparada."};im.src=e.target.result};r.readAsDataURL(arquivo)};
+saveChannelBtn.onclick=async()=>{const nome=channelNameInput.value.trim(),desc=channelDescriptionInput.value.trim();if(!nome){channelProfileStatus.textContent="⚠️ Digite um nome para o canal.";return}if(nome.length<2){channelProfileStatus.textContent="⚠️ O nome precisa ter pelo menos 2 caracteres.";return}saveChannelBtn.disabled=true;try{const {error}=await supabaseClient.auth.updateUser({data:{channel_name:nome,channel_description:desc,channel_photo:canalFotoProcessada||null}});if(error)throw error;
+const u=await obterUsuarioAtual();
+const {error:canalError}=await supabaseClient.from("channels").upsert({id:u.id,name:nome,description:desc,photo_url:canalFotoProcessada||null,updated_at:new Date().toISOString()},{onConflict:"id"});
+if(canalError)throw canalError;
+channelProfileStatus.textContent="✅ Canal salvo!";setTimeout(()=>{fecharModalCanal();abrirCanal()},600)}catch(e){channelProfileStatus.textContent="❌ "+e.message}finally{saveChannelBtn.disabled=false}};
+async function obterDadosCanalPublico(id,atual){
+ const {data,error}=await supabaseClient.from("channels").select("id,name,description,photo_url").eq("id",id).maybeSingle();
+ if(error)throw error;
+ if(data)return{nome:data.name||"Meu Canal",descricao:data.description||"",foto:data.photo_url||null};
+ if(id===atual.id)return{nome:obterNomeCanalUsuario(atual),descricao:atual.user_metadata?.channel_description||"",foto:obterFotoCanalUsuario(atual)};
+ return{nome:"Usuário",descricao:"Canal do usuário.",foto:null};
+}
+async function abrirCanal(id=null){const atual=await obterUsuarioAtual();if(!atual)return;id=id||atual.id;canalAtualVisualizado=id;homeScreen.style.display="none";videosScreen.style.display="none";communitiesScreen.style.display="none";createCommunityScreen.style.display="none";communityPageScreen.style.display="none";channelScreen.style.display="block";const d=await obterDadosCanalPublico(id,atual);channelPageName.textContent=d.nome;channelPageDescription.textContent=d.descricao||"Este canal ainda não tem descrição.";if(d.foto){channelPageAvatar.src=d.foto;channelPageAvatar.style.display="block";channelPageAvatarPlaceholder.style.display="none"}else{channelPageAvatar.style.display="none";channelPageAvatarPlaceholder.style.display="flex"}const eu=id===atual.id;channelPublishBox.style.display=eu?"block":"none";editChannelFromPageBtn.style.display=eu?"inline-block":"none";await carregarVideosDoCanal(id)}
+backFromChannelBtn.onclick=async()=>{channelScreen.style.display="none";videosScreen.style.display="block";await carregarVideos();await carregarBarraLateral()};
+let videoSelecionadoCanal=null;channelSelectVideoBtn.onclick=()=>selecionarVideoPara(a=>{videoSelecionadoCanal=a;channelSelectedVideoInfo.style.display="block";channelSelectedVideoInfo.textContent="🎬 "+a.name+" • "+Math.round(a.size/1024/1024)+" MB"});
+async function salvarVideoNoBanco(url,titulo,descricao=""){const u=await obterUsuarioAtual();if(!u)return null;const {data,error}=await supabaseClient.from("videos").insert({user_id:u.id,channel_id:u.id,title:titulo||"Vídeo sem título",description:descricao||"",video_url:url}).select().single();if(error)throw error;return data}
+channelPublishVideoBtn.onclick=async()=>{if(!videoSelecionadoCanal){channelVideoStatus.textContent="⚠️ Escolha um vídeo primeiro.";return}channelPublishVideoBtn.disabled=true;channelSelectVideoBtn.disabled=true;try{const a=videoSelecionadoCanal,url=await fazerUploadVideo(a);if(!url)return;await salvarVideoNoBanco(url,channelVideoTitleInput.value.trim()||a.name,channelVideoDescriptionInput.value.trim());videoSelecionadoCanal=null;channelVideoTitleInput.value="";channelVideoDescriptionInput.value="";channelSelectedVideoInfo.style.display="none";channelVideoStatus.textContent="✅ Vídeo publicado no canal!";await carregarVideosDoCanal((await obterUsuarioAtual()).id);await carregarVideos();await carregarBarraLateral()}catch(e){channelVideoStatus.textContent="❌ "+e.message}finally{channelPublishVideoBtn.disabled=false;channelSelectVideoBtn.disabled=false}};
 
-if(!arquivo)
-return false;
+let videosCache=[];
+let nomesCanaisCache={};
+let videoStats={};
+let videoAtualDetalhe=null;
 
-if(!arquivo.type.startsWith("video/")){
-
-alert(
-"❌ O arquivo selecionado não é um vídeo."
-);
-
-return false;
-
+async function carregarEstatisticasVideos(videos){
+ videoStats={};
+ if(!videos.length)return;
+ const ids=videos.map(v=>v.id);
+ try{
+  const {data:likes,error:likesError}=await supabaseClient.from("video_likes").select("video_id,user_id").in("video_id",ids);
+  if(likesError)throw likesError;
+  const {data:comments,error:commentsError}=await supabaseClient.from("video_comments").select("video_id").in("video_id",ids);
+  if(commentsError)throw commentsError;
+  const u=await obterUsuarioAtual();
+  for(const id of ids){
+   const ls=(likes||[]).filter(x=>x.video_id===id);
+   const cs=(comments||[]).filter(x=>x.video_id===id);
+   videoStats[id]={likes:ls.length,comments:cs.length,liked:!!(u&&ls.some(x=>x.user_id===u.id))};
+  }
+ }catch(e){
+  console.warn("⚠️ Não foi possível carregar likes/comentários:",e.message);
+  for(const id of ids)videoStats[id]={likes:0,comments:0,liked:false};
+ }
 }
 
-return true;
-
+async function obterNomeVideo(v){
+ if(nomesCanaisCache[v.channel_id||v.user_id])return nomesCanaisCache[v.channel_id||v.user_id];
+ const id=v.channel_id||v.user_id;
+ const {data:c}=await supabaseClient.from("channels").select("name").eq("id",id).maybeSingle();
+ if(c?.name){nomesCanaisCache[id]=c.name;return c.name}
+ const u=await obterUsuarioAtual();
+ if(u&&v.user_id===u.id){nomesCanaisCache[id]=obterNomeCanalUsuario(u);return nomesCanaisCache[id]}
+ const {data:p}=await supabaseClient.from("profiles").select("username").eq("id",v.user_id).maybeSingle();
+ nomesCanaisCache[id]=p?.username||"Usuário";return nomesCanaisCache[id];
+}
+function criarCardVideo(v,nome){
+ const card=document.createElement("div");card.className="video-card";card.dataset.videoId=v.id;
+ const p=document.createElement("video");p.className="video-thumb";p.dataset.videoId=v.id;p.controls=true;p.preload="metadata";p.playsInline=true;p.src=v.video_url;
+ p.addEventListener("click",e=>e.stopPropagation());
+ const t=document.createElement("div");t.className="video-card-title";t.textContent=v.title||"Vídeo sem título";t.onclick=()=>abrirVideo(v.id);
+ const a=document.createElement("div");a.className="video-card-author";a.textContent="📺 "+nome;
+ const st=videoStats[v.id]||{likes:0,comments:0};const stats=document.createElement("div");stats.className="video-card-stats";stats.textContent=`👍 ${st.likes}   💬 ${st.comments}`;
+ const b=document.createElement("button");b.className="video-card-channel-btn";b.type="button";b.textContent="👤 Ver canal";b.onclick=()=>abrirCanal(v.user_id);
+ const d=document.createElement("button");d.className="secondary-btn video-card-open";d.type="button";d.textContent="▶️ Abrir vídeo";d.onclick=()=>abrirVideo(v.id);
+ card.append(p,t,a,stats,b,d);return card;
 }
 
-function selecionarVideo(){
-
-const input=
-document.createElement("input");
-
-input.type="file";
-input.accept="video/*";
-
-input.addEventListener(
-"change",
-()=>{
-
-const arquivo=
-input.files[0];
-
-if(!arquivo){
-
-console.log(
-"🎬 Nenhum vídeo selecionado."
-);
-
-return;
-
+async function carregarVideos(mostrar=true){
+ const estados={};
+ document.querySelectorAll('#videosList video[data-video-id]').forEach(el=>{estados[el.dataset.videoId]={currentTime:el.currentTime,paused:el.paused,muted:el.muted,volume:el.volume}});
+ if(mostrar)videosList.innerHTML='<p class="video-loading">⏳ Carregando vídeos...</p>';
+ try{
+  const {data,error}=await supabaseClient.from("videos").select("*").order("created_at",{ascending:false});if(error)throw error;
+  videosCache=data||[];nomesCanaisCache={};await carregarEstatisticasVideos(videosCache);await renderizarVideos();
+  for(const [id,state] of Object.entries(estados)){
+   const novo=videosList.querySelector(`video[data-video-id="${CSS.escape(id)}"]`);if(!novo)continue;
+   const aplicar=()=>{try{novo.currentTime=state.currentTime}catch(e){}novo.muted=state.muted;novo.volume=state.volume;if(!state.paused)novo.play().catch(()=>{})};
+   if(novo.readyState>=1)aplicar();else novo.addEventListener("loadedmetadata",aplicar,{once:true});
+  }
+ }catch(e){console.error(e);videosList.innerHTML='<p class="video-error">❌ Erro ao carregar os vídeos.<br><br>'+e.message+'</p>'}
+}
+async function renderizarVideos(){
+ const termo=(videoSearchInput?.value||"").trim().toLowerCase();
+ videosList.innerHTML="";
+ let lista=videosCache;
+ if(termo)lista=lista.filter(v=>(v.title||"").toLowerCase().includes(termo)||(v.description||"").toLowerCase().includes(termo));
+ if(!lista.length){videosList.innerHTML=termo?'<p class="video-empty">🔎 Nenhum vídeo encontrado para essa pesquisa.</p>':'<p class="video-empty">🎬 Nenhum vídeo publicado ainda.<br><br>Entre no seu canal para publicar o primeiro!</p>';return}
+ for(const v of lista){const nome=await obterNomeVideo(v);videosList.appendChild(criarCardVideo(v,nome))}
 }
 
-if(!verificarVideo(arquivo))
-return;
-
-videoSelecionado=arquivo;
-
-videoSelectedInfo.style.display="block";
-
-videoSelectedInfo.textContent=
-"🎬 "+arquivo.name+
-" • "+
-Math.round(arquivo.size/1024/1024)+
-" MB";
-
-videoStatus.textContent=
-"✅ Vídeo selecionado. Agora clique em Publicar vídeo.";
-
-console.log(
-"🎬 Vídeo selecionado:",
-arquivo.name
-);
-
-console.log(
-"📦 Tipo:",
-arquivo.type
-);
-
-console.log(
-"📏 Tamanho:",
-arquivo.size
-);
-
+async function carregarVideosDoCanal(id){
+ channelVideosList.innerHTML='<p class="video-loading">⏳ Carregando vídeos...</p>';
+ try{
+  const {data,error}=await supabaseClient.from("videos").select("*").eq("channel_id",id).order("created_at",{ascending:false});if(error)throw error;
+  channelVideosList.innerHTML="";
+  if(!data?.length){channelVideosList.innerHTML='<p class="video-empty">🎬 Este canal ainda não publicou vídeos.</p>';return}
+  await carregarEstatisticasVideos(data);
+  const {data:c}=await supabaseClient.from("channels").select("name").eq("id",id).maybeSingle();
+  const nome=c?.name||"Usuário";const u=await obterUsuarioAtual();
+  for(const v of data){
+   const card=criarCardVideo(v,nome);
+   if(u&&v.user_id===u.id){
+    const actions=document.createElement("div");actions.className="video-owner-actions";
+    const ed=document.createElement("button");ed.className="secondary-btn";ed.type="button";ed.textContent="✏️ Editar";ed.onclick=()=>editarVideo(v);
+    const del=document.createElement("button");del.className="danger-btn";del.type="button";del.textContent="🗑️ Excluir";del.onclick=()=>excluirVideo(v);
+    actions.append(ed,del);card.appendChild(actions);
+   }
+   channelVideosList.appendChild(card);
+  }
+ }catch(e){console.error(e);channelVideosList.innerHTML='<p class="video-error">❌ Erro ao carregar vídeos deste canal.<br><br>'+e.message+'</p>'}
 }
-);
-
-input.click();
-
+async function editarVideo(v){
+ const u=await obterUsuarioAtual();if(!u||u.id!==v.user_id){alert("❌ Você só pode editar seus próprios vídeos.");return}
+ const titulo=prompt("Novo título do vídeo:",v.title||"");if(titulo===null)return;if(!titulo.trim()){alert("⚠️ O título não pode ficar vazio.");return}
+ const descricao=prompt("Nova descrição do vídeo:",v.description||"");if(descricao===null)return;
+ try{
+  const {error}=await supabaseClient.from("videos").update({title:titulo.trim(),description:descricao.trim()}).eq("id",v.id).eq("user_id",u.id);if(error)throw error;
+  const local=videosCache.find(x=>x.id===v.id);if(local){local.title=titulo.trim();local.description=descricao.trim()}
+  alert("✅ Vídeo atualizado!");await carregarVideosDoCanal(v.channel_id||v.user_id);await carregarVideos(false);
+ }catch(e){alert("❌ Não foi possível editar o vídeo.\n\n"+e.message)}
 }
-
-selectVideoBtn.addEventListener(
-"click",
-()=>{
-
-selecionarVideo();
-
-});
-
-async function fazerUploadVideo(arquivo){
-
-if(!arquivo){
-
-console.error(
-"❌ Nenhum vídeo foi selecionado."
-);
-
-return null;
-
+async function excluirVideo(v){
+ const u=await obterUsuarioAtual();if(!u||u.id!==v.user_id){alert("❌ Você só pode excluir seus próprios vídeos.");return}
+ if(!confirm(`Excluir o vídeo "${v.title||"Vídeo sem título"}"?`))return;
+ try{
+  const {error}=await supabaseClient.from("videos").delete().eq("id",v.id).eq("user_id",u.id);if(error)throw error;
+  videosCache=videosCache.filter(x=>x.id!==v.id);alert("✅ Vídeo excluído!");
+  await carregarVideosDoCanal(v.channel_id||v.user_id);await carregarVideos(false);await carregarBarraLateral();
+  if(videoAtualDetalhe?.id===v.id){videoAtualDetalhe=null;videoDetailScreen.style.display="none";channelScreen.style.display="block"}
+ }catch(e){alert("❌ Não foi possível excluir o vídeo.\n\n"+e.message)}
 }
 
-if(!arquivo.type.startsWith("video/")){
-
-console.error(
-"❌ O arquivo não é um vídeo."
-);
-
-return null;
-
+async function abrirVideo(videoId){
+ const v=videosCache.find(x=>x.id===videoId);
+ if(!v){const {data,error}=await supabaseClient.from("videos").select("*").eq("id",videoId).maybeSingle();if(error||!data){alert("❌ Vídeo não encontrado.");return}videoAtualDetalhe=data}else videoAtualDetalhe=v;
+ homeScreen.style.display="none";videosScreen.style.display="none";channelScreen.style.display="none";communitiesScreen.style.display="none";createCommunityScreen.style.display="none";communityPageScreen.style.display="none";videoDetailScreen.style.display="block";
+ await renderizarDetalheVideo(videoAtualDetalhe);
 }
 
-console.log(
-"⬆️ Iniciando upload do vídeo..."
-);
-
-console.log(
-"📁 Arquivo:",
-arquivo.name
-);
-
-videoStatus.textContent=
-"⏳ Enviando vídeo para o Supabase...";
-
-const nomeArquivo=
-crypto.randomUUID()+
-"-"+
-arquivo.name;
-
-const caminhoArquivo=
-"videos/"+nomeArquivo;
-
-try{
-
-const {data,error}=
-await supabaseClient
-
-.storage
-
-.from("videos")
-
-.upload(
-caminhoArquivo,
-arquivo,
-{
-contentType:arquivo.type,
-upsert:false
+async function renderizarDetalheVideo(v){
+ videoDetailContent.innerHTML='<div class="video-detail-loading">⏳ Carregando vídeo...</div>';
+ const nome=await obterNomeVideo(v);await carregarEstatisticasVideos([v]);const st=videoStats[v.id]||{likes:0,comments:0,liked:false};const u=await obterUsuarioAtual();
+ const player=document.createElement("video");player.className="video-detail-player";player.controls=true;player.preload="metadata";player.playsInline=true;player.src=v.video_url;
+ const title=document.createElement("div");title.className="video-detail-title";title.textContent=v.title||"Vídeo sem título";
+ const author=document.createElement("div");author.className="video-detail-author";author.textContent="📺 "+nome;
+ const actions=document.createElement("div");actions.className="video-detail-actions";
+ const like=document.createElement("button");like.className="video-like-btn"+(st.liked?" liked":"");like.type="button";like.textContent=`👍 Curtir (${st.likes})`;like.onclick=async()=>alternarLike(v.id,like);
+ const commentsCount=document.createElement("span");commentsCount.className="video-card-stats";commentsCount.textContent=`💬 ${st.comments} comentário${st.comments===1?"":"s"}`;
+ const channel=document.createElement("button");channel.className="secondary-btn";channel.type="button";channel.textContent="👤 Ver canal";channel.onclick=()=>abrirCanal(v.channel_id||v.user_id);
+ actions.append(like,commentsCount,channel);
+ if(u&&u.id===v.user_id){
+  const oa=document.createElement("div");oa.className="video-owner-actions";
+  const ed=document.createElement("button");ed.className="secondary-btn";ed.type="button";ed.textContent="✏️ Editar vídeo";ed.onclick=()=>editarVideo(v);
+  const del=document.createElement("button");del.className="danger-btn";del.type="button";del.textContent="🗑️ Excluir vídeo";del.onclick=()=>excluirVideo(v);oa.append(ed,del);actions.appendChild(oa);
+ }
+ const descBox=document.createElement("div");descBox.className="video-description-box";const descTitle=document.createElement("div");descTitle.className="video-description-title";descTitle.textContent="📝 Descrição";const desc=document.createElement("div");desc.className="video-description-text";desc.textContent=v.description||"Este vídeo não possui descrição.";descBox.append(descTitle,desc);
+ const comments=document.createElement("div");comments.className="video-comments";comments.innerHTML='<h3>💬 Comentários</h3>';
+ const form=document.createElement("div");form.className="comment-form";const ta=document.createElement("textarea");ta.maxLength=1000;ta.placeholder="Escreva um comentário...";const send=document.createElement("button");send.type="button";send.textContent="💬 Comentar";
+ send.onclick=async()=>{const texto=ta.value.trim();if(!texto)return;send.disabled=true;const ok=await adicionarComentario(v.id,texto);if(ok){ta.value="";await carregarComentariosDetalhe(v.id,comments);await carregarEstatisticasVideos([v]);const s=videoStats[v.id]||{comments:0};commentsCount.textContent=`💬 ${s.comments} comentário${s.comments===1?"":"s"}`}send.disabled=false};
+ form.append(ta,send);const list=document.createElement("div");list.id="videoCommentsList";comments.append(form,list);videoDetailContent.append(player,title,author,actions,descBox,comments);await carregarComentariosDetalhe(v.id,comments);
 }
-);
-
-if(error)
-throw error;
-
-console.log(
-"✅ Upload concluído!"
-);
-
-console.log(
-"📦 Caminho:",
-data.path
-);
-
-const {data:urlData}=
-supabaseClient
-
-.storage
-
-.from("videos")
-
-.getPublicUrl(data.path);
-
-const videoUrl=
-urlData.publicUrl;
-
-console.log(
-"🔗 URL do vídeo:",
-videoUrl
-);
-
-return videoUrl;
-
-}catch(erro){
-
-console.error(
-"❌ Erro no upload:",
-erro
-);
-
-videoStatus.textContent=
-"❌ Erro ao enviar vídeo: "+
-erro.message;
-
-return null;
-
+async function alternarLike(videoId,button){
+ const u=await obterUsuarioAtual();if(!u){alert("❌ Você precisa estar logado.");return}button.disabled=true;
+ try{
+  const {data:existente,error:checkError}=await supabaseClient.from("video_likes").select("id").eq("video_id",videoId).eq("user_id",u.id).maybeSingle();if(checkError)throw checkError;
+  if(existente){const {error}=await supabaseClient.from("video_likes").delete().eq("id",existente.id);if(error)throw error}else{const {error}=await supabaseClient.from("video_likes").insert({video_id:videoId,user_id:u.id});if(error)throw error}
+  await carregarEstatisticasVideos([{id:videoId}]);const st=videoStats[videoId]||{likes:0,liked:false};button.className="video-like-btn"+(st.liked?" liked":"");button.textContent=`👍 Curtir (${st.likes})`;await renderizarVideos();
+ }catch(e){alert("❌ Não foi possível alterar a curtida.\n\n"+e.message)}finally{button.disabled=false}
 }
-
+async function adicionarComentario(videoId,content,parentCommentId=null){
+ const u=await obterUsuarioAtual();if(!u){alert("❌ Você precisa estar logado.");return false}
+ try{const payload={video_id:videoId,user_id:u.id,content};if(parentCommentId)payload.parent_comment_id=parentCommentId;const {error}=await supabaseClient.from("video_comments").insert(payload);if(error)throw error;return true}catch(e){alert("❌ Não foi possível comentar.\n\n"+e.message);return false}
 }
-
-async function salvarVideoNoBanco(
-videoUrl,
-titulo
-){
-
-if(!videoUrl){
-
-console.error(
-"❌ URL do vídeo não encontrada."
-);
-
-return null;
-
+async function carregarComentariosDetalhe(videoId,container){
+ const list=container.querySelector("#videoCommentsList");if(!list)return;list.innerHTML='<div class="comments-empty">⏳ Carregando comentários...</div>';
+ try{
+  const {data,error}=await supabaseClient.from("video_comments").select("*").eq("video_id",videoId).order("created_at",{ascending:true});if(error)throw error;list.innerHTML="";
+  if(!data?.length){list.innerHTML='<div class="comments-empty">💬 Nenhum comentário ainda. Seja o primeiro!</div>';return}
+  const u=await obterUsuarioAtual();const cache={};
+  for(const c of data){if(cache[c.user_id])continue;if(u&&c.user_id===u.id)cache[c.user_id]=obterNomeCanalUsuario(u);else{const {data:ch}=await supabaseClient.from("channels").select("name").eq("id",c.user_id).maybeSingle();cache[c.user_id]=ch?.name||"Usuário"}}
+  const filhos={};for(const c of data){const key=c.parent_comment_id||"root";(filhos[key]??=[]).push(c)}
+  const render=(c,nivel=0)=>{
+   const item=document.createElement("div");item.className="comment-item";
+   const au=document.createElement("div");au.className="comment-author";au.textContent="👤 "+(cache[c.user_id]||"Usuário");const dt=document.createElement("span");dt.className="comment-date";dt.textContent=new Date(c.created_at).toLocaleString("pt-BR");au.appendChild(dt);
+   const tx=document.createElement("div");tx.className="comment-content";tx.textContent=c.content;
+   const actions=document.createElement("div");
+   const reply=document.createElement("button");reply.type="button";reply.className="secondary-btn comment-reply-btn";reply.textContent="↩️ Responder";actions.appendChild(reply);
+   if(u&&u.id===c.user_id){const del=document.createElement("button");del.type="button";del.className="danger-btn comment-delete-btn";del.textContent="🗑️ Apagar";del.onclick=async()=>{if(!confirm("Apagar este comentário?"))return;const {error}=await supabaseClient.from("video_comments").delete().eq("id",c.id).eq("user_id",u.id);if(error){alert("❌ Não foi possível apagar.\n\n"+error.message);return}await carregarComentariosDetalhe(videoId,container)};actions.appendChild(del)}
+   const rf=document.createElement("div");rf.className="comment-reply-form";rf.style.display="none";const rta=document.createElement("textarea");rta.maxLength=1000;rta.placeholder="Escreva uma resposta...";const rs=document.createElement("button");rs.type="button";rs.textContent="Responder";rs.onclick=async()=>{const texto=rta.value.trim();if(!texto)return;rs.disabled=true;const ok=await adicionarComentario(videoId,texto,c.id);if(ok){rta.value="";rf.style.display="none";await carregarComentariosDetalhe(videoId,container)}rs.disabled=false};rf.append(rta,rs);reply.onclick=()=>{rf.style.display=rf.style.display==="none"?"flex":"none"};
+   item.append(au,tx,actions,rf);
+   const fs=filhos[c.id]||[];if(fs.length){const box=document.createElement("div");box.className="comment-replies";fs.forEach(f=>box.appendChild(render(f,nivel+1)));item.appendChild(box)}return item;
+  };
+  (filhos.root||[]).forEach(c=>list.appendChild(render(c)));
+ }catch(e){console.error(e);list.innerHTML='<div class="comments-empty">❌ Erro ao carregar comentários.</div>'}
 }
-
-try{
-
-const {
-data:sessionData,
-error:sessionError
-}=
-await supabaseClient.auth.getSession();
-
-if(sessionError)
-throw sessionError;
-
-const usuario=
-sessionData.session?.user;
-
-if(!usuario){
-
-console.error(
-"❌ Você precisa estar logado."
-);
-
-return null;
-
-}
-
-const {data,error}=
-await supabaseClient
-
-.from("videos")
-
-.insert({
-
-user_id:usuario.id,
-title:titulo||"Vídeo sem título",
-video_url:videoUrl
-
-})
-
-.select()
-.single();
-
-if(error)
-throw error;
-
-console.log(
-"💾 Vídeo salvo no banco!"
-);
-
-console.log(
-"🆔 ID:",
-data.id
-);
-
-return data;
-
-}catch(erro){
-
-console.error(
-"❌ Erro ao salvar vídeo:",
-erro
-);
-
-videoStatus.textContent=
-"❌ Erro ao salvar vídeo: "+
-erro.message;
-
-return null;
-
-}
-
-}async function publicarVideo(){
-
-if(!videoSelecionado){
-
-videoStatus.textContent=
-"⚠️ Primeiro selecione um vídeo.";
-
-selecionarVideo();
-
-return;
-
-}
-
-publishVideoBtn.disabled=true;
-selectVideoBtn.disabled=true;
-
-videoStatus.textContent=
-"⏳ Preparando publicação...";
-
-console.log(
-"🎬 Preparando publicação..."
-);
-
-try{
-
-const arquivo=
-videoSelecionado;
-
-const url=
-await fazerUploadVideo(arquivo);
-
-if(!url){
-
-console.error(
-"❌ O vídeo não foi enviado."
-);
-
-return;
-
-}
-
-videoStatus.textContent=
-"⏳ Salvando vídeo no banco...";
-
-const titulo=
-arquivo.name;
-
-const videoSalvo=
-await salvarVideoNoBanco(
-url,
-titulo
-);
-
-if(!videoSalvo){
-
-console.error(
-"❌ Não foi possível salvar a publicação."
-);
-
-return;
-
-}
-
-console.log(
-"🎉 VÍDEO PUBLICADO COM SUCESSO!"
-);
-
-console.log(
-"📺 URL:",
-url
-);
-
-videoSelecionado=null;
-
-videoSelectedInfo.textContent="";
-videoSelectedInfo.style.display="none";
-
-videoStatus.textContent=
-"✅ Vídeo publicado com sucesso!";
-
-await carregarVideos();
-
-}catch(erro){
-
-console.error(
-"❌ Erro ao publicar vídeo:",
-erro
-);
-
-videoStatus.textContent=
-"❌ "+erro.message;
-
-}finally{
-
-publishVideoBtn.disabled=false;
-selectVideoBtn.disabled=false;
-
-}
-
-}
-
-publishVideoBtn.addEventListener(
-"click",
-async()=>{
-
-await publicarVideo();
-
-});
-
-async function carregarVideos(
-mostrarCarregando=true
-){
-
-if(!videosList)
-return;
-
-console.log(
-"📺 Buscando vídeos..."
-);
-
-if(mostrarCarregando){
-
-videosList.innerHTML=
-'<p class="video-loading">⏳ Carregando vídeos...</p>';
-
-}
-
-try{
-
-const {data,error}=
-await supabaseClient
-
-.from("videos")
-
-.select("*")
-
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
-if(error)
-throw error;
-
-console.log(
-"✅ Vídeos encontrados:",
-data.length
-);
-
-videosList.innerHTML="";
-
-if(!data||data.length===0){
-
-videosList.innerHTML=
-'<p class="video-empty">🎬 Nenhum vídeo publicado ainda.<br><br>Seja o primeiro a publicar!</p>';
-
-return;
-
-}
-
-for(const video of data){
-
-console.log(
-"🎬 "+video.title
-);
-
-console.log(
-"🔗 "+video.video_url
-);
-
-const card=
-document.createElement("div");
-
-card.className=
-"video-card";
-
-const titulo=
-document.createElement("div");
-
-titulo.className=
-"video-card-title";
-
-titulo.textContent=
-"🎬 "+(
-video.title||
-"Vídeo sem título"
-);
-
-const autor=
-document.createElement("div");
-
-autor.className=
-"video-card-author";
-
-autor.textContent=
-"📺 InternetBlox Videos";
-
-const player=
-document.createElement("video");
-
-player.className=
-"video-player";
-
-player.controls=true;
-player.preload="metadata";
-player.playsInline=true;
-player.src=video.video_url;
-
-card.appendChild(titulo);
-card.appendChild(autor);
-card.appendChild(player);
-
-videosList.appendChild(card);
-
-}
-
-}catch(erro){
-
-console.error(
-"❌ Erro ao carregar vídeos:",
-erro
-);
-
-videosList.innerHTML=
-'<p class="video-error">❌ Erro ao carregar os vídeos.<br><br>'+
-erro.message+
-'</p>';
-
-}
-
-}
-
-function escolherVideo(){
-
-selecionarVideo();
-
-}
-
-async function testarUploadVideo(){
-
-if(!videoSelecionado){
-
-console.log(
-"🎬 Primeiro selecione um vídeo."
-);
-
-selecionarVideo();
-
-return;
-
-}
-
-const url=
-await fazerUploadVideo(
-videoSelecionado
-);
-
-if(url){
-
-console.log(
-"🎉 Vídeo enviado com sucesso!"
-);
-
-console.log(url);
-
-}
-
-}
-
-async function testarPublicacaoVideo(){
-
-if(!videoSelecionado){
-
-selecionarVideo();
-
-console.log(
-"🎬 Selecione o vídeo para continuar."
-);
-
-return;
-
-}
-
-await publicarVideo();
-
-}
-
-async function publicarEAtualizarVideo(){
-
-await publicarVideo();
-
-}
-
-async function testarListaVideos(){
-
-await carregarVideos();
-
-}
-
-async function testarVideoCompleto(){
-
-if(!videoSelecionado){
-
-console.log(
-"🎬 Selecione um vídeo primeiro."
-);
-
-selecionarVideo();
-
-return;
-
-}
-
-await publicarVideo();
-
-console.log(
-"🎉 Processo completo finalizado!"
-);
-
-}setInterval(
-async()=>{
-
-if(
-document.visibilityState==="visible" &&
-videosScreen.style.display!=="none"
-){
-
-const algumVideoTocando=
-[...videosList.querySelectorAll("video")]
-.some(video=>!video.paused&&!video.ended);
-
-if(algumVideoTocando){
-
-console.log(
-"▶️ Vídeo em reprodução. Atualização automática ignorada."
-);
-
-return;
-
-}
-
-await carregarVideos(false);
-
-}
-
-},
-15000
-);
-
-console.log(
-"🎬 InternetBlox Videos: sistema de vídeos carregado!"
-);
-
-console.log(
-"👉 Clique em 'Entrar nos vídeos' na Home."
-);
-
-console.log(
-"👉 Depois use 'Selecionar vídeo'."
-);
-
-console.log(
-"👉 Depois clique em 'Publicar vídeo'."
-
-);
-
+videoSearchBtn.onclick=renderizarVideos;videoSearchInput.addEventListener("input",renderizarVideos);videoSearchInput.addEventListener("keydown",e=>{if(e.key==="Enter")renderizarVideos()});
+backFromVideoDetailBtn.onclick=async()=>{videoDetailScreen.style.display="none";videosScreen.style.display="block";await carregarBarraLateral()};
+setInterval(async()=>{if(document.visibilityState==="visible"&&videosScreen.style.display!=="none"&&videoDetailScreen.style.display==="none"){const tocando=[...videosList.querySelectorAll("video")].some(v=>!v.paused&&!v.ended);if(!tocando){await carregarVideos(false);await carregarBarraLateral()}}},15000);
+console.log("🎬 InternetBlox Videos 2.2 + Supabase carregados!");
 </script>
 
 </body>
