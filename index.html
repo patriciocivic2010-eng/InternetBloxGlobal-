@@ -925,96 +925,46 @@ createCommunityBtn.disabled=false;
 
 });
 
-async function carregarComunidades(){
+let comunidadesCache=[];
+let comunidadesAssinatura="";
+let carregandoComunidades=false;
+let nomesCriadoresComunidades={};
 
-communitiesList.innerHTML=
-'<p class="info">⏳ Carregando comunidades...</p>';
-
-const {data,error}=await supabaseClient
-
-.from("communities")
-.select("*")
-.order("created_at",{ascending:false});
-
-if(error){
-
-console.error(error);
-
-communitiesList.innerHTML=
-'<p class="erro">❌ Erro ao carregar comunidades.</p>';
-
-return;
-
+function assinaturaComunidades(lista){
+ return JSON.stringify((lista||[]).map(c=>({id:c.id,name:c.name,description:c.description,owner_id:c.owner_id,created_at:c.created_at,updated_at:c.updated_at||null})));
 }
 
-if(!data||data.length===0){
-
-communitiesList.innerHTML=
-'<p class="info">🌎 Nenhuma comunidade criada ainda.</p>';
-
-return;
-
+async function carregarComunidades(mostrar=true){
+ if(carregandoComunidades)return;
+ carregandoComunidades=true;
+ const primeiraCarga=!comunidadesAssinatura;
+ if(mostrar&&primeiraCarga)communitiesList.innerHTML='<p class="info">⏳ Carregando comunidades...</p>';
+ try{
+  const {data,error}=await supabaseClient.from("communities").select("*").order("created_at",{ascending:false});
+  if(error)throw error;
+  const lista=data||[];
+  const assinatura=assinaturaComunidades(lista);
+  if(assinatura===comunidadesAssinatura){comunidadesCache=lista;return;}
+  comunidadesCache=lista;
+  comunidadesAssinatura=assinatura;
+  if(!lista.length){communitiesList.innerHTML='<p class="info">🌎 Nenhuma comunidade criada ainda.</p>';return;}
+  communitiesList.innerHTML="";
+  for(const comunidade of lista){
+   const card=document.createElement("div");card.className="community-card";
+   const titulo=document.createElement("h3");titulo.textContent="🌐 "+comunidade.name;
+   const descricao=document.createElement("p");descricao.className="community-description";descricao.textContent=comunidade.description||"Sem descrição.";
+   const owner=document.createElement("p");owner.className="community-owner";owner.textContent="👑 Comunidade criada por um usuário";
+   const ownerId=comunidade.owner_id;
+   if(nomesCriadoresComunidades[ownerId])owner.textContent="👑 Criada por @"+nomesCriadoresComunidades[ownerId];
+   else{try{const {data:criador}=await supabaseClient.from("channels").select("name").eq("id",ownerId).maybeSingle();if(criador?.name){nomesCriadoresComunidades[ownerId]=criador.name;owner.textContent="👑 Criada por @"+criador.name;}}catch(e){console.warn("Criador da comunidade:",e.message)}}
+   const actions=document.createElement("div");actions.className="community-actions";
+   const abrirBtn=document.createElement("button");abrirBtn.textContent="👀 Abrir";abrirBtn.addEventListener("click",()=>abrirComunidade(comunidade));
+   const entrarBtnComunidade=document.createElement("button");entrarBtnComunidade.className="secondary-btn";entrarBtnComunidade.textContent="➕ Entrar";entrarBtnComunidade.addEventListener("click",()=>entrarNaComunidade(comunidade.id));
+   actions.appendChild(abrirBtn);actions.appendChild(entrarBtnComunidade);card.appendChild(titulo);card.appendChild(descricao);card.appendChild(owner);card.appendChild(actions);communitiesList.appendChild(card);
+  }
+ }catch(error){console.error("Erro ao carregar comunidades:",error);if(primeiraCarga||mostrar)communitiesList.innerHTML='<p class="erro">❌ Erro ao carregar comunidades.<br><br>'+(error.message||"Falha de conexão")+'</p>';}
+ finally{carregandoComunidades=false;}
 }
-
-communitiesList.innerHTML="";
-
-for(const comunidade of data){
-
-const card=document.createElement("div");
-card.className="community-card";
-
-const titulo=document.createElement("h3");
-titulo.textContent="🌐 "+comunidade.name;
-
-const descricao=document.createElement("p");
-descricao.className="community-description";
-descricao.textContent=comunidade.description||"Sem descrição.";
-
-const owner=document.createElement("p");
-owner.className="community-owner";
-owner.textContent="👑 Comunidade criada por um usuário";
-try{
- const {data:criador}=await supabaseClient.from("channels").select("name").eq("id",comunidade.owner_id).maybeSingle();
- if(criador?.name)owner.textContent="👑 Criada por @"+criador.name;
-}catch(e){console.warn("Criador da comunidade:",e.message)}
-
-const actions=document.createElement("div");
-actions.className="community-actions";
-
-const abrirBtn=document.createElement("button");
-
-abrirBtn.textContent="👀 Abrir";
-
-abrirBtn.addEventListener("click",()=>{
-
-abrirComunidade(comunidade);
-
-});
-
-const entrarBtnComunidade=document.createElement("button");
-
-entrarBtnComunidade.className="secondary-btn";
-entrarBtnComunidade.textContent="➕ Entrar";
-
-entrarBtnComunidade.addEventListener(
-"click",
-()=>entrarNaComunidade(comunidade.id)
-);
-
-actions.appendChild(abrirBtn);
-actions.appendChild(entrarBtnComunidade);
-
-card.appendChild(titulo);
-card.appendChild(descricao);
-card.appendChild(owner);
-card.appendChild(actions);
-
-communitiesList.appendChild(card);
-
-}
-
-}
-
 async function entrarNaComunidade(communityId){
 
 const {data:sessionData}=await supabaseClient.auth.getSession();
@@ -1103,14 +1053,10 @@ clearInterval(intervaloAtualizacao);
 }
 
 intervaloAtualizacao=setInterval(async()=>{
-
-if(!comunidadeAtual)
-return;
-
-await carregarPosts(comunidadeAtual.id);
-await carregarMensagens(comunidadeAtual.id);
-await atualizarQuantidadeMembros(comunidadeAtual.id);
-
+ if(!comunidadeAtual||document.visibilityState!=="visible")return;
+ if(window.__atualizacaoComunidadeEmAndamento)return;
+ window.__atualizacaoComunidadeEmAndamento=true;
+ try{await carregarPosts(comunidadeAtual.id);await carregarMensagens(comunidadeAtual.id);await atualizarQuantidadeMembros(comunidadeAtual.id);}finally{window.__atualizacaoComunidadeEmAndamento=false;}
 },5000);
 
 }
@@ -1977,19 +1923,26 @@ function criarCardVideo(v,nome){
  card.append(p,t,a,stats,b,d);return card;
 }
 
+let videosAssinatura="";
+let carregandoVideos=false;
+function assinaturaVideos(lista){return JSON.stringify((lista||[]).map(v=>({id:v.id,user_id:v.user_id,channel_id:v.channel_id||null,title:v.title||"",description:v.description||"",video_url:v.video_url||"",created_at:v.created_at,updated_at:v.updated_at||null})));}
 async function carregarVideos(mostrar=true){
- const estados={};
+ if(carregandoVideos)return false;
+ carregandoVideos=true;
+ const primeiraCarga=!videosAssinatura;
+ const estados={};const scrollTop=videosList.scrollTop;
  document.querySelectorAll('#videosList video[data-video-id]').forEach(el=>{estados[el.dataset.videoId]={currentTime:el.currentTime,paused:el.paused,muted:el.muted,volume:el.volume}});
- if(mostrar)videosList.innerHTML='<p class="video-loading">⏳ Carregando vídeos...</p>';
+ if(mostrar&&primeiraCarga)videosList.innerHTML='<p class="video-loading">⏳ Carregando vídeos...</p>';
  try{
   const {data,error}=await supabaseClient.from("videos").select("*").order("created_at",{ascending:false});if(error)throw error;
-  videosCache=data||[];nomesCanaisCache={};await carregarEstatisticasVideos(videosCache);await renderizarVideos();
-  for(const [id,state] of Object.entries(estados)){
-   const novo=videosList.querySelector(`video[data-video-id="${CSS.escape(id)}"]`);if(!novo)continue;
-   const aplicar=()=>{try{novo.currentTime=state.currentTime}catch(e){}novo.muted=state.muted;novo.volume=state.volume;if(!state.paused)novo.play().catch(()=>{})};
-   if(novo.readyState>=1)aplicar();else novo.addEventListener("loadedmetadata",aplicar,{once:true});
-  }
- }catch(e){console.error(e);videosList.innerHTML='<p class="video-error">❌ Erro ao carregar os vídeos.<br><br>'+e.message+'</p>'}
+  const lista=data||[],assinatura=assinaturaVideos(lista);
+  if(assinatura===videosAssinatura){videosCache=lista;return false;}
+  videosCache=lista;videosAssinatura=assinatura;nomesCanaisCache={};
+  await carregarEstatisticasVideos(videosCache);await renderizarVideos();videosList.scrollTop=scrollTop;
+  for(const [id,state] of Object.entries(estados)){const novo=videosList.querySelector(`video[data-video-id="${CSS.escape(id)}"]`);if(!novo)continue;const aplicar=()=>{try{novo.currentTime=state.currentTime}catch(e){}novo.muted=state.muted;novo.volume=state.volume;if(!state.paused)novo.play().catch(()=>{})};if(novo.readyState>=1)aplicar();else novo.addEventListener("loadedmetadata",aplicar,{once:true});}
+  return true;
+ }catch(e){console.error("Erro ao atualizar vídeos:",e);if(primeiraCarga||mostrar)videosList.innerHTML='<p class="video-error">❌ Erro ao carregar os vídeos.<br><br>'+(e.message||"Falha de conexão")+'</p>';return false;}
+ finally{carregandoVideos=false;}
 }
 async function renderizarVideos(){
  const termo=(videoSearchInput?.value||"").trim().toLowerCase();
@@ -2107,7 +2060,12 @@ async function carregarComentariosDetalhe(videoId,container){
 }
 videoSearchBtn.onclick=renderizarVideos;videoSearchInput.addEventListener("input",renderizarVideos);videoSearchInput.addEventListener("keydown",e=>{if(e.key==="Enter")renderizarVideos()});
 backFromVideoDetailBtn.onclick=async()=>{videoDetailScreen.style.display="none";videosScreen.style.display="block";await carregarBarraLateral()};
-setInterval(async()=>{if(document.visibilityState==="visible"&&videosScreen.style.display!=="none"&&videoDetailScreen.style.display==="none"){const tocando=[...videosList.querySelectorAll("video")].some(v=>!v.paused&&!v.ended);if(!tocando){await carregarVideos(false);await carregarBarraLateral()}}},15000);
+setInterval(async()=>{
+ if(document.visibilityState!=="visible")return;
+ if(videosScreen.style.display==="none"||videoDetailScreen.style.display!=="none")return;
+ const alterou=await carregarVideos(false);
+ if(alterou)await carregarBarraLateral();
+},15000);
 console.log("🎬 InternetBlox Videos 2.2 + Supabase carregados!");
 </script>
 
