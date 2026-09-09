@@ -458,7 +458,15 @@ const method=(options.method||"GET").toUpperCase();
 const tentativas=(method==="GET"||method==="HEAD"||method==="OPTIONS")?3:1;
 let ultimoErro;
 for(let tentativa=1;tentativa<=tentativas;tentativa++){
-try{return await fetch(url,options)}catch(erro){
+try{
+const target=new URL(url);
+if(target.hostname===new URL(SUPABASE_URL).hostname && target.pathname.startsWith("/rest/v1/") && !target.searchParams.has("apikey")){
+target.searchParams.set("apikey",SUPABASE_KEY);
+}
+const headers=new Headers(options.headers||{});
+if(target.pathname.startsWith("/rest/v1/")){headers.delete("apikey");}
+return await fetch(target.toString(),{...options,headers});
+}catch(erro){
 ultimoErro=erro;
 if(tentativa<tentativas)await new Promise(r=>setTimeout(r,800*tentativa));
 }
@@ -468,6 +476,7 @@ throw ultimoErro;
 const supabaseClient=window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY,
+{global:{fetch:internetBloxFetch}}
 );
 
 const authScreen=document.getElementById("authScreen");
