@@ -453,9 +453,22 @@ Posts precisam ter uma imagem. Você pode adicionar uma legenda opcional.
 
 const SUPABASE_KEY="sb_publishable_P0EN7mrejTenAEqg1rlMVA_PgXArNIu";
 
+async function internetBloxFetch(url,options={}){
+const method=(options.method||"GET").toUpperCase();
+const tentativas=(method==="GET"||method==="HEAD"||method==="OPTIONS")?3:1;
+let ultimoErro;
+for(let tentativa=1;tentativa<=tentativas;tentativa++){
+try{return await fetch(url,options)}catch(erro){
+ultimoErro=erro;
+if(tentativa<tentativas)await new Promise(r=>setTimeout(r,800*tentativa));
+}
+}
+throw ultimoErro;
+}
 const supabaseClient=window.supabase.createClient(
 SUPABASE_URL,
-SUPABASE_KEY
+SUPABASE_KEY,
+{global:{fetch:internetBloxFetch}}
 );
 
 const authScreen=document.getElementById("authScreen");
@@ -1726,6 +1739,8 @@ communityPostsList.scrollTop=0;
 
 setInterval(async()=>{
 
+if(document.visibilityState!=="visible")return;
+
 if(
 communitiesScreen.style.display!=="none"
 ){
@@ -1735,6 +1750,15 @@ await carregarComunidades();
 }
 
 },10000);
+
+document.addEventListener("visibilitychange",async()=>{
+if(document.visibilityState!=="visible")return;
+if(communitiesScreen.style.display!=="none")await carregarComunidades();
+if(videosScreen.style.display!=="none"&&videoDetailScreen.style.display==="none"){
+const alterou=await carregarVideos(false);
+if(alterou)await carregarBarraLateral();
+}
+});
 
 homeLogoutBtn.addEventListener(
 "click",
